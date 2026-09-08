@@ -52,7 +52,7 @@ function SystemFlow({ dict }: { dict: Dictionary }) {
       </div>
       <svg className="system-flow-svg" viewBox="0 0 1000 360" role="img" aria-label="Sensor to DODA to host compute system flow">
         <defs>
-          <linearGradient id="flowGradient" x1="0" x2="1">
+          <linearGradient id="flowGradient" gradientUnits="userSpaceOnUse" x1="0" y1="180" x2="1000" y2="180">
             <stop stopColor="#30ddd4" />
             <stop offset=".55" stopColor="#4c78ff" />
             <stop offset="1" stopColor="#8c4cff" />

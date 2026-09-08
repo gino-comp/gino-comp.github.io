@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
-import { TechnologySection, DodaSection } from "@/components/Technology";
-import ApplicationsSection from "@/components/Applications";
-import ResearchSection from "@/components/Research";
-import CompanySection from "@/components/Company";
+import ExploreSection from "@/components/Explore";
 import ContactSection from "@/components/Contact";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { makeMetadata } from "@/lib/metadata";
@@ -23,11 +20,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <Hero locale={locale} dict={dict} />
       <TechnologyIndex locale={locale} dict={dict} />
-      <TechnologySection dict={dict} />
-      <DodaSection dict={dict} />
-      <ApplicationsSection dict={dict} />
-      <ResearchSection dict={dict} />
-      <CompanySection dict={dict} />
+      <ExploreSection locale={locale} dict={dict} />
       <ContactSection dict={dict} />
     </>
   );

@@ -103,6 +103,12 @@ export const dictionaries = {
       ["02", "FPGA Overlay", "R&D and early commercialization path"],
       ["03", "Silicon Roadmap", "From architecture IP to dedicated silicon"]
     ],
+    explore: {
+      kicker: "EXPLORE",
+      title: "Go deeper.",
+      desc: "The architecture, application areas, research foundation and team each have a dedicated page.",
+      more: "Learn more"
+    },
     technology: {
       kicker: "01 / WHY NEAR-SENSOR",
       title: "Move less data. React sooner.",
@@ -278,6 +284,12 @@ export const dictionaries = {
       ["02", "FPGA Overlay", "초기 검증 및 사업화 경로"],
       ["03", "Silicon Roadmap", "Architecture IP에서 전용 Silicon으로"]
     ],
+    explore: {
+      kicker: "EXPLORE",
+      title: "더 깊이 살펴보기.",
+      desc: "아키텍처, 응용 분야, 연구 기반, 팀 소개는 각 페이지에서 자세히 확인할 수 있습니다.",
+      more: "자세히 보기"
+    },
     technology: {
       kicker: "01 / WHY NEAR-SENSOR",
       title: "데이터 이동은 줄이고, 반응은 더 빠르게.",
