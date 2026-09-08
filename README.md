@@ -11,7 +11,7 @@ Production-oriented Next.js implementation of the RiDM Technology website concep
 - Korean / English routes
 - Metadata, hreflang, sitemap, robots.txt
 - JSON-LD for Organization and the 3DRA publication
-- GitHub Actions build check
+- Static export (`output: "export"`) deployed to GitHub Pages via GitHub Actions
 
 ## Routes
 
@@ -43,8 +43,11 @@ Production check:
 ```bash
 npm run typecheck
 npm run build
-npm start
+npx serve out
 ```
+
+`npm run build` produces a fully static site in `out/`. There is no Node server in
+production, so `next start` is not used.
 
 ## GitHub
 
@@ -59,19 +62,42 @@ git push -u origin main
 
 A GitHub Actions workflow in `.github/workflows/ci.yml` runs TypeScript and production build checks on pushes and pull requests.
 
-## Vercel deployment
+## GitHub Pages deployment
 
-1. Push this directory to GitHub.
-2. Import the repository into Vercel.
-3. Framework preset should resolve automatically to **Next.js**.
-4. Add the environment variable below if the production URL differs from `https://www.ridm.tech`:
+The site is deployed as a static export to GitHub Pages from
+`.github/workflows/deploy.yml`, which builds on every push to `main` and
+publishes `out/`.
 
-```text
-NEXT_PUBLIC_SITE_URL=https://www.ridm.tech
-```
+One-time repository setup:
 
-5. Deploy to a preview domain first.
-6. After QA, attach the production domain in Vercel and update DNS.
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
+   Without this the workflow builds but cannot publish.
+2. Push to `main`. The site goes live at `https://gino-comp.github.io/`.
+
+### Static-export constraints
+
+GitHub Pages serves files only — no Node server. The following therefore apply
+and must not be reintroduced:
+
+- No `middleware.ts`. The `/` → `/ko` redirect is a static `public/index.html`
+  meta-refresh instead.
+- No request-time APIs (`headers()`, `cookies()`, dynamic `searchParams`).
+  The root layout lives at `src/app/[locale]/layout.tsx` and takes `lang` from
+  the route param.
+- `next/image` runs with `unoptimized: true`.
+- Route handlers used for metadata (`robots.ts`, `sitemap.ts`) declare
+  `export const dynamic = "force-static"`.
+- `trailingSlash: true`, so every route exports as `<route>/index.html` and
+  canonical URLs carry the trailing slash.
+
+### Moving to the ridm.tech domain later
+
+1. Set `NEXT_PUBLIC_SITE_URL: https://www.ridm.tech` in `.github/workflows/deploy.yml`
+   (this feeds canonical URLs, `hreflang`, `sitemap.xml`, `robots.txt` and JSON-LD).
+2. Add `public/CNAME` containing `www.ridm.tech`.
+3. Point DNS: `CNAME www → gino-comp.github.io`.
+4. Settings → Pages → Custom domain, then enable **Enforce HTTPS**.
+5. Update the absolute URL in `public/index.html`.
 
 ## Content updates
 

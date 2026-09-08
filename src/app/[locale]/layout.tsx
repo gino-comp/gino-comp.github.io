@@ -2,7 +2,14 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getDictionary, isLocale, locales, siteUrl } from "@/lib/i18n";
+import "../globals.css";
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
+
+export const metadata: Metadata = {
+  title: "RiDM Technology",
+  description: "Programmable Near-Sensor Computing"
+};
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -32,12 +39,14 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   };
 
   return (
-    <>
-      <Header locale={locale} />
-      <main>{children}</main>
-      <Footer locale={locale} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(paperJsonLd) }} />
-    </>
+    <html lang={locale}>
+      <body>
+        <Header locale={locale} />
+        <main>{children}</main>
+        <Footer locale={locale} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(paperJsonLd) }} />
+      </body>
+    </html>
   );
 }

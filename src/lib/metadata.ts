@@ -4,8 +4,10 @@ import { getDictionary, siteUrl } from "./i18n";
 
 export function makeMetadata(locale: Locale, path = "", title?: string, description?: string): Metadata {
   const dict = getDictionary(locale);
+  // Trailing slashes match `trailingSlash: true` in next.config.mjs, so the
+  // canonical URL is byte-identical to the URL GitHub Pages actually serves.
   const normalized = path ? `/${path}` : "";
-  const pageUrl = `/${locale}${normalized}`;
+  const pageUrl = `/${locale}${normalized}/`;
   const pageTitle = title ? `${title} | RiDM Technology` : dict.meta.title;
   const pageDescription = description ?? dict.meta.description;
 
@@ -16,8 +18,8 @@ export function makeMetadata(locale: Locale, path = "", title?: string, descript
     alternates: {
       canonical: pageUrl,
       languages: {
-        ko: `/ko${normalized}`,
-        en: `/en${normalized}`
+        ko: `/ko${normalized}/`,
+        en: `/en${normalized}/`
       }
     },
     openGraph: {
