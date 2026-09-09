@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment, type CSSProperties } from "react";
-import type { AcronymPart, Dictionary, Milestone, TeamGroup, TeamLink, TeamMember, TeamStat } from "@/lib/i18n";
+import type { AcronymPart, Dictionary, Milestone, TeamGroup, TeamLink, TeamMember } from "@/lib/i18n";
 
 function LinkedInIcon() {
   return (
@@ -118,7 +118,6 @@ export function TeamSection({ dict }: { dict: Dictionary }) {
   const a = dict.about;
   const lead = a.lead as TeamMember;
   const groups = a.groups as readonly TeamGroup[];
-  const stats = a.stats as readonly TeamStat[];
 
   return (
     <section className="section dark-section">
@@ -127,11 +126,6 @@ export function TeamSection({ dict }: { dict: Dictionary }) {
           <div>
             <div className="section-kicker">{a.teamKicker}</div>
             <h2>{a.teamTitle}</h2>
-          </div>
-          <div className="team-stats">
-            {stats.map(([value, label]) => (
-              <div key={label}><b>{value}</b><span>{label}</span></div>
-            ))}
           </div>
         </div>
 

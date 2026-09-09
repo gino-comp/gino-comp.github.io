@@ -224,11 +224,6 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .origin-body { display: grid; gap: 18px; align-self: end; }
 .origin-body p { color: var(--text-2); max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; }
 
-.team-stats { display: flex; flex-wrap: wrap; gap: 10px 40px; align-self: end; }
-.team-stats div { display: grid; gap: 5px; }
-.team-stats b { font-size: 30px; line-height: 1; letter-spacing: -.04em; font-weight: 700; }
-.team-stats span { font-size: 12px; color: var(--text-3); }
-
 /* One label style for every small uppercase tag on the page. */
 .founder-copy > span, .team-columns summary > div > span { font-size: 11px; letter-spacing: .12em; color: var(--accent-text); text-transform: uppercase; font-weight: 700; }
 .founder-copy > small, .team-columns summary small { font-size: 12px; color: var(--text-3); }
@@ -364,8 +359,6 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .paper-row > b { justify-self: start; }
   .about-page .section { padding: 64px 0; }
   .about-page .section-head { margin-bottom: 40px; }
-  .team-stats { gap: 8px 26px; }
-  .team-stats b { font-size: 26px; }
   .acronym { padding: 26px 22px; margin-top: 36px; }
   .acronym-note { font-size: 14px; }
   .founder-lead { grid-template-columns: 1fr; gap: 20px; padding: 18px; }

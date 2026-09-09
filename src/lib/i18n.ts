@@ -211,8 +211,7 @@ export const dictionaries = {
           "A recursive acronym: the expansion contains the name itself. It is also the shortest description of the company — we research dataflow architecture, and we carry it into silicon."
       },
       teamKicker: "TEAM",
-      teamTitle: "The people behind DODA.",
-      stats: [["2", "PhDs"], ["1", "PhD Candidate"], ["1", "MBA"], ["2", "IC Designers"]],
+      teamTitle: "The people behind RiDM.",
       collapse: "Show less",
       expand: "Show more",
       websiteLabel: "Website",
@@ -468,8 +467,7 @@ export const dictionaries = {
           "이름 안에 이름이 다시 등장하는 재귀 약어(recursive acronym)입니다. 동시에 회사를 가장 짧게 설명하는 문장이기도 합니다. 데이터플로우 아키텍처를 직접 연구하고, 실리콘으로 구현합니다."
       },
       teamKicker: "TEAM",
-      teamTitle: "DODA를 만드는 사람들.",
-      stats: [["2", "PhD"], ["1", "PhD Candidate"], ["1", "MBA"], ["2", "IC 설계"]],
+      teamTitle: "RiDM을 만드는 사람들.",
       collapse: "간략히",
       expand: "자세히",
       websiteLabel: "웹사이트",
@@ -633,9 +631,6 @@ export type Milestone = {
 
 // [highlighted initial, rest of the word]; the initials spell RiDM.
 export type AcronymPart = readonly [string, string];
-
-// [value, label], e.g. ["2", "PhDs"]
-export type TeamStat = readonly [string, string];
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale];
