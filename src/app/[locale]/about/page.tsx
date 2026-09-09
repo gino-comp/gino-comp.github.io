@@ -14,7 +14,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
   return (
-    <div className="subpage">
+    <div className="subpage about-page">
       <AboutIntro dict={dict} />
       <OriginSection dict={dict} />
       <TeamSection dict={dict} />

@@ -6,6 +6,10 @@
   --text: #f6f8fb;
   --muted: #98a4b3;
   --muted2: #707d8d;
+  --text-2: #a5b0bd;
+  --text-3: #7b8796;
+  --accent-text: #6fdad4;
+  --hairline: rgba(255, 255, 255, 0.055);
   --cyan: #30ddd4;
   --blue: #4c78ff;
   --violet: #8c4cff;
@@ -105,7 +109,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .section { padding: 104px 0; }
 .dark-section { background: var(--bg); color: var(--text); }
 .section-head { display: grid; grid-template-columns: .95fr 1.05fr; gap: 70px; margin-bottom: 70px; }
-.section-kicker { font-size: 10px; letter-spacing: .15em; color: #718092; font-weight: 700; margin-bottom: 16px; }
+.section-kicker { font-size: 11px; letter-spacing: .14em; color: var(--text-3); font-weight: 700; margin-bottom: 16px; }
 .section-head h2 { margin: 0; font-size: clamp(36px,3.6vw,54px); line-height: 1.06; letter-spacing: -.045em; max-width: 720px; }
 .section-head > p { color: #96a1b0; max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; align-self: end; }
 
@@ -189,83 +193,93 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .patent-list code { color: #236d83; font-size: 11px; }
 .patent-list h3 { font-size: 16px; margin: 8px 0 0; }
 
+/* ---------- About page ---------- */
+.about-page .section { padding: 80px 0; }
+.about-page .section-head { margin-bottom: 56px; }
+.about-page .section-head > p { color: var(--text-2); }
+.about-page .page-intro { padding-bottom: 28px; }
 .page-intro .section-head, .head-only .section-head { margin-bottom: 0; }
+
 /* Gradient border: the panel fill is painted to the padding box and the brand
    ramp to the border box, so the 1px edge carries the logo colours. */
-.acronym { margin-top: 52px; border: 1px solid transparent; border-radius: 24px; padding: 40px 44px;
+.acronym { margin-top: 44px; border: 1px solid transparent; border-radius: 24px; padding: 38px 44px;
   background:
     radial-gradient(circle at 10% 12%,rgba(48,221,212,.13),transparent 46%) padding-box,
     radial-gradient(circle at 92% 88%,rgba(140,76,255,.13),transparent 48%) padding-box,
     linear-gradient(180deg,#0a0e14,#080c12) padding-box,
     linear-gradient(100deg,#30ddd4,#4c78ff 52%,#8c4cff) border-box; }
-.acronym > span { font-size: 10px; letter-spacing: .15em; font-weight: 700;
+.acronym > span { font-size: 11px; letter-spacing: .14em; font-weight: 700;
   background: linear-gradient(100deg,#5fe7df,#7fa4ff 55%,#bb8bff);
   -webkit-background-clip: text; background-clip: text; color: transparent; }
 /* The gradient lives on the phrase, not on each letter, so every acronym
    initial samples the ramp where it actually sits on the line. The rest of
    each word paints a solid colour over that background and recedes. */
-.acronym-expansion { margin: 18px 0 0; width: fit-content; max-width: 100%; font-size: clamp(26px,3vw,40px); line-height: 1.18; letter-spacing: -.035em; font-weight: 640;
+.acronym-expansion { margin: 16px 0 0; width: fit-content; max-width: 100%; font-size: clamp(26px,3vw,40px); line-height: 1.18; letter-spacing: -.035em; font-weight: 640;
   background: linear-gradient(100deg,#3fe3da 0%,#59c9f7 24%,#6f96ff 52%,#a06bff 78%,#dd8bff 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent; }
 .acronym-expansion b { font-weight: 640; color: transparent; }
 .acronym-expansion > span { color: #5d6875; -webkit-text-fill-color: #5d6875; }
-.acronym-note { margin: 24px 0 0; max-width: 640px; font-size: 15px; line-height: 1.72; color: #96a1b0; }
+.acronym-note { margin: 22px 0 0; max-width: 640px; font-size: 15px; line-height: 1.72; color: var(--text-2); }
 
-.milestone-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: auto; padding-top: 26px; }
-.milestone-logos img { width: auto; object-fit: contain; opacity: .92; }
-.team-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+.origin-body { display: grid; gap: 18px; align-self: end; }
+.origin-body p { color: var(--text-2); max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; }
+
+.team-stats { display: flex; flex-wrap: wrap; gap: 10px 40px; align-self: end; }
+.team-stats div { display: grid; gap: 5px; }
+.team-stats b { font-size: 30px; line-height: 1; letter-spacing: -.04em; font-weight: 700; }
+.team-stats span { font-size: 12px; color: var(--text-3); }
+
+/* One label style for every small uppercase tag on the page. */
+.founder-copy > span, .team-columns summary > div > span { font-size: 11px; letter-spacing: .12em; color: var(--accent-text); text-transform: uppercase; font-weight: 700; }
+.founder-copy > small, .team-columns summary small { font-size: 12px; color: var(--text-3); }
+
+.founder-lead { display: grid; grid-template-columns: 300px 1fr; gap: 36px; border: 1px solid var(--line); border-radius: 24px; background: var(--bg2); padding: 24px; margin-bottom: 44px; }
+.founder-portrait { border-radius: 16px; overflow: hidden; background: #dfe3e7; aspect-ratio: 4 / 5; }
+.founder-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.founder-copy { display: flex; flex-direction: column; justify-content: center; padding: 8px 12px 8px 0; }
+.founder-copy h3 { font-size: 32px; letter-spacing: -.04em; line-height: 1.1; margin: 12px 0 6px; }
+
+.founder-copy dl, .profile-body dl { margin: 0; display: grid; gap: 6px; }
+.founder-copy dl { margin-top: 24px; }
+.founder-copy dl > div, .profile-body dl > div { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 11px 0; border-top: 1px solid var(--hairline); }
+.founder-copy dt, .profile-body dt { font-size: 11px; color: var(--text-3); font-weight: 600; letter-spacing: .02em; padding-top: 2px; }
+.founder-copy dd, .profile-body dd { font-size: 14px; color: var(--text-2); margin: 0; line-height: 1.6; }
+.detail-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.detail-list li { line-height: 1.5; }
+
+.team-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
 /* Cards in a row share its height, so the two location columns stay level.
    A collapsed card shrinks to its summary instead of leaving a tall gap. */
 .team-columns > details { align-self: stretch; }
 .team-columns > details:not([open]) { align-self: start; }
-.team-column-head { display: grid; gap: 5px; align-content: start; padding: 2px 4px 12px; border-bottom: 1px solid var(--line); }
+.team-column-head { display: grid; gap: 6px; align-content: start; padding: 0 2px 14px; border-bottom: 1px solid var(--line); }
 .team-column-head > div { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.team-column-head strong { font-size: 16px; letter-spacing: -.02em; }
-.team-column-head span { font-size: 11px; letter-spacing: .02em; color: #6a7686; }
-.team-column-head em { font-style: normal; font-size: 12px; color: #6fdad4; }
-.team-columns details { border: 1px solid var(--line); border-radius: 18px; background: #0a0f16; overflow: hidden; }
-.team-columns summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 24px; }
+.team-column-head strong { font-size: 17px; letter-spacing: -.02em; }
+.team-column-head span { font-size: 12px; color: var(--text-3); }
+.team-column-head em { font-style: normal; font-size: 13px; color: var(--accent-text); }
+.team-columns details { border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); overflow: hidden; }
+.team-columns summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 22px 24px; }
 .team-columns summary::-webkit-details-marker { display: none; }
 .team-columns summary > div { display: grid; gap: 4px; }
-.team-columns summary > div > span { font-size: 9px; letter-spacing: .09em; color: #6fdad4; text-transform: uppercase; }
-.team-columns summary strong { font-size: 19px; }
-.team-columns summary small { font-size: 10px; color: #748091; }
-.team-columns summary i { height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.07); display: grid; place-items: center; color: #8996a7; font-style: normal; font-size: 11px; white-space: nowrap; transition: color .18s ease, border-color .18s ease; }
+.team-columns summary strong { font-size: 19px; letter-spacing: -.02em; }
+.team-columns summary i { height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--text-3); font-style: normal; font-size: 11px; white-space: nowrap; transition: color .18s ease, border-color .18s ease; }
 .team-columns summary:hover i { color: #dfe5ec; border-color: rgba(255,255,255,.18); }
 .team-columns details[open] summary .toggle-expand, .team-columns details:not([open]) summary .toggle-collapse { display: none; }
 .profile-body { padding: 0 24px 22px; }
-.profile-body dl { margin: 0; display: grid; gap: 8px; }
-.profile-body dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.055); }
-.profile-body dt { font-size: 10px; color: #718091; font-weight: 600; }
-.profile-body dd { font-size: 13px; color: #a8b2bf; margin: 0; line-height: 1.6; }
 
-.founder-lead { display: grid; grid-template-columns: 300px 1fr; gap: 34px; border: 1px solid var(--line); border-radius: 22px; background: #0a0f16; padding: 22px; margin-bottom: 12px; }
-.founder-portrait { border-radius: 16px; overflow: hidden; background: #dfe3e7; aspect-ratio: 4 / 5; }
-.founder-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.founder-copy { display: flex; flex-direction: column; justify-content: center; padding: 12px 10px 12px 0; }
-.founder-copy > span { font-size: 9px; letter-spacing: .09em; color: #6fdad4; text-transform: uppercase; }
-.founder-copy h3 { font-size: 32px; letter-spacing: -.04em; line-height: 1.1; margin: 12px 0 6px; }
-.founder-copy > small { font-size: 11px; color: #748091; }
-.founder-copy dl { margin: 26px 0 0; display: grid; gap: 8px; }
-.founder-copy dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.055); }
-.founder-copy dt { font-size: 10px; color: #718091; font-weight: 600; }
-.founder-copy dd { font-size: 14px; color: #a8b2bf; margin: 0; line-height: 1.65; }
-
-.origin-body { display: grid; gap: 18px; align-self: end; }
-.origin-body p { color: #96a1b0; max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; }
-.milestones { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
-.milestones article { background: var(--bg2); padding: 32px; min-height: 210px; display: flex; flex-direction: column; }
-.milestones b { font-size: 11px; letter-spacing: .12em; color: #6fdad4; font-weight: 700; }
-.milestones h3 { font-size: 20px; letter-spacing: -.03em; line-height: 1.2; margin: 16px 0 12px; }
-.milestones p { font-size: 14px; color: #8e9aa9; line-height: 1.65; margin: 0; }
-
-.detail-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
-.detail-list li { line-height: 1.5; }
 .profile-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-.profile-links a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 999px; font-size: 12px; color: #b6c0cc; transition: color .18s ease, border-color .18s ease, background-color .18s ease; }
+.profile-links a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: #b6c0cc; transition: color .18s ease, border-color .18s ease, background-color .18s ease; }
 .profile-links a:hover { color: #fff; border-color: rgba(48,221,212,.34); background: rgba(48,221,212,.06); }
 .profile-links svg { width: 14px; height: 14px; flex: none; }
 .founder-copy .profile-links { margin-top: 22px; }
+
+.milestones { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.milestones article { background: var(--bg2); padding: 32px; min-height: 200px; display: flex; flex-direction: column; }
+.milestones b { font-size: 11px; letter-spacing: .12em; color: var(--accent-text); font-weight: 700; }
+.milestones h3 { font-size: 21px; letter-spacing: -.03em; line-height: 1.2; margin: 16px 0 12px; }
+.milestones p { font-size: 14px; color: var(--text-2); line-height: 1.65; margin: 0; }
+.milestone-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: auto; padding-top: 26px; }
+.milestone-logos img { width: auto; object-fit: contain; opacity: .92; }
 
 .contact-section { background: var(--bg); padding-top: 0; }
 .contact-panel { border-radius: 28px; background: #eef1f3; color: #0a0e13; padding: 64px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 42px; align-items: end; }
@@ -310,7 +324,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .brand { min-width: 0; }
   .hero-section { padding: 58px 0 42px; }
   h1 { font-size: clamp(50px,16vw,76px); line-height: .92; word-break: keep-all; }
-  .hero-copy p, .section-head > p { word-break: keep-all; }
+  .hero-copy p, .section-head > p, .section-head h2 { word-break: keep-all; }
   .word-cycle { margin-top: 40px; }
   .word-cycle-window { display: none; }
   .word-cycle::after { content: "Sensing · Networking · Robotics · Edge AI"; font-size: 13px; color: #c7d0da; }
@@ -348,6 +362,10 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .application-icon svg { width: 78px; height: 78px; }
   .paper-row { grid-template-columns: 1fr; gap: 8px; }
   .paper-row > b { justify-self: start; }
+  .about-page .section { padding: 64px 0; }
+  .about-page .section-head { margin-bottom: 40px; }
+  .team-stats { gap: 8px 26px; }
+  .team-stats b { font-size: 26px; }
   .acronym { padding: 26px 22px; margin-top: 36px; }
   .acronym-note { font-size: 14px; }
   .founder-lead { grid-template-columns: 1fr; gap: 20px; padding: 18px; }

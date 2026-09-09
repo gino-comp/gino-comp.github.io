@@ -212,7 +212,7 @@ export const dictionaries = {
       },
       teamKicker: "TEAM",
       teamTitle: "The people behind DODA.",
-      overview: "2 PhDs · 1 PhD Candidate · 1 MBA · 2 IC Designers",
+      stats: [["2", "PhDs"], ["1", "PhD Candidate"], ["1", "MBA"], ["2", "IC Designers"]],
       collapse: "Show less",
       expand: "Show more",
       websiteLabel: "Website",
@@ -451,12 +451,12 @@ export const dictionaries = {
         "공동창업자들의 NUS 연구에서 출발한 PCT 특허 3건이 핵심 IP를 구성하며, RiDM은 해당 IP에 대한 독점 라이선스를 보유하고 있습니다."
     },
     about: {
-      kicker: "회사 소개",
+      kicker: "ABOUT US",
       title: "핵심 기술을 연구한 팀이 직접 만듭니다.",
       desc:
         "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
       acronym: {
-        kicker: "이름에 담긴 뜻",
+        kicker: "THE NAME",
         expansion: [
           ["R", "iDM"],
           ["i", "s"],
@@ -469,7 +469,7 @@ export const dictionaries = {
       },
       teamKicker: "TEAM",
       teamTitle: "DODA를 만드는 사람들.",
-      overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인 · IC 설계 2인",
+      stats: [["2", "PhD"], ["1", "PhD Candidate"], ["1", "MBA"], ["2", "IC 설계"]],
       collapse: "간략히",
       expand: "자세히",
       websiteLabel: "웹사이트",
@@ -633,6 +633,9 @@ export type Milestone = {
 
 // [highlighted initial, rest of the word]; the initials spell RiDM.
 export type AcronymPart = readonly [string, string];
+
+// [value, label], e.g. ["2", "PhDs"]
+export type TeamStat = readonly [string, string];
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale];
