@@ -74,6 +74,10 @@ const common = {
   ]
 };
 
+// Publication numbers are listed in the founder bio; derive them from the
+// patents list so the two can never disagree.
+const patentCodes = common.patents.map((patent) => patent.code).join(" · ");
+
 export const dictionaries = {
   en: {
     ...common,
@@ -196,39 +200,45 @@ export const dictionaries = {
         "RiDM is an NUS spin-off founded by computer architecture researchers and a business lead from NUS. The founding team that did the underlying research remains directly involved in architecture, implementation and commercialization.",
       teamKicker: "FOUNDING TEAM",
       overview: "2 PhDs · 1 PhD Candidate · 1 MBA",
-      overviewNote: "Expand each profile for research background and current role.",
+      overviewNote: "Each profile shows research background and current role.",
+      collapse: "Show less",
+      expand: "Show more",
+      websiteLabel: "Website",
       team: [
         {
           role: "CEO & Co-founder",
           name: "Jinho Lee, PhD",
           school: "NUS School of Computing",
           portrait: "/team/jinho-lee.jpg",
+          links: [],
           details: [
             ["Research", "General-purpose dynamic dataflow processing and reconfigurable computer architecture."],
-            ["IP", "Lead inventor on RiDM’s three core PCT patent filings."],
+            ["IP", `Lead inventor on RiDM’s three core PCT filings: ${patentCodes}.`],
             ["Role", "Company strategy, architecture direction and commercialization."]
           ]
         },
         {
-          role: "Co-founder · AI Accelerator Research",
+          role: "CTO & Co-founder",
           name: "Tingting Xiang",
           school: "NUS PhD Candidate",
           portrait: null,
+          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
           details: [
             ["Research", "AI accelerator design and optimization for sparse data environments."],
             ["Focus", "AI workload analysis and hardware optimization."],
-            ["Role", "Application-oriented accelerator research and optimization."]
+            ["Role", "Leads the company’s technical direction across architecture and implementation, alongside AI accelerator research."]
           ]
         },
         {
-          role: "Co-founder · Business",
+          role: "CFO & Co-founder",
           name: "Xiaoqing (Serena) Xie, MBA",
           school: "NUS MBA",
           portrait: null,
+          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/serena-xie-a6a8986/" }],
           details: [
-            ["Background", "NUS MBA with responsibility for business development, strategy and operations."],
-            ["Focus", "Business development, strategy, operations and investor communication."],
-            ["Role", "Business operations and commercialization support."]
+            ["Background", "NUS MBA with responsibility for finance, strategy and operations."],
+            ["Focus", "Finance, fundraising, investor relations and corporate operations."],
+            ["Role", "Financial management and commercialization support."]
           ]
         },
         {
@@ -236,6 +246,7 @@ export const dictionaries = {
           name: "Trevor E. Carlson, PhD",
           school: "Associate Professor, NUS",
           portrait: null,
+          links: [{ type: "website", href: "https://www.comp.nus.edu.sg/~tcarlson/" }],
           details: [
             ["Research", "Computer architecture and related systems research."],
             ["Background", "NUS Associate Professor and academic advisor to the founding research team."],
@@ -392,39 +403,45 @@ export const dictionaries = {
         "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
       teamKicker: "FOUNDING TEAM",
       overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인",
-      overviewNote: "각 프로필을 열면 연구분야와 담당 역할을 확인할 수 있습니다.",
+      overviewNote: "각 프로필에서 연구분야와 담당 역할을 확인할 수 있습니다.",
+      collapse: "간략히",
+      expand: "자세히",
+      websiteLabel: "웹사이트",
       team: [
         {
           role: "CEO & Co-founder",
           name: "이진호, PhD",
           school: "NUS School of Computing",
           portrait: "/team/jinho-lee.jpg",
+          links: [],
           details: [
             ["연구분야", "General-purpose Dynamic Dataflow Processing, Reconfigurable Computer Architecture"],
-            ["IP", "핵심 PCT 특허 3건의 Lead Inventor"],
+            ["IP", `핵심 PCT 특허 3건의 Lead Inventor: ${patentCodes}`],
             ["담당", "회사 전략, 아키텍처 방향성 및 사업화 총괄"]
           ]
         },
         {
-          role: "Co-founder · AI Accelerator Research",
+          role: "CTO & Co-founder",
           name: "Tingting Xiang",
           school: "NUS PhD Candidate",
           portrait: null,
+          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
           details: [
             ["연구분야", "Sparse Data 환경의 AI 가속기 설계 및 최적화"],
             ["주요업무", "AI Workload 분석 및 Hardware Optimization"],
-            ["담당", "응용 워크로드 기반 가속기 연구 및 최적화"]
+            ["담당", "AI 가속기 연구와 함께 아키텍처·구현 등 회사 기술 부문 총괄"]
           ]
         },
         {
-          role: "Co-founder · Business",
+          role: "CFO & Co-founder",
           name: "Xiaoqing (Serena) Xie, MBA",
           school: "NUS MBA",
           portrait: null,
+          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/serena-xie-a6a8986/" }],
           details: [
             ["학력", "NUS MBA"],
-            ["주요업무", "사업개발, 전략, 운영 및 투자자 커뮤니케이션"],
-            ["담당", "사업개발·운영 및 사업화 지원"]
+            ["주요업무", "재무, 투자 유치, 투자자 커뮤니케이션 및 경영 관리"],
+            ["담당", "재무 총괄 및 사업화 지원"]
           ]
         },
         {
@@ -432,6 +449,7 @@ export const dictionaries = {
           name: "Trevor E. Carlson, PhD",
           school: "Associate Professor, NUS",
           portrait: null,
+          links: [{ type: "website", href: "https://www.comp.nus.edu.sg/~tcarlson/" }],
           details: [
             ["연구분야", "Computer Architecture 및 관련 시스템 연구"],
             ["주요경력", "NUS 부교수이자 창업 연구팀의 지도교수"],
@@ -481,11 +499,14 @@ export type Dictionary = (typeof dictionaries)[Locale];
 // The two locale dictionaries are structurally identical but have distinct
 // literal types, so components read the shared shapes through these instead of
 // mapping over a union of readonly tuples.
+export type TeamLink = { type: "linkedin" | "website"; href: string };
+
 export type TeamMember = {
   role: string;
   name: string;
   school: string;
   portrait: string | null;
+  links: readonly TeamLink[];
   details: readonly (readonly [string, string])[];
 };
 

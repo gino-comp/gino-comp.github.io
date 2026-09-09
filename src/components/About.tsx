@@ -1,5 +1,49 @@
 import Image from "next/image";
-import type { Dictionary, Milestone, TeamMember } from "@/lib/i18n";
+import type { Dictionary, Milestone, TeamLink, TeamMember } from "@/lib/i18n";
+
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"
+      />
+    </svg>
+  );
+}
+
+function WebsiteIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.9">
+      <circle cx="12" cy="12" r="9.25" />
+      <path d="M2.75 12h18.5M12 2.75c2.4 2.6 3.6 5.7 3.6 9.25s-1.2 6.65-3.6 9.25c-2.4-2.6-3.6-5.7-3.6-9.25S9.6 5.35 12 2.75z" />
+    </svg>
+  );
+}
+
+function ProfileLinks({ links, websiteLabel }: { links: readonly TeamLink[]; websiteLabel: string }) {
+  if (links.length === 0) return null;
+  return (
+    <div className="profile-links">
+      {links.map((link) => (
+        <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
+          {link.type === "linkedin" ? <LinkedInIcon /> : <WebsiteIcon />}
+          <span>{link.type === "linkedin" ? "LinkedIn" : websiteLabel}</span>
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function ProfileDetails({ member }: { member: TeamMember }) {
+  return (
+    <dl>
+      {member.details.map(([label, value]) => (
+        <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+      ))}
+    </dl>
+  );
+}
 
 export default function AboutSection({ dict }: { dict: Dictionary }) {
   const a = dict.about;
@@ -32,27 +76,24 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
             <span>{founder.role}</span>
             <h3>{founder.name}</h3>
             <small>{founder.school}</small>
-            <dl>
-              {founder.details.map(([label, value]) => (
-                <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
-              ))}
-            </dl>
+            <ProfileDetails member={founder} />
+            <ProfileLinks links={founder.links} websiteLabel={a.websiteLabel} />
           </div>
         </article>
 
         <div className="team-grid">
           {others.map((member) => (
-            <details key={member.name}>
+            <details key={member.name} open>
               <summary>
                 <div><span>{member.role}</span><strong>{member.name}</strong><small>{member.school}</small></div>
-                <i>+</i>
+                <i>
+                  <span className="toggle-expand">{a.expand}</span>
+                  <span className="toggle-collapse">{a.collapse}</span>
+                </i>
               </summary>
               <div className="profile-body">
-                <dl>
-                  {member.details.map(([label, value]) => (
-                    <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
-                  ))}
-                </dl>
+                <ProfileDetails member={member} />
+                <ProfileLinks links={member.links} websiteLabel={a.websiteLabel} />
               </div>
             </details>
           ))}

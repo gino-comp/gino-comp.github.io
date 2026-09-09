@@ -195,14 +195,15 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .team-overview > p { font-size: 12px; color: #758191; margin: 0; }
 .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .team-grid details { border: 1px solid var(--line); border-radius: 18px; background: #0a0f16; overflow: hidden; }
-.team-grid summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 1fr 30px; align-items: center; gap: 16px; padding: 24px; }
+.team-grid summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 24px; }
 .team-grid summary::-webkit-details-marker { display: none; }
 .team-grid summary > div { display: grid; gap: 4px; }
-.team-grid summary span { font-size: 9px; letter-spacing: .09em; color: #6fdad4; text-transform: uppercase; }
+.team-grid summary > div > span { font-size: 9px; letter-spacing: .09em; color: #6fdad4; text-transform: uppercase; }
 .team-grid summary strong { font-size: 18px; }
 .team-grid summary small { font-size: 10px; color: #748091; }
-.team-grid summary i { width: 28px; height: 28px; border-radius: 8px; border: 1px solid rgba(255,255,255,.07); display: grid; place-items: center; color: #8996a7; font-style: normal; transition: transform .18s ease; }
-.team-grid details[open] summary i { transform: rotate(45deg); }
+.team-grid summary i { height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.07); display: grid; place-items: center; color: #8996a7; font-style: normal; font-size: 11px; white-space: nowrap; transition: color .18s ease, border-color .18s ease; }
+.team-grid summary:hover i { color: #dfe5ec; border-color: rgba(255,255,255,.18); }
+.team-grid details[open] summary .toggle-expand, .team-grid details:not([open]) summary .toggle-collapse { display: none; }
 .profile-body { padding: 0 24px 22px; }
 .profile-body dl { margin: 0; display: grid; gap: 8px; }
 .profile-body dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.055); }
@@ -231,6 +232,12 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .milestones b { font-size: 11px; letter-spacing: .12em; color: #6fdad4; font-weight: 700; }
 .milestones h3 { font-size: 20px; letter-spacing: -.03em; line-height: 1.2; margin: 16px 0 12px; }
 .milestones p { font-size: 14px; color: #8e9aa9; line-height: 1.65; margin: 0; }
+
+.profile-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.profile-links a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 999px; font-size: 12px; color: #b6c0cc; transition: color .18s ease, border-color .18s ease, background-color .18s ease; }
+.profile-links a:hover { color: #fff; border-color: rgba(48,221,212,.34); background: rgba(48,221,212,.06); }
+.profile-links svg { width: 14px; height: 14px; flex: none; }
+.founder-copy .profile-links { margin-top: 22px; }
 
 .contact-section { background: var(--bg); padding-top: 0; }
 .contact-panel { border-radius: 28px; background: #eef1f3; color: #0a0e13; padding: 64px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 42px; align-items: end; }
