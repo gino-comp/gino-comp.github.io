@@ -614,7 +614,14 @@ export type TeamMember = {
 
 export type TeamGroup = { label: string; entity: string; note: string; members: readonly TeamMember[] };
 
-export type Milestone = { year: string; title: string; body: string };
+export type MilestoneLogo = { src: string; alt: string };
+
+export type Milestone = {
+  year: string;
+  title: string;
+  body: string;
+  logos?: readonly MilestoneLogo[];
+};
 
 // [highlighted initial, rest of the word]; the initials spell RiDM.
 export type AcronymPart = readonly [string, string];

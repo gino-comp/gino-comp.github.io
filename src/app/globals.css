@@ -190,13 +190,29 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .patent-list h3 { font-size: 16px; margin: 8px 0 0; }
 
 .page-intro .section-head, .head-only .section-head { margin-bottom: 0; }
-.acronym { margin-top: 52px; border: 1px solid var(--line); border-radius: 24px; padding: 40px 44px; background: radial-gradient(circle at 16% 18%,rgba(48,221,212,.07),transparent 48%), linear-gradient(180deg,#0a0e14,#080c12); }
-.acronym > span { font-size: 10px; letter-spacing: .15em; color: #718092; font-weight: 700; }
-/* The acronym letters carry the brand gradient; the rest of each word recedes,
-   so R-i-D-M reads out of the phrase. */
-.acronym-expansion { margin: 18px 0 0; font-size: clamp(26px,3vw,40px); line-height: 1.18; letter-spacing: -.035em; font-weight: 640; color: #6d7987; }
-.acronym-expansion b { font-weight: 640; color: #f4f8fb; }
+/* Gradient border: the panel fill is painted to the padding box and the brand
+   ramp to the border box, so the 1px edge carries the logo colours. */
+.acronym { margin-top: 52px; border: 1px solid transparent; border-radius: 24px; padding: 40px 44px;
+  background:
+    radial-gradient(circle at 10% 12%,rgba(48,221,212,.13),transparent 46%) padding-box,
+    radial-gradient(circle at 92% 88%,rgba(140,76,255,.13),transparent 48%) padding-box,
+    linear-gradient(180deg,#0a0e14,#080c12) padding-box,
+    linear-gradient(100deg,#30ddd4,#4c78ff 52%,#8c4cff) border-box; }
+.acronym > span { font-size: 10px; letter-spacing: .15em; font-weight: 700;
+  background: linear-gradient(100deg,#5fe7df,#7fa4ff 55%,#bb8bff);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* The gradient lives on the phrase, not on each letter, so every acronym
+   initial samples the ramp where it actually sits on the line. The rest of
+   each word paints a solid colour over that background and recedes. */
+.acronym-expansion { margin: 18px 0 0; width: fit-content; max-width: 100%; font-size: clamp(26px,3vw,40px); line-height: 1.18; letter-spacing: -.035em; font-weight: 640;
+  background: linear-gradient(100deg,#3fe3da 0%,#59c9f7 24%,#6f96ff 52%,#a06bff 78%,#dd8bff 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.acronym-expansion b { font-weight: 640; color: transparent; }
+.acronym-expansion > span { color: #5d6875; -webkit-text-fill-color: #5d6875; }
 .acronym-note { margin: 24px 0 0; max-width: 640px; font-size: 15px; line-height: 1.72; color: #96a1b0; }
+
+.milestone-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: auto; padding-top: 26px; }
+.milestone-logos img { height: 26px; width: auto; opacity: .82; }
 .team-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
 /* Cards in a row share its height, so the two location columns stay level.
    A collapsed card shrinks to its summary instead of leaving a tall gap. */
