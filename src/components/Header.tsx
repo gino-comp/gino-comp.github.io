@@ -10,7 +10,7 @@ const navItems = [
   ["technology", "DODA"],
   ["applications", "Applications"],
   ["research", "Research"],
-  ["company", "Company"],
+  ["about", "About"],
 ] as const;
 
 export default function Header({ locale }: { locale: Locale }) {

@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CompanySection from "@/components/Company";
+import AboutSection, { StorySection } from "@/components/About";
 import ContactSection from "@/components/Contact";
 import { getDictionary, isLocale } from "@/lib/i18n";
 import { makeMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? makeMetadata(locale, "company", "Company") : {};
+  return isLocale(locale) ? makeMetadata(locale, "about", "About Us") : {};
 }
 
-export default async function CompanyPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
-  return <div className="subpage"><CompanySection dict={dict} /><ContactSection dict={dict} /></div>;
+  return (
+    <div className="subpage">
+      <AboutSection dict={dict} />
+      <StorySection dict={dict} />
+      <ContactSection dict={dict} />
+    </div>
+  );
 }

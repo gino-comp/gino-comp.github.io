@@ -23,7 +23,7 @@ Production-oriented Next.js implementation of the RiDM Technology website concep
 /ko/technology          /en/technology
 /ko/applications        /en/applications
 /ko/research            /en/research
-/ko/company             /en/company
+/ko/about               /en/about
 /ko/contact             /en/contact
 ```
 
@@ -127,6 +127,17 @@ src/components/
 
 ```text
 public/brand/ridm-logo.png
+public/team/jinho-lee.jpg
+```
+
+Team portraits are committed pre-sized and EXIF-stripped, because
+`images.unoptimized` means the file shipped is the file downloaded. To add
+another, derive it the same way and set `portrait` on that member in
+`src/lib/i18n.ts` (members without a portrait use `portrait: null`):
+
+```bash
+convert <source> -crop <w>x<h>+<x>+<y> +repage -resize 900x1125 \
+  -strip -interlace Plane -quality 82 public/team/<name>.jpg
 ```
 
 The logo supplied for this project is used directly. Replace this file with an approved higher-resolution / transparent master if RiDM has one.

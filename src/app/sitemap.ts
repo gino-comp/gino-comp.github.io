@@ -5,7 +5,7 @@ import { locales, siteUrl } from "@/lib/i18n";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/technology", "/applications", "/research", "/company", "/contact"];
+  const routes = ["", "/technology", "/applications", "/research", "/about", "/contact"];
   const lastModified = new Date();
   return locales.flatMap((locale) =>
     routes.map((route) => ({

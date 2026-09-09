@@ -17,7 +17,7 @@ export default function Footer({ locale }: { locale: Locale }) {
           <Link href={`/${locale}/technology`}>DODA</Link>
           <Link href={`/${locale}/applications`}>Applications</Link>
           <Link href={`/${locale}/research`}>Research</Link>
-          <Link href={`/${locale}/company`}>Company</Link>
+          <Link href={`/${locale}/about`}>About</Link>
         </div>
         <div className="footer-meta">© 2026 RiDM Technology.</div>
       </div>

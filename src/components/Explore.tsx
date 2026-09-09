@@ -6,7 +6,7 @@ export default function ExploreSection({ locale, dict }: { locale: Locale; dict:
     { href: `/${locale}/technology`, label: dict.nav.technology, title: dict.doda.title, body: dict.doda.desc },
     { href: `/${locale}/applications`, label: dict.nav.applications, title: dict.applicationsCopy.title, body: dict.applicationsCopy.desc },
     { href: `/${locale}/research`, label: dict.nav.research, title: dict.researchCopy.title, body: dict.researchCopy.desc },
-    { href: `/${locale}/company`, label: dict.nav.company, title: dict.company.title, body: dict.company.desc }
+    { href: `/${locale}/about`, label: dict.nav.about, title: dict.about.title, body: dict.about.desc }
   ];
 
   return (

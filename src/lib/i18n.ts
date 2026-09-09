@@ -12,7 +12,7 @@ const common = {
     technology: "DODA",
     applications: "Applications",
     research: "Research",
-    company: "Company",
+    about: "About",
     contact: "Contact"
   },
   applications: [
@@ -189,18 +189,20 @@ export const dictionaries = {
       ipBody:
         "Three PCT patent families originated from the founders’ NUS research, and RiDM holds an exclusive license to the core IP."
     },
-    company: {
-      kicker: "05 / COMPANY",
+    about: {
+      kicker: "ABOUT US",
       title: "Researchers building what they invented.",
       desc:
-        "RiDM is an NUS spin-off founded by researchers in computer architecture and a business lead from NUS. The founding team remains directly involved in architecture, implementation and commercialization.",
-      overview: "3 PhDs · 1 PhD Candidate · 1 MBA",
+        "RiDM is an NUS spin-off founded by computer architecture researchers and a business lead from NUS. The founding team that did the underlying research remains directly involved in architecture, implementation and commercialization.",
+      teamKicker: "FOUNDING TEAM",
+      overview: "2 PhDs · 1 PhD Candidate · 1 MBA",
       overviewNote: "Expand each profile for research background and current role.",
       team: [
         {
           role: "CEO & Co-founder",
           name: "Jinho Lee, PhD",
           school: "NUS School of Computing",
+          portrait: "/team/jinho-lee.jpg",
           details: [
             ["Research", "General-purpose dynamic dataflow processing and reconfigurable computer architecture."],
             ["IP", "Lead inventor on RiDM’s three core PCT patent filings."],
@@ -208,19 +210,10 @@ export const dictionaries = {
           ]
         },
         {
-          role: "Co-founder · Architecture",
-          name: "Burin Amornpaisannon, PhD",
-          school: "NUS School of Computing",
-          details: [
-            ["Research", "Reconfigurable architecture, AI acceleration and hardware implementation."],
-            ["IP", "Core architecture co-invention and RTL design / verification."],
-            ["Role", "Architecture implementation, RTL design and verification."]
-          ]
-        },
-        {
           role: "Co-founder · AI Accelerator Research",
           name: "Tingting Xiang",
           school: "NUS PhD Candidate",
+          portrait: null,
           details: [
             ["Research", "AI accelerator design and optimization for sparse data environments."],
             ["Focus", "AI workload analysis and hardware optimization."],
@@ -231,6 +224,7 @@ export const dictionaries = {
           role: "Co-founder · Business",
           name: "Xiaoqing (Serena) Xie, MBA",
           school: "NUS MBA",
+          portrait: null,
           details: [
             ["Background", "NUS MBA with responsibility for business development, strategy and operations."],
             ["Focus", "Business development, strategy, operations and investor communication."],
@@ -241,11 +235,39 @@ export const dictionaries = {
           role: "Co-founder · Advisor",
           name: "Trevor E. Carlson, PhD",
           school: "Associate Professor, NUS",
+          portrait: null,
           details: [
             ["Research", "Computer architecture and related systems research."],
             ["Background", "NUS Associate Professor and academic advisor to the founding research team."],
             ["Role", "Technical advisor and research continuity."]
           ]
+        }
+      ],
+      story: {
+        kicker: "ORIGIN",
+        title: "It started in a computer architecture lab.",
+        body: [
+          "RiDM began at the National University of Singapore, inside Trevor E. Carlson’s Computer Architecture Group. The founding team spent years there researching faster and more efficient computer architectures together, and the dynamic dataflow work that became DODA existed as published research and PCT filings long before it was a product.",
+          "In 2023 the team graduated from NUS GRIP, the university’s flagship deep-tech startup incubation programme, now National GRIP. RiDM carries that architecture from research toward silicon with the same people who designed it."
+        ]
+      },
+      milestonesKicker: "MILESTONES",
+      milestonesTitle: "From lab to company.",
+      milestones: [
+        {
+          year: "2023",
+          title: "Graduated NUS GRIP",
+          body: "Completed the National University of Singapore’s flagship deep-tech startup incubation programme, now National GRIP."
+        },
+        {
+          year: "2026",
+          title: "Seed round",
+          body: "Secured seed funding from Qube Research & Technologies and The Invention Lab."
+        },
+        {
+          year: "2026",
+          title: "RiDM Korea · TIPS",
+          body: "Opened the RiDM Korea subsidiary and secured a TIPS R&D grant."
         }
       ]
     },
@@ -363,18 +385,20 @@ export const dictionaries = {
       ipBody:
         "공동창업자들의 NUS 연구에서 출발한 PCT 특허 3건이 핵심 IP를 구성하며, RiDM은 해당 IP에 대한 독점 라이선스를 보유하고 있습니다."
     },
-    company: {
-      kicker: "05 / COMPANY",
+    about: {
+      kicker: "회사 소개",
       title: "핵심 기술을 연구한 팀이 직접 만듭니다.",
       desc:
-        "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 연구한 공동창업자들이 아키텍처 구현과 사업화까지 직접 참여합니다.",
-      overview: "PhD 3인 · PhD Candidate 1인 · MBA 1인",
+        "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
+      teamKicker: "FOUNDING TEAM",
+      overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인",
       overviewNote: "각 프로필을 열면 연구분야와 담당 역할을 확인할 수 있습니다.",
       team: [
         {
           role: "CEO & Co-founder",
           name: "이진호, PhD",
           school: "NUS School of Computing",
+          portrait: "/team/jinho-lee.jpg",
           details: [
             ["연구분야", "General-purpose Dynamic Dataflow Processing, Reconfigurable Computer Architecture"],
             ["IP", "핵심 PCT 특허 3건의 Lead Inventor"],
@@ -382,19 +406,10 @@ export const dictionaries = {
           ]
         },
         {
-          role: "Co-founder · Architecture",
-          name: "Burin Amornpaisannon, PhD",
-          school: "NUS School of Computing",
-          details: [
-            ["연구분야", "재구성형 아키텍처, AI 가속기 및 하드웨어 구현"],
-            ["IP", "핵심 아키텍처 공동 발명 및 RTL 설계·검증"],
-            ["담당", "아키텍처 구현, RTL 설계 및 검증"]
-          ]
-        },
-        {
           role: "Co-founder · AI Accelerator Research",
           name: "Tingting Xiang",
           school: "NUS PhD Candidate",
+          portrait: null,
           details: [
             ["연구분야", "Sparse Data 환경의 AI 가속기 설계 및 최적화"],
             ["주요업무", "AI Workload 분석 및 Hardware Optimization"],
@@ -405,6 +420,7 @@ export const dictionaries = {
           role: "Co-founder · Business",
           name: "Xiaoqing (Serena) Xie, MBA",
           school: "NUS MBA",
+          portrait: null,
           details: [
             ["학력", "NUS MBA"],
             ["주요업무", "사업개발, 전략, 운영 및 투자자 커뮤니케이션"],
@@ -415,11 +431,39 @@ export const dictionaries = {
           role: "Co-founder · Advisor",
           name: "Trevor E. Carlson, PhD",
           school: "Associate Professor, NUS",
+          portrait: null,
           details: [
             ["연구분야", "Computer Architecture 및 관련 시스템 연구"],
             ["주요경력", "NUS 부교수이자 창업 연구팀의 지도교수"],
             ["담당", "Technical Advisor 및 연구 연속성 지원"]
           ]
+        }
+      ],
+      story: {
+        kicker: "ORIGIN",
+        title: "컴퓨터 아키텍처 연구실에서 시작했습니다.",
+        body: [
+          "RiDM은 싱가포르국립대학교(NUS) Trevor E. Carlson 교수의 Computer Architecture Group에서 시작되었습니다. 창업팀은 이곳에서 더 빠르고 효율적인 컴퓨터 아키텍처를 함께 연구했으며, DODA의 바탕이 된 Dynamic Dataflow 연구는 제품이 되기 전에 이미 논문과 PCT 특허로 축적되었습니다.",
+          "2023년에는 NUS의 대표 딥테크 창업 인큐베이션 프로그램인 NUS GRIP(현 National GRIP)을 성공적으로 졸업했습니다. 아키텍처를 직접 설계한 구성원들이 연구 단계에서 실리콘까지 그대로 이어가고 있습니다."
+        ]
+      },
+      milestonesKicker: "MILESTONES",
+      milestonesTitle: "연구실에서 회사로.",
+      milestones: [
+        {
+          year: "2023",
+          title: "NUS GRIP 졸업",
+          body: "NUS의 대표 딥테크 창업 인큐베이션 프로그램인 NUS GRIP(현 National GRIP)을 성공적으로 졸업했습니다."
+        },
+        {
+          year: "2026",
+          title: "시드 투자 유치",
+          body: "Qube Research & Technologies와 The Invention Lab으로부터 시드 라운드 투자를 유치했습니다."
+        },
+        {
+          year: "2026",
+          title: "RiDM Korea 설립 · TIPS 선정",
+          body: "자회사 RiDM Korea를 설립하고 TIPS R&D 과제에 선정되었습니다."
         }
       ]
     },
@@ -433,6 +477,19 @@ export const dictionaries = {
 } as const;
 
 export type Dictionary = (typeof dictionaries)[Locale];
+
+// The two locale dictionaries are structurally identical but have distinct
+// literal types, so components read the shared shapes through these instead of
+// mapping over a union of readonly tuples.
+export type TeamMember = {
+  role: string;
+  name: string;
+  school: string;
+  portrait: string | null;
+  details: readonly (readonly [string, string])[];
+};
+
+export type Milestone = { year: string; title: string; body: string };
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale];
