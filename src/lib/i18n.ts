@@ -323,7 +323,11 @@ export const dictionaries = {
         {
           year: "2026",
           title: "Seed round",
-          body: "Secured seed funding from Qube Research & Technologies and The Invention Lab."
+          body: "Secured seed funding from Qube Research & Technologies and The Invention Lab.",
+          logos: [
+            { src: "/investors/qrt.png", alt: "Qube Research & Technologies", height: 54 },
+            { src: "/investors/the-invention-lab.png", alt: "The Invention Lab", height: 36 }
+          ]
         },
         {
           year: "2026",
@@ -576,7 +580,11 @@ export const dictionaries = {
         {
           year: "2026",
           title: "시드 투자 유치",
-          body: "Qube Research & Technologies와 The Invention Lab으로부터 시드 라운드 투자를 유치했습니다."
+          body: "Qube Research & Technologies와 The Invention Lab으로부터 시드 라운드 투자를 유치했습니다.",
+          logos: [
+            { src: "/investors/qrt.png", alt: "Qube Research & Technologies", height: 54 },
+            { src: "/investors/the-invention-lab.png", alt: "The Invention Lab", height: 36 }
+          ]
         },
         {
           year: "2026",
@@ -614,7 +622,7 @@ export type TeamMember = {
 
 export type TeamGroup = { label: string; entity: string; note: string; members: readonly TeamMember[] };
 
-export type MilestoneLogo = { src: string; alt: string };
+export type MilestoneLogo = { src: string; alt: string; height: number };
 
 export type Milestone = {
   year: string;

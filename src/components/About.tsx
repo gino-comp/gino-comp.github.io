@@ -218,11 +218,9 @@ export function MilestonesSection({ dict }: { dict: Dictionary }) {
               <p>{milestone.body}</p>
               {milestone.logos && milestone.logos.length > 0 ? (
                 <div className="milestone-logos">
-                  {/* Supplied marks vary in aspect ratio, so they are sized by
-                      height in CSS rather than given fixed dimensions here. */}
                   {milestone.logos.map((logo) => (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img key={logo.src} src={logo.src} alt={logo.alt} />
+                    <img key={logo.src} src={logo.src} alt={logo.alt} style={{ height: logo.height }} />
                   ))}
                 </div>
               ) : null}
