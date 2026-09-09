@@ -7,10 +7,10 @@ import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
 
 const navItems = [
+  ["about", "About"],
   ["technology", "DODA"],
   ["applications", "Applications"],
   ["research", "Research"],
-  ["about", "About"],
 ] as const;
 
 export default function Header({ locale }: { locale: Locale }) {
