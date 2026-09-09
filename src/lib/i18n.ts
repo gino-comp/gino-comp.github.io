@@ -219,7 +219,8 @@ export const dictionaries = {
       groups: [
         {
           label: "Singapore",
-          note: "NUS founding team",
+          entity: "RiDM PTE. LTD.",
+          note: "Core IP development",
           members: [
             {
               role: "CTO & Co-founder",
@@ -261,7 +262,8 @@ export const dictionaries = {
         },
         {
           label: "Korea",
-          note: "RiDM Korea · IC design",
+          entity: "RiDM Korea",
+          note: "Silicon implementation and business development",
           members: [
             {
               role: "IC Designer",
@@ -458,7 +460,8 @@ export const dictionaries = {
       groups: [
         {
           label: "싱가포르",
-          note: "NUS 창업팀",
+          entity: "RiDM PTE. LTD.",
+          note: "핵심 IP 개발",
           members: [
             {
               role: "CTO & Co-founder",
@@ -500,11 +503,12 @@ export const dictionaries = {
         },
         {
           label: "한국",
-          note: "RiDM Korea · IC 설계",
+          entity: "RiDM Korea",
+          note: "실리콘 구현 및 사업 개발",
           members: [
             {
               role: "IC Designer",
-              name: "Moon Junghyun",
+              name: "문정현",
               school: "경희대학교",
               portrait: null,
               links: [],
@@ -516,7 +520,7 @@ export const dictionaries = {
             },
             {
               role: "IC Designer",
-              name: "Yu Youngjun",
+              name: "유영준",
               school: "아주대학교",
               portrait: null,
               links: [],
@@ -584,7 +588,7 @@ export type TeamMember = {
   details: readonly (readonly [string, string | readonly string[]])[];
 };
 
-export type TeamGroup = { label: string; note: string; members: readonly TeamMember[] };
+export type TeamGroup = { label: string; entity: string; note: string; members: readonly TeamMember[] };
 
 export type Milestone = { year: string; title: string; body: string };
 

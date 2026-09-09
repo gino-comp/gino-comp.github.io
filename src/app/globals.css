@@ -193,21 +193,26 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .team-overview span { font-size: 10px; letter-spacing: .14em; color: #748091; }
 .team-overview h3 { font-size: 28px; margin: 7px 0 0; letter-spacing: -.035em; }
 .team-overview > p { font-size: 12px; color: #758191; margin: 0; }
-.team-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-.team-column { display: grid; gap: 12px; align-content: start; }
-.team-column-head { display: flex; align-items: baseline; gap: 12px; padding: 2px 4px 6px; border-bottom: 1px solid var(--line); }
-.team-column-head strong { font-size: 15px; letter-spacing: -.02em; }
-.team-column-head span { font-size: 11px; letter-spacing: .04em; color: #6a7686; }
-.team-column details { border: 1px solid var(--line); border-radius: 18px; background: #0a0f16; overflow: hidden; }
-.team-column summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 24px; }
-.team-column summary::-webkit-details-marker { display: none; }
-.team-column summary > div { display: grid; gap: 4px; }
-.team-column summary > div > span { font-size: 9px; letter-spacing: .09em; color: #6fdad4; text-transform: uppercase; }
-.team-column summary strong { font-size: 19px; }
-.team-column summary small { font-size: 10px; color: #748091; }
-.team-column summary i { height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.07); display: grid; place-items: center; color: #8996a7; font-style: normal; font-size: 11px; white-space: nowrap; transition: color .18s ease, border-color .18s ease; }
-.team-column summary:hover i { color: #dfe5ec; border-color: rgba(255,255,255,.18); }
-.team-column details[open] summary .toggle-expand, .team-column details:not([open]) summary .toggle-collapse { display: none; }
+.team-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+/* Cards in a row share its height, so the two location columns stay level.
+   A collapsed card shrinks to its summary instead of leaving a tall gap. */
+.team-columns > details { align-self: stretch; }
+.team-columns > details:not([open]) { align-self: start; }
+.team-column-head { display: grid; gap: 5px; align-content: start; padding: 2px 4px 12px; border-bottom: 1px solid var(--line); }
+.team-column-head > div { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.team-column-head strong { font-size: 16px; letter-spacing: -.02em; }
+.team-column-head span { font-size: 11px; letter-spacing: .02em; color: #6a7686; }
+.team-column-head em { font-style: normal; font-size: 12px; color: #6fdad4; }
+.team-columns details { border: 1px solid var(--line); border-radius: 18px; background: #0a0f16; overflow: hidden; }
+.team-columns summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 24px; }
+.team-columns summary::-webkit-details-marker { display: none; }
+.team-columns summary > div { display: grid; gap: 4px; }
+.team-columns summary > div > span { font-size: 9px; letter-spacing: .09em; color: #6fdad4; text-transform: uppercase; }
+.team-columns summary strong { font-size: 19px; }
+.team-columns summary small { font-size: 10px; color: #748091; }
+.team-columns summary i { height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.07); display: grid; place-items: center; color: #8996a7; font-style: normal; font-size: 11px; white-space: nowrap; transition: color .18s ease, border-color .18s ease; }
+.team-columns summary:hover i { color: #dfe5ec; border-color: rgba(255,255,255,.18); }
+.team-columns details[open] summary .toggle-expand, .team-columns details:not([open]) summary .toggle-collapse { display: none; }
 .profile-body { padding: 0 24px 22px; }
 .profile-body dl { margin: 0; display: grid; gap: 8px; }
 .profile-body dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.055); }
@@ -309,6 +314,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .section-head { margin-bottom: 42px; }
   .section-head h2 { font-size: 42px; }
   .problem-grid, .applications-grid, .ip-grid, .team-columns, .explore-grid { grid-template-columns: 1fr; }
+  .team-columns > * { grid-column: 1 !important; grid-row: auto !important; }
   .explore-card { min-height: 0; padding: 26px; }
   .problem-grid article { min-height: 330px; padding: 26px; }
   .doda-feature { min-height: 520px; padding: 28px; }

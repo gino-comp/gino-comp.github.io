@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Fragment, type CSSProperties } from "react";
 import type { Dictionary, Milestone, TeamGroup, TeamLink, TeamMember } from "@/lib/i18n";
 
 function LinkedInIcon() {
@@ -54,14 +55,15 @@ function ProfileDetails({ member }: { member: TeamMember }) {
   );
 }
 
-function Profile({ member, expand, collapse, websiteLabel }: {
+function Profile({ member, expand, collapse, websiteLabel, style }: {
   member: TeamMember;
   expand: string;
   collapse: string;
   websiteLabel: string;
+  style?: CSSProperties;
 }) {
   return (
-    <details open>
+    <details open style={style}>
       <summary>
         <div><span>{member.role}</span><strong>{member.name}</strong><small>{member.school}</small></div>
         <i>
@@ -113,23 +115,30 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
           </div>
         </article>
 
+        {/*
+          One grid rather than a container per location: cards only share a row
+          height, and so line up across the two columns, if they are siblings.
+          Placement is explicit; the mobile breakpoint drops it and the cards
+          fall back to DOM order, which is already grouped by location.
+        */}
         <div className="team-columns">
-          {groups.map((group) => (
-            <div key={group.label} className="team-column">
-              <div className="team-column-head">
-                <strong>{group.label}</strong>
-                <span>{group.note}</span>
+          {groups.map((group, groupIndex) => (
+            <Fragment key={group.label}>
+              <div className="team-column-head" style={{ gridColumn: groupIndex + 1, gridRow: 1 }}>
+                <div><strong>{group.label}</strong><span>{group.entity}</span></div>
+                <em>{group.note}</em>
               </div>
-              {group.members.map((member) => (
+              {group.members.map((member, memberIndex) => (
                 <Profile
                   key={member.name}
                   member={member}
                   expand={a.expand}
                   collapse={a.collapse}
                   websiteLabel={a.websiteLabel}
+                  style={{ gridColumn: groupIndex + 1, gridRow: memberIndex + 2 }}
                 />
               ))}
-            </div>
+            </Fragment>
           ))}
         </div>
       </div>
