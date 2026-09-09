@@ -199,8 +199,8 @@ export const dictionaries = {
       desc:
         "RiDM is an NUS spin-off founded by computer architecture researchers and a business lead from NUS. The founding team that did the underlying research remains directly involved in architecture, implementation and commercialization.",
       teamKicker: "TEAM",
+      teamTitle: "The people behind DODA.",
       overview: "2 PhDs · 1 PhD Candidate · 1 MBA · 2 IC Designers",
-      overviewNote: "Each profile shows background and current role.",
       collapse: "Show less",
       expand: "Show more",
       websiteLabel: "Website",
@@ -440,8 +440,8 @@ export const dictionaries = {
       desc:
         "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
       teamKicker: "TEAM",
+      teamTitle: "DODA를 만드는 사람들.",
       overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인 · IC 설계 2인",
-      overviewNote: "각 프로필에서 주요 경력과 담당 역할을 확인할 수 있습니다.",
       collapse: "간략히",
       expand: "자세히",
       websiteLabel: "웹사이트",

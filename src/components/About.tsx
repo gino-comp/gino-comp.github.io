@@ -79,7 +79,24 @@ function Profile({ member, expand, collapse, websiteLabel, style }: {
   );
 }
 
-export default function AboutSection({ dict }: { dict: Dictionary }) {
+export default function AboutIntro({ dict }: { dict: Dictionary }) {
+  const a = dict.about;
+  return (
+    <section className="section dark-section page-intro">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="section-kicker">{a.kicker}</div>
+            <h2>{a.title}</h2>
+          </div>
+          <p>{a.desc}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function TeamSection({ dict }: { dict: Dictionary }) {
   const a = dict.about;
   const lead = a.lead as TeamMember;
   const groups = a.groups as readonly TeamGroup[];
@@ -89,15 +106,10 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
       <div className="container">
         <div className="section-head">
           <div>
-            <div className="section-kicker">{a.kicker}</div>
-            <h2>{a.title}</h2>
+            <div className="section-kicker">{a.teamKicker}</div>
+            <h2>{a.teamTitle}</h2>
           </div>
-          <p>{a.desc}</p>
-        </div>
-
-        <div className="team-overview">
-          <div><span>{a.teamKicker}</span><h3>{a.overview}</h3></div>
-          <p>{a.overviewNote}</p>
+          <p>{a.overview}</p>
         </div>
 
         <article className="founder-lead">
@@ -146,12 +158,10 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
   );
 }
 
-export function StorySection({ dict }: { dict: Dictionary }) {
+export function OriginSection({ dict }: { dict: Dictionary }) {
   const a = dict.about;
-  const milestones = a.milestones as readonly Milestone[];
-
   return (
-    <section className="section dark-section">
+    <section className="section dark-section head-only">
       <div className="container">
         <div className="section-head">
           <div>
@@ -164,10 +174,23 @@ export function StorySection({ dict }: { dict: Dictionary }) {
             ))}
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="milestones-head">
-          <span>{a.milestonesKicker}</span>
-          <h3>{a.milestonesTitle}</h3>
+export function MilestonesSection({ dict }: { dict: Dictionary }) {
+  const a = dict.about;
+  const milestones = a.milestones as readonly Milestone[];
+
+  return (
+    <section className="section dark-section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="section-kicker">{a.milestonesKicker}</div>
+            <h2>{a.milestonesTitle}</h2>
+          </div>
         </div>
         <div className="milestones">
           {milestones.map((milestone) => (
