@@ -189,8 +189,14 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .patent-list code { color: #236d83; font-size: 11px; }
 .patent-list h3 { font-size: 16px; margin: 8px 0 0; }
 
-.page-intro { padding-bottom: 0; }
 .page-intro .section-head, .head-only .section-head { margin-bottom: 0; }
+.acronym { margin-top: 52px; border: 1px solid var(--line); border-radius: 24px; padding: 40px 44px; background: radial-gradient(circle at 16% 18%,rgba(48,221,212,.07),transparent 48%), linear-gradient(180deg,#0a0e14,#080c12); }
+.acronym > span { font-size: 10px; letter-spacing: .15em; color: #718092; font-weight: 700; }
+/* The acronym letters carry the brand gradient; the rest of each word recedes,
+   so R-i-D-M reads out of the phrase. */
+.acronym-expansion { margin: 18px 0 0; font-size: clamp(26px,3vw,40px); line-height: 1.18; letter-spacing: -.035em; font-weight: 640; color: #6d7987; }
+.acronym-expansion b { font-weight: 640; color: #f4f8fb; }
+.acronym-note { margin: 24px 0 0; max-width: 640px; font-size: 15px; line-height: 1.72; color: #96a1b0; }
 .team-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
 /* Cards in a row share its height, so the two location columns stay level.
    A collapsed card shrinks to its summary instead of leaving a tall gap. */
@@ -326,6 +332,8 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .application-icon svg { width: 78px; height: 78px; }
   .paper-row { grid-template-columns: 1fr; gap: 8px; }
   .paper-row > b { justify-self: start; }
+  .acronym { padding: 26px 22px; margin-top: 36px; }
+  .acronym-note { font-size: 14px; }
   .founder-lead { grid-template-columns: 1fr; gap: 20px; padding: 18px; }
   .founder-portrait { max-width: 300px; }
   .founder-copy { justify-content: flex-start; padding: 0 4px 8px; }

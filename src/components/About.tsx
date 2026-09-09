@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment, type CSSProperties } from "react";
-import type { Dictionary, Milestone, TeamGroup, TeamLink, TeamMember } from "@/lib/i18n";
+import type { AcronymPart, Dictionary, Milestone, TeamGroup, TeamLink, TeamMember } from "@/lib/i18n";
 
 function LinkedInIcon() {
   return (
@@ -81,6 +81,10 @@ function Profile({ member, expand, collapse, websiteLabel, style }: {
 
 export default function AboutIntro({ dict }: { dict: Dictionary }) {
   const a = dict.about;
+  // Real spaces between the words rather than flex gaps, so the phrase still
+  // reads correctly when copied or announced by a screen reader.
+  const expansion = a.acronym.expansion as readonly AcronymPart[];
+
   return (
     <section className="section dark-section page-intro">
       <div className="container">
@@ -90,6 +94,19 @@ export default function AboutIntro({ dict }: { dict: Dictionary }) {
             <h2>{a.title}</h2>
           </div>
           <p>{a.desc}</p>
+        </div>
+
+        <div className="acronym">
+          <span>{a.acronym.kicker}</span>
+          <p className="acronym-expansion">
+            {expansion.map(([initial, rest], index) => (
+              <Fragment key={initial + rest}>
+                {index > 0 ? " " : null}
+                <span><b>{initial}</b>{rest}</span>
+              </Fragment>
+            ))}
+          </p>
+          <p className="acronym-note">{a.acronym.note}</p>
         </div>
       </div>
     </section>

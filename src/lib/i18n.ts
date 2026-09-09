@@ -198,6 +198,18 @@ export const dictionaries = {
       title: "Researchers building what they invented.",
       desc:
         "RiDM is an NUS spin-off founded by computer architecture researchers and a business lead from NUS. The founding team that did the underlying research remains directly involved in architecture, implementation and commercialization.",
+      acronym: {
+        kicker: "THE NAME",
+        expansion: [
+          ["R", "iDM"],
+          ["i", "s"],
+          ["", "a"],
+          ["D", "ataflow"],
+          ["M", "achine"]
+        ],
+        note:
+          "A recursive acronym: the expansion contains the name itself. It is also the shortest description of the company — we research dataflow architecture, and we carry it into silicon."
+      },
       teamKicker: "TEAM",
       teamTitle: "The people behind DODA.",
       overview: "2 PhDs · 1 PhD Candidate · 1 MBA · 2 IC Designers",
@@ -439,6 +451,18 @@ export const dictionaries = {
       title: "핵심 기술을 연구한 팀이 직접 만듭니다.",
       desc:
         "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
+      acronym: {
+        kicker: "이름에 담긴 뜻",
+        expansion: [
+          ["R", "iDM"],
+          ["i", "s"],
+          ["", "a"],
+          ["D", "ataflow"],
+          ["M", "achine"]
+        ],
+        note:
+          "이름 안에 이름이 다시 등장하는 재귀 약어(recursive acronym)입니다. 동시에 회사를 가장 짧게 설명하는 문장이기도 합니다. 데이터플로우 아키텍처를 직접 연구하고, 실리콘으로 구현합니다."
+      },
       teamKicker: "TEAM",
       teamTitle: "DODA를 만드는 사람들.",
       overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인 · IC 설계 2인",
@@ -591,6 +615,9 @@ export type TeamMember = {
 export type TeamGroup = { label: string; entity: string; note: string; members: readonly TeamMember[] };
 
 export type Milestone = { year: string; title: string; body: string };
+
+// [highlighted initial, rest of the word]; the initials spell RiDM.
+export type AcronymPart = readonly [string, string];
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale];
