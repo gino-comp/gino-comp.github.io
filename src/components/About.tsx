@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Dictionary, Milestone, TeamLink, TeamMember } from "@/lib/i18n";
+import type { Dictionary, Milestone, TeamGroup, TeamLink, TeamMember } from "@/lib/i18n";
 
 function LinkedInIcon() {
   return (
@@ -39,16 +39,48 @@ function ProfileDetails({ member }: { member: TeamMember }) {
   return (
     <dl>
       {member.details.map(([label, value]) => (
-        <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+        <div key={label}>
+          <dt>{label}</dt>
+          <dd>
+            {typeof value === "string" ? value : (
+              <ul className="detail-list">
+                {value.map((line) => <li key={line}>{line}</li>)}
+              </ul>
+            )}
+          </dd>
+        </div>
       ))}
     </dl>
   );
 }
 
+function Profile({ member, expand, collapse, websiteLabel }: {
+  member: TeamMember;
+  expand: string;
+  collapse: string;
+  websiteLabel: string;
+}) {
+  return (
+    <details open>
+      <summary>
+        <div><span>{member.role}</span><strong>{member.name}</strong><small>{member.school}</small></div>
+        <i>
+          <span className="toggle-expand">{expand}</span>
+          <span className="toggle-collapse">{collapse}</span>
+        </i>
+      </summary>
+      <div className="profile-body">
+        <ProfileDetails member={member} />
+        <ProfileLinks links={member.links} websiteLabel={websiteLabel} />
+      </div>
+    </details>
+  );
+}
+
 export default function AboutSection({ dict }: { dict: Dictionary }) {
   const a = dict.about;
-  const team = a.team as readonly TeamMember[];
-  const [founder, ...others] = team;
+  const lead = a.lead as TeamMember;
+  const groups = a.groups as readonly TeamGroup[];
 
   return (
     <section className="section dark-section">
@@ -68,34 +100,36 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
 
         <article className="founder-lead">
           <div className="founder-portrait">
-            {founder.portrait ? (
-              <Image src={founder.portrait} alt={founder.name} width={900} height={1125} priority />
+            {lead.portrait ? (
+              <Image src={lead.portrait} alt={lead.name} width={900} height={1125} priority />
             ) : null}
           </div>
           <div className="founder-copy">
-            <span>{founder.role}</span>
-            <h3>{founder.name}</h3>
-            <small>{founder.school}</small>
-            <ProfileDetails member={founder} />
-            <ProfileLinks links={founder.links} websiteLabel={a.websiteLabel} />
+            <span>{lead.role}</span>
+            <h3>{lead.name}</h3>
+            <small>{lead.school}</small>
+            <ProfileDetails member={lead} />
+            <ProfileLinks links={lead.links} websiteLabel={a.websiteLabel} />
           </div>
         </article>
 
-        <div className="team-grid">
-          {others.map((member) => (
-            <details key={member.name} open>
-              <summary>
-                <div><span>{member.role}</span><strong>{member.name}</strong><small>{member.school}</small></div>
-                <i>
-                  <span className="toggle-expand">{a.expand}</span>
-                  <span className="toggle-collapse">{a.collapse}</span>
-                </i>
-              </summary>
-              <div className="profile-body">
-                <ProfileDetails member={member} />
-                <ProfileLinks links={member.links} websiteLabel={a.websiteLabel} />
+        <div className="team-columns">
+          {groups.map((group) => (
+            <div key={group.label} className="team-column">
+              <div className="team-column-head">
+                <strong>{group.label}</strong>
+                <span>{group.note}</span>
               </div>
-            </details>
+              {group.members.map((member) => (
+                <Profile
+                  key={member.name}
+                  member={member}
+                  expand={a.expand}
+                  collapse={a.collapse}
+                  websiteLabel={a.websiteLabel}
+                />
+              ))}
+            </div>
           ))}
         </div>
       </div>

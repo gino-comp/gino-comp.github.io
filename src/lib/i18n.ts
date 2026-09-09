@@ -74,9 +74,9 @@ const common = {
   ]
 };
 
-// Publication numbers are listed in the founder bio; derive them from the
-// patents list so the two can never disagree.
-const patentCodes = common.patents.map((patent) => patent.code).join(" · ");
+// The founder bio lists the PCT filings; derive them from the patents list
+// so the bio and the Research page can never disagree.
+const patentEntries = common.patents.map((patent) => `${patent.code} — ${patent.title}`);
 
 export const dictionaries = {
   en: {
@@ -198,59 +198,95 @@ export const dictionaries = {
       title: "Researchers building what they invented.",
       desc:
         "RiDM is an NUS spin-off founded by computer architecture researchers and a business lead from NUS. The founding team that did the underlying research remains directly involved in architecture, implementation and commercialization.",
-      teamKicker: "FOUNDING TEAM",
-      overview: "2 PhDs · 1 PhD Candidate · 1 MBA",
-      overviewNote: "Each profile shows research background and current role.",
+      teamKicker: "TEAM",
+      overview: "2 PhDs · 1 PhD Candidate · 1 MBA · 2 IC Designers",
+      overviewNote: "Each profile shows background and current role.",
       collapse: "Show less",
       expand: "Show more",
       websiteLabel: "Website",
-      team: [
+      lead: {
+        role: "CEO & Co-founder",
+        name: "Jinho Lee, PhD",
+        school: "NUS School of Computing",
+        portrait: "/team/jinho-lee.jpg",
+        links: [],
+        details: [
+          ["Research", "General-purpose dynamic dataflow processing and reconfigurable computer architecture."],
+          ["IP", patentEntries],
+          ["Role", "Company strategy, architecture direction and commercialization."]
+        ]
+      },
+      groups: [
         {
-          role: "CEO & Co-founder",
-          name: "Jinho Lee, PhD",
-          school: "NUS School of Computing",
-          portrait: "/team/jinho-lee.jpg",
-          links: [],
-          details: [
-            ["Research", "General-purpose dynamic dataflow processing and reconfigurable computer architecture."],
-            ["IP", `Lead inventor on RiDM’s three core PCT filings: ${patentCodes}.`],
-            ["Role", "Company strategy, architecture direction and commercialization."]
+          label: "Singapore",
+          note: "NUS founding team",
+          members: [
+            {
+              role: "CTO & Co-founder",
+              name: "Tingting Xiang",
+              school: "NUS PhD Candidate",
+              portrait: null,
+              links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
+              details: [
+                ["Research", "AI accelerator design and optimization for sparse data environments."],
+                ["Focus", "AI workload analysis and hardware optimization."],
+                ["Role", "Leads the company’s technical direction across architecture and implementation, alongside AI accelerator research."]
+              ]
+            },
+            {
+              role: "CFO & Co-founder",
+              name: "Xiaoqing (Serena) Xie, MBA",
+              school: "NUS MBA",
+              portrait: null,
+              links: [{ type: "linkedin", href: "https://www.linkedin.com/in/serena-xie-a6a8986/" }],
+              details: [
+                ["Background", "NUS MBA with responsibility for finance, strategy and operations."],
+                ["Focus", "Finance, fundraising, investor relations and corporate operations."],
+                ["Role", "Financial management and commercialization support."]
+              ]
+            },
+            {
+              role: "Co-founder · Advisor",
+              name: "Trevor E. Carlson, PhD",
+              school: "Associate Professor, NUS",
+              portrait: null,
+              links: [{ type: "website", href: "https://www.comp.nus.edu.sg/~tcarlson/" }],
+              details: [
+                ["Research", "Computer architecture and related systems research."],
+                ["Background", "NUS Associate Professor and academic advisor to the founding research team."],
+                ["Role", "Technical advisor and research continuity."]
+              ]
+            }
           ]
         },
         {
-          role: "CTO & Co-founder",
-          name: "Tingting Xiang",
-          school: "NUS PhD Candidate",
-          portrait: null,
-          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
-          details: [
-            ["Research", "AI accelerator design and optimization for sparse data environments."],
-            ["Focus", "AI workload analysis and hardware optimization."],
-            ["Role", "Leads the company’s technical direction across architecture and implementation, alongside AI accelerator research."]
-          ]
-        },
-        {
-          role: "CFO & Co-founder",
-          name: "Xiaoqing (Serena) Xie, MBA",
-          school: "NUS MBA",
-          portrait: null,
-          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/serena-xie-a6a8986/" }],
-          details: [
-            ["Background", "NUS MBA with responsibility for finance, strategy and operations."],
-            ["Focus", "Finance, fundraising, investor relations and corporate operations."],
-            ["Role", "Financial management and commercialization support."]
-          ]
-        },
-        {
-          role: "Co-founder · Advisor",
-          name: "Trevor E. Carlson, PhD",
-          school: "Associate Professor, NUS",
-          portrait: null,
-          links: [{ type: "website", href: "https://www.comp.nus.edu.sg/~tcarlson/" }],
-          details: [
-            ["Research", "Computer architecture and related systems research."],
-            ["Background", "NUS Associate Professor and academic advisor to the founding research team."],
-            ["Role", "Technical advisor and research continuity."]
+          label: "Korea",
+          note: "RiDM Korea · IC design",
+          members: [
+            {
+              role: "IC Designer",
+              name: "Moon Junghyun",
+              school: "Kyung Hee University",
+              portrait: null,
+              links: [],
+              details: [
+                ["Focus", "Analog IC design."],
+                ["Education", "MS in Electrical Engineering, Kyung Hee University."],
+                ["Tape-outs", "Four tape-outs through Samsung 28nm MPW shuttles during her master’s."]
+              ]
+            },
+            {
+              role: "IC Designer",
+              name: "Yu Youngjun",
+              school: "Ajou University",
+              portrait: null,
+              links: [],
+              details: [
+                ["Focus", "Analog and mixed-signal IC design."],
+                ["Education", "MS in Intelligence Semiconductor Engineering, Ajou University."],
+                ["Tape-outs", "Two tape-outs through TSMC 130nm MPW shuttles."]
+              ]
+            }
           ]
         }
       ],
@@ -401,59 +437,95 @@ export const dictionaries = {
       title: "핵심 기술을 연구한 팀이 직접 만듭니다.",
       desc:
         "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
-      teamKicker: "FOUNDING TEAM",
-      overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인",
-      overviewNote: "각 프로필에서 연구분야와 담당 역할을 확인할 수 있습니다.",
+      teamKicker: "TEAM",
+      overview: "PhD 2인 · PhD Candidate 1인 · MBA 1인 · IC 설계 2인",
+      overviewNote: "각 프로필에서 주요 경력과 담당 역할을 확인할 수 있습니다.",
       collapse: "간략히",
       expand: "자세히",
       websiteLabel: "웹사이트",
-      team: [
+      lead: {
+        role: "CEO & Co-founder",
+        name: "이진호, PhD",
+        school: "NUS School of Computing",
+        portrait: "/team/jinho-lee.jpg",
+        links: [],
+        details: [
+          ["연구분야", "General-purpose Dynamic Dataflow Processing, Reconfigurable Computer Architecture"],
+          ["IP", patentEntries],
+          ["담당", "회사 전략, 아키텍처 방향성 및 사업화 총괄"]
+        ]
+      },
+      groups: [
         {
-          role: "CEO & Co-founder",
-          name: "이진호, PhD",
-          school: "NUS School of Computing",
-          portrait: "/team/jinho-lee.jpg",
-          links: [],
-          details: [
-            ["연구분야", "General-purpose Dynamic Dataflow Processing, Reconfigurable Computer Architecture"],
-            ["IP", `핵심 PCT 특허 3건의 Lead Inventor: ${patentCodes}`],
-            ["담당", "회사 전략, 아키텍처 방향성 및 사업화 총괄"]
+          label: "싱가포르",
+          note: "NUS 창업팀",
+          members: [
+            {
+              role: "CTO & Co-founder",
+              name: "Tingting Xiang",
+              school: "NUS PhD Candidate",
+              portrait: null,
+              links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
+              details: [
+                ["연구분야", "Sparse Data 환경의 AI 가속기 설계 및 최적화"],
+                ["주요업무", "AI Workload 분석 및 Hardware Optimization"],
+                ["담당", "AI 가속기 연구와 함께 아키텍처·구현 등 회사 기술 부문 총괄"]
+              ]
+            },
+            {
+              role: "CFO & Co-founder",
+              name: "Xiaoqing (Serena) Xie, MBA",
+              school: "NUS MBA",
+              portrait: null,
+              links: [{ type: "linkedin", href: "https://www.linkedin.com/in/serena-xie-a6a8986/" }],
+              details: [
+                ["학력", "NUS MBA"],
+                ["주요업무", "재무, 투자 유치, 투자자 커뮤니케이션 및 경영 관리"],
+                ["담당", "재무 총괄 및 사업화 지원"]
+              ]
+            },
+            {
+              role: "Co-founder · Advisor",
+              name: "Trevor E. Carlson, PhD",
+              school: "Associate Professor, NUS",
+              portrait: null,
+              links: [{ type: "website", href: "https://www.comp.nus.edu.sg/~tcarlson/" }],
+              details: [
+                ["연구분야", "Computer Architecture 및 관련 시스템 연구"],
+                ["주요경력", "NUS 부교수이자 창업 연구팀의 지도교수"],
+                ["담당", "Technical Advisor 및 연구 연속성 지원"]
+              ]
+            }
           ]
         },
         {
-          role: "CTO & Co-founder",
-          name: "Tingting Xiang",
-          school: "NUS PhD Candidate",
-          portrait: null,
-          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
-          details: [
-            ["연구분야", "Sparse Data 환경의 AI 가속기 설계 및 최적화"],
-            ["주요업무", "AI Workload 분석 및 Hardware Optimization"],
-            ["담당", "AI 가속기 연구와 함께 아키텍처·구현 등 회사 기술 부문 총괄"]
-          ]
-        },
-        {
-          role: "CFO & Co-founder",
-          name: "Xiaoqing (Serena) Xie, MBA",
-          school: "NUS MBA",
-          portrait: null,
-          links: [{ type: "linkedin", href: "https://www.linkedin.com/in/serena-xie-a6a8986/" }],
-          details: [
-            ["학력", "NUS MBA"],
-            ["주요업무", "재무, 투자 유치, 투자자 커뮤니케이션 및 경영 관리"],
-            ["담당", "재무 총괄 및 사업화 지원"]
-          ]
-        },
-        {
-          role: "Co-founder · Advisor",
-          name: "Trevor E. Carlson, PhD",
-          school: "Associate Professor, NUS",
-          portrait: null,
-          links: [{ type: "website", href: "https://www.comp.nus.edu.sg/~tcarlson/" }],
-          details: [
-            ["연구분야", "Computer Architecture 및 관련 시스템 연구"],
-            ["주요경력", "NUS 부교수이자 창업 연구팀의 지도교수"],
-            ["담당", "Technical Advisor 및 연구 연속성 지원"]
+          label: "한국",
+          note: "RiDM Korea · IC 설계",
+          members: [
+            {
+              role: "IC Designer",
+              name: "Moon Junghyun",
+              school: "경희대학교",
+              portrait: null,
+              links: [],
+              details: [
+                ["주요분야", "아날로그 IC 설계"],
+                ["학력", "경희대학교 전자공학 석사"],
+                ["Tape-out", "석사 과정 중 삼성 28nm MPW 셔틀을 통해 4회 tape-out 수행"]
+              ]
+            },
+            {
+              role: "IC Designer",
+              name: "Yu Youngjun",
+              school: "아주대학교",
+              portrait: null,
+              links: [],
+              details: [
+                ["주요분야", "아날로그·혼성신호 IC 설계"],
+                ["학력", "아주대학교 지능형반도체공학 석사"],
+                ["Tape-out", "TSMC 130nm MPW 셔틀을 통해 2회 tape-out 수행"]
+              ]
+            }
           ]
         }
       ],
@@ -507,8 +579,12 @@ export type TeamMember = {
   school: string;
   portrait: string | null;
   links: readonly TeamLink[];
-  details: readonly (readonly [string, string])[];
+  // A detail value is either a sentence or a list of lines, so the founder's
+  // IP row can enumerate the PCT filings.
+  details: readonly (readonly [string, string | readonly string[]])[];
 };
+
+export type TeamGroup = { label: string; note: string; members: readonly TeamMember[] };
 
 export type Milestone = { year: string; title: string; body: string };
 
