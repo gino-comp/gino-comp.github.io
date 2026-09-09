@@ -109,6 +109,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .section { padding: 104px 0; }
 .dark-section { background: var(--bg); color: var(--text); }
 .section-head { display: grid; grid-template-columns: .95fr 1.05fr; gap: 70px; margin-bottom: 70px; }
+.section-head > div:only-child { grid-column: 1 / -1; }
 .section-kicker { font-size: 11px; letter-spacing: .14em; color: var(--text-3); font-weight: 700; margin-bottom: 16px; }
 .section-head h2 { margin: 0; font-size: clamp(36px,3.6vw,54px); line-height: 1.06; letter-spacing: -.045em; max-width: 720px; }
 .section-head > p { color: #96a1b0; max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; align-self: end; }
