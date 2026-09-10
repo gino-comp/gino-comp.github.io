@@ -124,21 +124,18 @@ export const dictionaries = {
         overline: "CONVENTIONAL FLOW",
         title: "Every stream arrives at once. The CPU takes them one at a time.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        sensorsNote: "every stream, at full rate",
         memory: { name: "DRAM / shared memory", note: "every raw frame lands here first" },
         compute: [
           { name: "CPU", note: "filter · decode · resize · format" },
-          { name: "GPU", note: "inference" },
-          { name: "NPU", note: "inference" }
+          { name: "GPU / NPU", note: "inference" }
         ],
         edges: { ingest: "all streams, in parallel", cpu: "read one · write back", infer: "read again" },
-        costs: ["4 memory crossings", "CPU serializes what the sensors produce in parallel", "traffic grows with every sensor"]
+        costs: ["Longer reaction time — every result waits on four memory trips", "Delay that varies frame to frame — each stream waits its turn on the CPU", "Adding a sensor degrades latency for all of them"]
       },
       ridm: {
         overline: "RiDM APPROACH",
         title: "Process at the source, move only what matters.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        sensorsNote: "every stream, at full rate",
         stages: [
           {
             kind: "doda",
@@ -162,7 +159,7 @@ export const dictionaries = {
             heavy: false
           }
         ],
-        costs: ["2 memory crossings", "CPU free for application work", "host traffic follows results, not raw rate"]
+        costs: ["Shorter path to a result — data is reduced before it reaches memory", "Steadier delay — streams are handled as they arrive, not in turn", "Host latency is designed to hold as sensors are added"]
       }
     },
     doda: {
@@ -419,21 +416,18 @@ export const dictionaries = {
         overline: "CONVENTIONAL FLOW",
         title: "모든 스트림이 동시에 도착하지만, CPU는 하나씩 처리합니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        sensorsNote: "모든 스트림을 전체 대역으로",
         memory: { name: "DRAM / 공유 메모리", note: "모든 원시 프레임이 먼저 이곳에 쌓입니다" },
         compute: [
           { name: "CPU", note: "필터링 · 인코딩/디코딩 · 리사이즈 · 포맷 변환" },
-          { name: "GPU", note: "추론" },
-          { name: "NPU", note: "추론" }
+          { name: "GPU / NPU", note: "추론" }
         ],
         edges: { ingest: "모든 스트림 동시 유입", cpu: "하나씩 읽고 · 다시 쓰기", infer: "또 한 번 읽기" },
-        costs: ["메모리 4회 통과", "센서는 병렬로 생성하지만 CPU는 순차 처리", "센서가 늘수록 트래픽 증가"]
+        costs: ["반응 지연 증가 — 결과 하나마다 메모리를 네 번 오갑니다", "프레임마다 달라지는 지연 — 각 스트림이 CPU 차례를 기다립니다", "센서를 추가할수록 모든 센서의 지연이 악화됩니다"]
       },
       ridm: {
         overline: "RiDM APPROACH",
         title: "발생 지점에서 처리하고, 필요한 데이터만 전달합니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        sensorsNote: "모든 스트림을 전체 대역으로",
         stages: [
           {
             kind: "doda",
@@ -457,7 +451,7 @@ export const dictionaries = {
             heavy: false
           }
         ],
-        costs: ["메모리 2회 통과", "CPU는 애플리케이션 연산에 집중", "호스트 트래픽이 원시 데이터량에 비례하지 않음"]
+        costs: ["결과까지의 경로 단축 — 메모리에 도달하기 전에 데이터를 축약", "지연 편차 감소 — 스트림을 차례가 아니라 도착하는 대로 처리", "센서가 늘어도 호스트 지연을 유지하도록 설계"]
       }
     },
     doda: {

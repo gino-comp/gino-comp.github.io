@@ -5,7 +5,6 @@ type Side = {
   overline: string;
   title: string;
   sensors: readonly string[];
-  sensorsNote: string;
   stages: readonly PipeStage[];
   costs: readonly string[];
 };
@@ -14,7 +13,6 @@ type Conventional = {
   overline: string;
   title: string;
   sensors: readonly string[];
-  sensorsNote: string;
   memory: { name: string; note: string };
   compute: readonly { name: string; note: string }[];
   edges: { ingest: string; cpu: string; infer: string };
@@ -38,10 +36,9 @@ const RAW = "#c98a45";
 const REDUCED = "#7f8b99";
 
 const SENSOR_Y = [24, 68, 112, 156];
-const MEM = { x: 320, y: 96, w: 180, h: 100 };
-const CPU_Y = 54;
-const GPU_Y = 150;
-const NPU_Y = 226;
+const MEM = { x: 320, y: 90, w: 180, h: 100 };
+const CPU_Y = 60;
+const GPU_Y = 208;
 
 // A dot that travels its path once inside `start`..`start + travel`, then
 // waits out the rest of the cycle. keyPoints reversed sends it backwards.
@@ -93,14 +90,14 @@ function Box({ x, y, w, h, title, note, variant = "plain" }: {
 }
 
 function ConventionalFlow({ side, sensorsLabel }: { side: Conventional; sensorsLabel: string }) {
-  const [cpu, gpu, npu] = side.compute;
+  const [cpu, accel] = side.compute;
   const ingest = SENSOR_Y.map((y, i) => ({
     id: `cin${i}`,
     d: `M140,${y + 18} C 220,${y + 18} 240,${MEM.y + MEM.h / 2} ${MEM.x},${MEM.y + MEM.h / 2}`
   }));
 
   return (
-    <svg className="flow-svg" viewBox="0 0 980 268" role="img" aria-label={side.title}>
+    <svg className="flow-svg" viewBox="0 0 980 250" role="img" aria-label={side.title}>
       <defs>
         <marker id="cvArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill={REDUCED} />
@@ -109,9 +106,8 @@ function ConventionalFlow({ side, sensorsLabel }: { side: Conventional; sensorsL
           <path d="M0,0 L10,5 L0,10 z" fill={RAW} />
         </marker>
         {ingest.map((p) => <path key={p.id} id={p.id} d={p.d} />)}
-        <path id="cvCpu" d={`M${MEM.x + MEM.w},124 C 590,124 620,${CPU_Y} 700,${CPU_Y}`} />
+        <path id="cvCpu" d={`M${MEM.x + MEM.w},116 C 590,116 620,${CPU_Y} 700,${CPU_Y}`} />
         <path id="cvGpu" d={`M${MEM.x + MEM.w},168 C 590,168 620,${GPU_Y} 700,${GPU_Y}`} />
-        <path id="cvNpu" d={`M${MEM.x + MEM.w},180 C 590,180 620,${NPU_Y} 700,${NPU_Y}`} />
       </defs>
 
       <text x="8" y="12" className="fl-tag">{sensorsLabel}</text>
@@ -120,21 +116,18 @@ function ConventionalFlow({ side, sensorsLabel }: { side: Conventional; sensorsL
       ))}
       <rect className="fl-sliver" x="8" y="200" width="132" height="6" rx="3" />
       <rect className="fl-sliver is-faint" x="8" y="212" width="132" height="6" rx="3" />
-      <text x="8" y="238" className="fl-note">{side.sensorsNote}</text>
 
       {ingest.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-raw" markerEnd="url(#cvArrowRaw)" />)}
       <use href="#cvCpu" className="fl-path is-raw" />
       <use href="#cvGpu" className="fl-path" markerEnd="url(#cvArrow)" />
-      <use href="#cvNpu" className="fl-path" markerEnd="url(#cvArrow)" />
 
       <text x="168" y="206" className="fl-edge is-raw">{side.edges.ingest}</text>
-      <text x="530" y="92" className="fl-edge is-raw">{side.edges.cpu}</text>
-      <text x="548" y="204" className="fl-edge">{side.edges.infer}</text>
+      <text x="528" y="84" className="fl-edge is-raw">{side.edges.cpu}</text>
+      <text x="548" y="196" className="fl-edge">{side.edges.infer}</text>
 
       <Box x={MEM.x} y={MEM.y} w={MEM.w} h={MEM.h} title={side.memory.name} note={side.memory.note} variant="memory" />
       <Box x={700} y={CPU_Y - 30} w={272} h={60} title={cpu.name} note={cpu.note} />
-      <Box x={700} y={GPU_Y - 26} w={272} h={52} title={gpu.name} note={gpu.note} />
-      <Box x={700} y={NPU_Y - 26} w={272} h={52} title={npu.name} note={npu.note} />
+      <Box x={700} y={GPU_Y - 30} w={272} h={60} title={accel.name} note={accel.note} />
 
       <g className="flow-dots">
         {/* Sensors write continuously and in parallel, independent of the CPU. */}
@@ -154,7 +147,7 @@ function ConventionalFlow({ side, sensorsLabel }: { side: Conventional; sensorsL
           <Fragment key={`turn${i}`}>
             <Dot path="cvCpu" start={i * SLOT} travel={0.8} colour={RAW} r={5} />
             <Dot path="cvCpu" start={i * SLOT + 1.0} travel={0.8} colour={RAW} r={5} back />
-            <Dot path={i % 2 === 0 ? "cvGpu" : "cvNpu"} start={i * SLOT + 1.9} travel={0.6} colour={REDUCED} r={5} />
+            <Dot path="cvGpu" start={i * SLOT + 1.9} travel={0.6} colour={REDUCED} r={5} />
           </Fragment>
         ))}
       </g>
@@ -177,7 +170,6 @@ function Pipeline({ side, sensorsLabel }: { side: Side; sensorsLabel: string }) 
             <i aria-hidden="true" />
             <i aria-hidden="true" />
           </div>
-          <small>{side.sensorsNote}</small>
         </div>
 
         {side.stages.map((stage, index) => (
