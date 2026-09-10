@@ -136,10 +136,10 @@ export const dictionaries = {
         overline: "RiDM APPROACH",
         title: "Every stream arrives at once. DODA handles them that way.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        doda: { name: "DODA", note: ["filter · fuse · pre-process", "every stream at once"] },
+        doda: { name: "DODA", note: ["one processing element per stream"], pe: "PE" },
         memory: { name: "DRAM / shared memory", note: "reduced, higher-value data" },
         accel: { name: "GPU / NPU", note: "inference" },
-        edges: { ingest: "all streams, in parallel", reduced: "reduced", infer: "read once" },
+        edges: { reduced: "fused · reduced", infer: "read once" },
         costs: ["Shorter path to a result — data is reduced before it reaches memory", "Steadier delay — no stream waits its turn behind another", "Host latency is designed to hold as sensors are added"]
       }
     },
@@ -409,10 +409,10 @@ export const dictionaries = {
         overline: "RiDM APPROACH",
         title: "모든 스트림이 동시에 도착하고, DODA도 동시에 처리합니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        doda: { name: "DODA", note: ["필터링 · 융합 · 전처리", "모든 스트림을 동시에"] },
+        doda: { name: "DODA", note: ["스트림마다 전용 Processing Element"], pe: "PE" },
         memory: { name: "DRAM / 공유 메모리", note: "축약된 고부가 데이터" },
         accel: { name: "GPU / NPU", note: "추론" },
-        edges: { ingest: "모든 스트림 동시 유입", reduced: "축약된 데이터", infer: "한 번만 읽기" },
+        edges: { reduced: "융합 · 축약", infer: "한 번만 읽기" },
         costs: ["결과까지의 경로 단축 — 메모리에 도달하기 전에 데이터를 축약", "지연 편차 감소 — 어떤 스트림도 다른 스트림을 기다리지 않음", "센서가 늘어도 호스트 지연을 유지하도록 설계"]
       }
     },

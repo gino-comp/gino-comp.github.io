@@ -158,10 +158,10 @@ type Ridm = {
   overline: string;
   title: string;
   sensors: readonly string[];
-  doda: { name: string; note: readonly string[] };
+  doda: { name: string; note: readonly string[]; pe: string };
   memory: { name: string; note: string };
   accel: { name: string; note: string };
-  edges: { ingest: string; reduced: string; infer: string };
+  edges: { reduced: string; infer: string };
   costs: readonly string[];
 };
 
@@ -171,63 +171,87 @@ type Ridm = {
    stack, all four streams are handled in the same pass instead of in turn, and
    what leaves DODA is reduced, so it crosses memory once. */
 
-const DODA = { x: 196, y: 90, w: 176, h: 100 };
-const RMEM = { x: 452, y: 102, w: 160, h: 76 };
-const SPINE = 140;
+/* Sensor rows and PE rows share the same y centres, so the lanes into DODA are
+   dead straight and never converge. Four arrows meeting at one box was reading
+   as a funnel, the same shape as the DRAM bottleneck above it. Convergence
+   happens only after the PEs, where it means sensor fusion. */
+
+const R_SENSOR_Y = [62, 106, 150, 194];
+const R_CENTRES = R_SENSOR_Y.map((y) => y + 18);
+const DODA = { x: 200, y: 14, w: 210, h: 230 };
+const PE = { x: 216, w: 120, h: 28 };
+const JOIN = { x: DODA.x + DODA.w, y: 146 };
+const RMEM = { x: 490, y: 116, w: 160, h: 60 };
+const R_ACCEL = { x: 710, y: 116, w: 262, h: 60 };
 
 function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
-  const ingest = SENSOR_Y.map((y, i) => ({
-    id: `rin${i}`,
-    d: `M140,${y + 18} C 166,${y + 18} 174,${SPINE} ${DODA.x},${SPINE}`
+  const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${PE.x},${c}` }));
+  const fuses = R_CENTRES.map((c, i) => ({
+    id: `rf${i}`,
+    d: `M${PE.x + PE.w},${c} C ${PE.x + PE.w + 42},${c} ${JOIN.x - 36},${JOIN.y} ${JOIN.x},${JOIN.y}`
   }));
-  // Sensors emit on the same beats as the conventional diagram.
   const beats = [0, 1.7, 3.4, 5.1, 6.8];
 
   return (
-    <svg className="flow-svg is-ridm" viewBox="0 0 980 250" role="img" aria-label={side.title}>
+    <svg className="flow-svg is-ridm" viewBox="0 0 980 270" role="img" aria-label={side.title}>
       <defs>
         <marker id="rdArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill={REDUCED} />
         </marker>
-        <marker id="rdArrowCy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="#30ddd4" />
-        </marker>
-        {ingest.map((p) => <path key={p.id} id={p.id} d={p.d} />)}
-        <path id="rdOut" d={`M${DODA.x + DODA.w},${SPINE} L ${RMEM.x},${SPINE}`} />
-        <path id="rdInfer" d={`M${RMEM.x + RMEM.w},${SPINE} L 700,${SPINE}`} />
+        {lanes.map((p) => <path key={p.id} id={p.id} d={p.d} />)}
+        {fuses.map((p) => <path key={p.id} id={p.id} d={p.d} />)}
+        <path id="rdOut" d={`M${JOIN.x},${JOIN.y} L ${RMEM.x},${JOIN.y}`} />
+        <path id="rdInfer" d={`M${RMEM.x + RMEM.w},${JOIN.y} L ${R_ACCEL.x},${JOIN.y}`} />
       </defs>
 
-      <text x="8" y="12" className="fl-tag">{sensorsLabel}</text>
+      <text x="8" y="50" className="fl-tag">{sensorsLabel}</text>
       {side.sensors.map((sensor, i) => (
-        <Box key={sensor} x={8} y={SENSOR_Y[i]} w={132} h={36} title={sensor} variant="chip" />
+        <Box key={sensor} x={8} y={R_SENSOR_Y[i]} w={132} h={36} title={sensor} variant="chip" />
       ))}
-      <rect className="fl-sliver" x="8" y="200" width="132" height="6" rx="3" />
-      <rect className="fl-sliver is-faint" x="8" y="212" width="132" height="6" rx="3" />
+      <rect className="fl-sliver" x="8" y="236" width="132" height="6" rx="3" />
+      <rect className="fl-sliver is-faint" x="8" y="248" width="132" height="6" rx="3" />
 
-      {ingest.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-live" markerEnd="url(#rdArrowCy)" />)}
+      <rect className="fl-doda" x={DODA.x} y={DODA.y} width={DODA.w} height={DODA.h} rx="12" />
+      <text x={DODA.x + 16} y={DODA.y + 26} className="fl-doda-name">{side.doda.name}</text>
+      {side.doda.note.map((line, i) => (
+        <text key={line} x={DODA.x + 16} y={DODA.y + 42 + i * 12} className="fl-note">{line}</text>
+      ))}
+
+      {lanes.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-live" />)}
+      {fuses.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-live" />)}
+      <circle className="fl-join" cx={JOIN.x} cy={JOIN.y} r="4.5" />
       <use href="#rdOut" className="fl-path" markerEnd="url(#rdArrow)" />
       <use href="#rdInfer" className="fl-path" markerEnd="url(#rdArrow)" />
 
-      <text x={DODA.x} y="78" className="fl-edge is-live">{side.edges.ingest}</text>
-      <text x={(DODA.x + DODA.w + RMEM.x) / 2} y="130" textAnchor="middle" className="fl-edge">{side.edges.reduced}</text>
-      <text x={(RMEM.x + RMEM.w + 700) / 2} y="130" textAnchor="middle" className="fl-edge">{side.edges.infer}</text>
+      {R_CENTRES.map((c, i) => (
+        <g key={c} className="fl-pe">
+          <rect x={PE.x} y={c - PE.h / 2} width={PE.w} height={PE.h} rx="7" />
+          <text x={PE.x + PE.w / 2} y={c + 4} textAnchor="middle">{`${side.doda.pe} ${i + 1}`}</text>
+        </g>
+      ))}
 
-      <Box x={DODA.x} y={DODA.y} w={DODA.w} h={DODA.h} title={side.doda.name} note={side.doda.note} variant="doda" />
+      <text x={(JOIN.x + RMEM.x) / 2} y={RMEM.y - 10} textAnchor="middle" className="fl-edge">{side.edges.reduced}</text>
+      <text x={(RMEM.x + RMEM.w + R_ACCEL.x) / 2} y={RMEM.y - 10} textAnchor="middle" className="fl-edge">{side.edges.infer}</text>
+
       <Box x={RMEM.x} y={RMEM.y} w={RMEM.w} h={RMEM.h} title={side.memory.name} note={side.memory.note} variant="memory" />
-      <Box x={700} y={SPINE - 30} w={272} h={60} title={side.accel.name} note={side.accel.note} />
+      <Box x={R_ACCEL.x} y={R_ACCEL.y} w={R_ACCEL.w} h={R_ACCEL.h} title={side.accel.name} note={side.accel.note} />
 
       <g className="flow-dots">
-        {/* Four in together, on every beat. */}
-        {ingest.map((p) => (
+        {lanes.map((p) => (
           <Fragment key={p.id}>
-            {beats.map((b) => <Dot key={b} path={p.id} start={b} travel={0.6} colour="#30ddd4" />)}
+            {beats.map((b) => <Dot key={b} path={p.id} start={b} travel={0.45} colour="#30ddd4" />)}
           </Fragment>
         ))}
-        {/* One reduced result straight out, no queue to wait in. */}
+        {/* All four leave their PE together and merge: that is the fusion. */}
+        {fuses.map((p) => (
+          <Fragment key={p.id}>
+            {beats.map((b) => <Dot key={b} path={p.id} start={b + 0.6} travel={0.4} colour="#30ddd4" r={4} />)}
+          </Fragment>
+        ))}
         {beats.map((b) => (
-          <Fragment key={`out${b}`}>
-            <Dot path="rdOut" start={b + 0.75} travel={0.35} colour={REDUCED} r={3.5} />
-            <Dot path="rdInfer" start={b + 1.2} travel={0.4} colour={REDUCED} r={3.5} />
+          <Fragment key={`o${b}`}>
+            <Dot path="rdOut" start={b + 1.05} travel={0.35} colour={REDUCED} r={3.5} />
+            <Dot path="rdInfer" start={b + 1.5} travel={0.35} colour={REDUCED} r={3.5} />
           </Fragment>
         ))}
       </g>

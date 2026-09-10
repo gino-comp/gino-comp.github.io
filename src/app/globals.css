@@ -144,8 +144,13 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .fl-edge.is-live { fill: var(--accent-text); }
 /* DODA sits where the CPU pre-processing step used to be, and is the only
    box on either diagram that is doing work rather than storing or waiting. */
-.fl-box.is-doda rect { fill: rgba(48,221,212,.07); stroke: rgba(48,221,212,.45); }
-.fl-box.is-doda .fl-title { fill: #fff; font-size: 15px; }
+/* DODA is the only box on either diagram doing work rather than storing or
+   waiting, and it holds the per-stream elements. */
+.fl-doda { fill: rgba(48,221,212,.05); stroke: rgba(48,221,212,.4); stroke-width: 1; }
+.fl-doda-name { font-size: 16px; font-weight: 700; fill: #fff; letter-spacing: -.01em; }
+.fl-pe rect { fill: rgba(48,221,212,.1); stroke: rgba(48,221,212,.34); }
+.fl-pe text { font-size: 10px; font-weight: 650; fill: #b6efec; letter-spacing: .04em; }
+.fl-join { fill: #30ddd4; }
 .fl-sliver { fill: #0c121a; stroke: var(--line); opacity: .55; }
 .fl-sliver.is-faint { opacity: .28; }
 
