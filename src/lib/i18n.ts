@@ -169,7 +169,7 @@ export const dictionaries = {
         {
           step: "RESEARCH",
           title: "Toward General-Purpose Dynamic Dataflow Processing",
-          body: "Jinho Lee’s PhD research at NUS, pursuing a general-purpose architecture that is both fast and efficient.",
+          body: "Jinho Lee’s PhD research at NUS, pursuing a general-purpose dataflow architecture that is both fast and efficient.",
           href: "https://scholarbank.nus.edu.sg/entities/publication/5a4c1379-bfae-40b1-a98a-e2ede9c855aa",
           linkLabel: "NUS ScholarBank"
         },
@@ -434,7 +434,7 @@ export const dictionaries = {
     },
     doda: {
       kicker: "02 / DODA ARCHITECTURE",
-      title: "DODA",
+      title: "실행 중에 연산 흐름을 조율하는 데이터플로우 머신, DODA.",
       desc:
         "컴파일 시점에 정해진 순서가 아니라, 데이터가 준비된 연산부터 실행합니다. 새로운 워크로드를 위해 실리콘을 다시 만들지 않고 파이프라인을 재구성할 수 있습니다.",
       acronym: {
@@ -454,7 +454,7 @@ export const dictionaries = {
         {
           step: "RESEARCH",
           title: "Toward General-Purpose Dynamic Dataflow Processing",
-          body: "빠르면서도 효율적인 범용 아키텍처를 목표로 한 이진호 CEO의 NUS 박사 연구입니다.",
+          body: "빠르면서도 효율적인 범용 데이터플로우 아키텍처를 목표로 한 이진호 대표의 NUS 박사 연구입니다.",
           href: "https://scholarbank.nus.edu.sg/entities/publication/5a4c1379-bfae-40b1-a98a-e2ede9c855aa",
           linkLabel: "NUS ScholarBank"
         },
