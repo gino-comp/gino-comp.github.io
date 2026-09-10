@@ -134,12 +134,12 @@ export const dictionaries = {
       },
       ridm: {
         overline: "RiDM APPROACH",
-        title: "Every stream arrives at once. DODA handles them that way.",
+        title: "Every stream arrives at once. They get processed that way too.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        doda: {
-          name: "DODA",
+        processor: {
+          name: "Near-Sensor Processor",
           note: ["one module per stream, each its own work", "results fused before they leave"],
-          modules: ["decode · resize", "FFT · threshold", "correlate · range", "filter · downsample"]
+          modules: ["resize · crop · slice", "distance (long range)", "indoor localization", "distance (short range)"]
         },
         memory: { name: "DRAM / shared memory", note: "reduced, higher-value data" },
         accel: { name: "GPU / NPU", note: "inference" },
@@ -411,12 +411,12 @@ export const dictionaries = {
       },
       ridm: {
         overline: "RiDM APPROACH",
-        title: "모든 스트림이 동시에 도착하고, DODA도 동시에 처리합니다.",
+        title: "모든 스트림이 동시에 도착하고, 처리도 동시에 이루어집니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        doda: {
-          name: "DODA",
+        processor: {
+          name: "Near-Sensor Processor",
           note: ["스트림마다 전용 모듈이 각자 다른 연산을 수행", "결과는 융합된 뒤 전달됩니다"],
-          modules: ["디코딩 · 리사이즈", "FFT · 임계 처리", "상관 · 거리 산출", "필터링 · 다운샘플"]
+          modules: ["리사이즈 · 크롭 · 슬라이스", "거리 측정 (장거리)", "실내 측위", "거리 측정 (근거리)"]
         },
         memory: { name: "DRAM / 공유 메모리", note: "축약된 고부가 데이터" },
         accel: { name: "GPU / NPU", note: "추론" },

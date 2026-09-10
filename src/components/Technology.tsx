@@ -158,7 +158,7 @@ type Ridm = {
   overline: string;
   title: string;
   sensors: readonly string[];
-  doda: { name: string; note: readonly string[]; modules: readonly string[] };
+  processor: { name: string; note: readonly string[]; modules: readonly string[] };
   memory: { name: string; note: string };
   accel: { name: string; note: string };
   edges: { reduced: string; infer: string };
@@ -171,19 +171,19 @@ type Ridm = {
    stack, all four streams are handled in the same pass instead of in turn, and
    what leaves DODA is reduced, so it crosses memory once. */
 
-/* Sensor rows and module rows share the same y centres, so the lanes into DODA are
-   dead straight and never converge. Four arrows meeting at one box was reading
+/* Sensor rows and module rows share the same y centres, so the lanes into the
+   processor are dead straight and never converge. Four arrows meeting at one box was reading
    as a funnel, the same shape as the DRAM bottleneck above it. Convergence
    happens only after the PEs, where it means sensor fusion. */
 
 const R_SENSOR_Y = [74, 114, 154, 194];
 const R_SENSOR_H = 32;
 const R_CENTRES = R_SENSOR_Y.map((y) => y + R_SENSOR_H / 2);
-const DODA = { x: 200, y: 14, w: 210, h: 224 };
-const MODULE = { x: 216, w: 120, h: 26 };
-const JOIN = { x: DODA.x + DODA.w, y: 150 };
-const RMEM = { x: 490, y: 120, w: 160, h: 60 };
-const R_ACCEL = { x: 710, y: 120, w: 262, h: 60 };
+const PROC = { x: 200, y: 14, w: 250, h: 224 };
+const MODULE = { x: 216, w: 150, h: 26 };
+const JOIN = { x: PROC.x + PROC.w, y: 150 };
+const RMEM = { x: 530, y: 120, w: 160, h: 60 };
+const R_ACCEL = { x: 750, y: 120, w: 222, h: 60 };
 
 function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
   const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${MODULE.x},${c}` }));
@@ -212,10 +212,10 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
       <rect className="fl-sliver" x="8" y="232" width="132" height="6" rx="3" />
       <rect className="fl-sliver is-faint" x="8" y="242" width="132" height="6" rx="3" />
 
-      <rect className="fl-doda" x={DODA.x} y={DODA.y} width={DODA.w} height={DODA.h} rx="12" />
-      <text x={DODA.x + 16} y={DODA.y + 26} className="fl-doda-name">{side.doda.name}</text>
-      {side.doda.note.map((line, i) => (
-        <text key={line} x={DODA.x + 16} y={DODA.y + 44 + i * 12} className="fl-note">{line}</text>
+      <rect className="fl-processor" x={PROC.x} y={PROC.y} width={PROC.w} height={PROC.h} rx="12" />
+      <text x={PROC.x + 16} y={PROC.y + 26} className="fl-processor-name">{side.processor.name}</text>
+      {side.processor.note.map((line, i) => (
+        <text key={line} x={PROC.x + 16} y={PROC.y + 44 + i * 12} className="fl-note">{line}</text>
       ))}
 
       {lanes.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-live" />)}
@@ -227,7 +227,7 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
       {R_CENTRES.map((c, i) => (
         <g key={c} className="fl-module">
           <rect x={MODULE.x} y={c - MODULE.h / 2} width={MODULE.w} height={MODULE.h} rx="7" />
-          <text x={MODULE.x + MODULE.w / 2} y={c + 4} textAnchor="middle">{side.doda.modules[i]}</text>
+          <text x={MODULE.x + MODULE.w / 2} y={c + 4} textAnchor="middle">{side.processor.modules[i]}</text>
         </g>
       ))}
 
