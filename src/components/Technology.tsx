@@ -158,7 +158,7 @@ type Ridm = {
   overline: string;
   title: string;
   sensors: readonly string[];
-  doda: { name: string; note: readonly string[]; pe: string };
+  doda: { name: string; note: readonly string[]; pes: readonly string[] };
   memory: { name: string; note: string };
   accel: { name: string; note: string };
   edges: { reduced: string; infer: string };
@@ -176,13 +176,14 @@ type Ridm = {
    as a funnel, the same shape as the DRAM bottleneck above it. Convergence
    happens only after the PEs, where it means sensor fusion. */
 
-const R_SENSOR_Y = [62, 106, 150, 194];
-const R_CENTRES = R_SENSOR_Y.map((y) => y + 18);
-const DODA = { x: 200, y: 14, w: 210, h: 230 };
-const PE = { x: 216, w: 120, h: 28 };
-const JOIN = { x: DODA.x + DODA.w, y: 146 };
-const RMEM = { x: 490, y: 116, w: 160, h: 60 };
-const R_ACCEL = { x: 710, y: 116, w: 262, h: 60 };
+const R_SENSOR_Y = [74, 114, 154, 194];
+const R_SENSOR_H = 32;
+const R_CENTRES = R_SENSOR_Y.map((y) => y + R_SENSOR_H / 2);
+const DODA = { x: 200, y: 14, w: 210, h: 224 };
+const PE = { x: 216, w: 120, h: 26 };
+const JOIN = { x: DODA.x + DODA.w, y: 150 };
+const RMEM = { x: 490, y: 120, w: 160, h: 60 };
+const R_ACCEL = { x: 710, y: 120, w: 262, h: 60 };
 
 function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
   const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${PE.x},${c}` }));
@@ -193,7 +194,7 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
   const beats = [0, 1.7, 3.4, 5.1, 6.8];
 
   return (
-    <svg className="flow-svg is-ridm" viewBox="0 0 980 270" role="img" aria-label={side.title}>
+    <svg className="flow-svg is-ridm" viewBox="0 0 980 264" role="img" aria-label={side.title}>
       <defs>
         <marker id="rdArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill={REDUCED} />
@@ -204,17 +205,17 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
         <path id="rdInfer" d={`M${RMEM.x + RMEM.w},${JOIN.y} L ${R_ACCEL.x},${JOIN.y}`} />
       </defs>
 
-      <text x="8" y="50" className="fl-tag">{sensorsLabel}</text>
+      <text x="8" y="62" className="fl-tag">{sensorsLabel}</text>
       {side.sensors.map((sensor, i) => (
-        <Box key={sensor} x={8} y={R_SENSOR_Y[i]} w={132} h={36} title={sensor} variant="chip" />
+        <Box key={sensor} x={8} y={R_SENSOR_Y[i]} w={132} h={R_SENSOR_H} title={sensor} variant="chip" />
       ))}
-      <rect className="fl-sliver" x="8" y="236" width="132" height="6" rx="3" />
-      <rect className="fl-sliver is-faint" x="8" y="248" width="132" height="6" rx="3" />
+      <rect className="fl-sliver" x="8" y="232" width="132" height="6" rx="3" />
+      <rect className="fl-sliver is-faint" x="8" y="242" width="132" height="6" rx="3" />
 
       <rect className="fl-doda" x={DODA.x} y={DODA.y} width={DODA.w} height={DODA.h} rx="12" />
       <text x={DODA.x + 16} y={DODA.y + 26} className="fl-doda-name">{side.doda.name}</text>
       {side.doda.note.map((line, i) => (
-        <text key={line} x={DODA.x + 16} y={DODA.y + 42 + i * 12} className="fl-note">{line}</text>
+        <text key={line} x={DODA.x + 16} y={DODA.y + 44 + i * 12} className="fl-note">{line}</text>
       ))}
 
       {lanes.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-live" />)}
@@ -226,7 +227,7 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
       {R_CENTRES.map((c, i) => (
         <g key={c} className="fl-pe">
           <rect x={PE.x} y={c - PE.h / 2} width={PE.w} height={PE.h} rx="7" />
-          <text x={PE.x + PE.w / 2} y={c + 4} textAnchor="middle">{`${side.doda.pe} ${i + 1}`}</text>
+          <text x={PE.x + PE.w / 2} y={c + 4} textAnchor="middle">{side.doda.pes[i]}</text>
         </g>
       ))}
 

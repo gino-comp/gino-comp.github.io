@@ -136,7 +136,11 @@ export const dictionaries = {
         overline: "RiDM APPROACH",
         title: "Every stream arrives at once. DODA handles them that way.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        doda: { name: "DODA", note: ["one processing element per stream"], pe: "PE" },
+        doda: {
+          name: "DODA",
+          note: ["one element per stream, each its own work", "results fused before they leave"],
+          pes: ["decode · resize", "FFT · threshold", "correlate · range", "filter · downsample"]
+        },
         memory: { name: "DRAM / shared memory", note: "reduced, higher-value data" },
         accel: { name: "GPU / NPU", note: "inference" },
         edges: { reduced: "fused · reduced", infer: "read once" },
@@ -409,7 +413,11 @@ export const dictionaries = {
         overline: "RiDM APPROACH",
         title: "모든 스트림이 동시에 도착하고, DODA도 동시에 처리합니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        doda: { name: "DODA", note: ["스트림마다 전용 Processing Element"], pe: "PE" },
+        doda: {
+          name: "DODA",
+          note: ["스트림마다 전용 PE가 각자 다른 연산을 수행", "결과는 융합된 뒤 전달됩니다"],
+          pes: ["디코딩 · 리사이즈", "FFT · 임계 처리", "상관 · 거리 산출", "필터링 · 다운샘플"]
+        },
         memory: { name: "DRAM / 공유 메모리", note: "축약된 고부가 데이터" },
         accel: { name: "GPU / NPU", note: "추론" },
         edges: { reduced: "융합 · 축약", infer: "한 번만 읽기" },
