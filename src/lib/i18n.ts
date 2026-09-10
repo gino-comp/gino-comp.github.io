@@ -174,13 +174,6 @@ export const dictionaries = {
           linkLabel: "NUS ScholarBank"
         },
         {
-          step: "PUBLISHED",
-          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
-          body: "An early published result of that research, in IEEE Access, 2023.",
-          href: "https://doi.org/10.1109/ACCESS.2023.3319404",
-          linkLabel: "IEEE Access"
-        },
-        {
           step: "FILED",
           title: "Three PCT patent families",
           body: "Covering the core architecture, its interconnect, and runtime reconfiguration.",
@@ -441,7 +434,7 @@ export const dictionaries = {
     },
     doda: {
       kicker: "02 / DODA ARCHITECTURE",
-      title: "DODA는 런타임에 오케스트레이션되는 데이터플로우 머신입니다.",
+      title: "DODA",
       desc:
         "컴파일 시점에 정해진 순서가 아니라, 데이터가 준비된 연산부터 실행합니다. 새로운 워크로드를 위해 실리콘을 다시 만들지 않고 파이프라인을 재구성할 수 있습니다.",
       acronym: {
@@ -464,13 +457,6 @@ export const dictionaries = {
           body: "빠르면서도 효율적인 범용 아키텍처를 목표로 한 이진호 CEO의 NUS 박사 연구입니다.",
           href: "https://scholarbank.nus.edu.sg/entities/publication/5a4c1379-bfae-40b1-a98a-e2ede9c855aa",
           linkLabel: "NUS ScholarBank"
-        },
-        {
-          step: "PUBLISHED",
-          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
-          body: "해당 연구의 초기 공개 성과로, 2023년 IEEE Access에 게재되었습니다.",
-          href: "https://doi.org/10.1109/ACCESS.2023.3319404",
-          linkLabel: "IEEE Access"
         },
         {
           step: "FILED",
