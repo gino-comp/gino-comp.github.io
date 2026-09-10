@@ -1,7 +1,58 @@
-import type { Dictionary } from "@/lib/i18n";
+import type { Dictionary, PipeStage } from "@/lib/i18n";
+
+type Side = {
+  overline: string;
+  title: string;
+  sensors: readonly string[];
+  sensorsNote: string;
+  stages: readonly PipeStage[];
+  costs: readonly string[];
+};
+
+// One vertical path per approach. The conventional side lists DRAM twice
+// because raw data really is written and read back around CPU pre-processing;
+// that repetition is the point the diagram is making.
+function Pipeline({ side, sensorsLabel }: { side: Side; sensorsLabel: string }) {
+  return (
+    <div className="pipe">
+      <div className="pipe-sensors">
+        <span className="pipe-tag">{sensorsLabel}</span>
+        <div className="sensor-stack">
+          {side.sensors.map((sensor) => (
+            <span key={sensor}>{sensor}</span>
+          ))}
+          <i aria-hidden="true" />
+          <i aria-hidden="true" />
+        </div>
+        <small>{side.sensorsNote}</small>
+      </div>
+
+      {side.stages.map((stage, index) => (
+        <div key={stage.name + index} className="pipe-step">
+          <div className={`pipe-edge${stage.heavy ? " is-heavy" : ""}`}>
+            <span>{stage.edge}</span>
+          </div>
+          <div className={`pipe-node is-${stage.kind}`}>
+            <b>{stage.name}</b>
+            <small>{stage.note}</small>
+          </div>
+        </div>
+      ))}
+
+      <ul className="pipe-costs">
+        {side.costs.map((cost) => (
+          <li key={cost}>{cost}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function TechnologySection({ dict }: { dict: Dictionary }) {
   const t = dict.technology;
+  const conventional = t.conventional as Side;
+  const ridm = t.ridm as Side;
+
   return (
     <section className="section dark-section">
       <div className="container">
@@ -15,24 +66,17 @@ export function TechnologySection({ dict }: { dict: Dictionary }) {
 
         <div className="problem-grid">
           <article>
-            <span>{t.conventional.overline}</span>
-            <h3>{t.conventional.title}</h3>
-            <p>{t.conventional.body}</p>
-            <div className="mini-flow">
-              <b>Sensors</b><i>→</i><b>Raw Data</b><i>→</i><b>CPU / GPU</b>
-            </div>
-            <small>{t.conventional.caption}</small>
+            <span>{conventional.overline}</span>
+            <h3>{conventional.title}</h3>
+            <Pipeline side={conventional} sensorsLabel={t.sensorsLabel} />
           </article>
           <article className="ridm-side">
-            <span>{t.ridm.overline}</span>
-            <h3>{t.ridm.title}</h3>
-            <p>{t.ridm.body}</p>
-            <div className="mini-flow">
-              <b>Sensors</b><i>→</i><b className="highlight">DODA</b><i>→</i><b>Processed Data</b><i>→</i><b>CPU / GPU</b>
-            </div>
-            <small>{t.ridm.caption}</small>
+            <span>{ridm.overline}</span>
+            <h3>{ridm.title}</h3>
+            <Pipeline side={ridm} sensorsLabel={t.sensorsLabel} />
           </article>
         </div>
+        <p className="diagram-note">{t.diagramNote}</p>
       </div>
     </section>
   );

@@ -117,20 +117,75 @@ export const dictionaries = {
       kicker: "01 / WHY NEAR-SENSOR",
       title: "Move less data. React sooner.",
       desc:
-        "In sensing-intensive systems, raw streams are continuously transported to central processors. RiDM moves part of that processing closer to the point where data is generated.",
+        "In sensing-intensive systems every raw stream is written to shared memory, pre-processed by the CPU, written back, and only then read by the accelerator. RiDM does that work where the data is produced.",
+      diagramNote: "Illustrative data path",
+      sensorsLabel: "SENSORS",
       conventional: {
         overline: "CONVENTIONAL FLOW",
-        title: "Move raw data to central compute.",
-        body:
-          "Sensor streams travel through the system before filtering, fusion or inference takes place.",
-        caption: "More sensors increase traffic, host load and latency pressure."
+        title: "Raw data crosses memory before anything looks at it.",
+        sensors: ["Camera", "Radar", "UWB", "Lidar"],
+        sensorsNote: "every stream, at full rate",
+        stages: [
+          {
+            kind: "memory",
+            name: "DRAM / shared memory",
+            note: "raw frames buffered",
+            edge: "raw · full bandwidth",
+            heavy: true
+          },
+          {
+            kind: "compute",
+            name: "CPU",
+            note: "filter · decode · resize · format",
+            edge: "read back",
+            heavy: true
+          },
+          {
+            kind: "memory",
+            name: "DRAM / shared memory",
+            note: "pre-processed frames",
+            edge: "write again",
+            heavy: true
+          },
+          {
+            kind: "compute",
+            name: "GPU / NPU",
+            note: "inference",
+            edge: "read again",
+            heavy: true
+          }
+        ],
+        costs: ["4 memory crossings", "CPU spent on pre-processing", "traffic grows with every sensor"]
       },
       ridm: {
         overline: "RiDM APPROACH",
-        title: "Process data closer to the source.",
-        body:
-          "DODA is designed to filter, fuse and process sensor data before forwarding higher-value data to the host processor.",
-        caption: "Programmability allows the processing pipeline to change with the workload."
+        title: "Process at the source, move only what matters.",
+        sensors: ["Camera", "Radar", "UWB", "Lidar"],
+        sensorsNote: "every stream, at full rate",
+        stages: [
+          {
+            kind: "doda",
+            name: "DODA",
+            note: "filter · fuse · pre-process inline",
+            edge: "raw stays local",
+            heavy: true
+          },
+          {
+            kind: "memory",
+            name: "DRAM / shared memory",
+            note: "reduced, higher-value data",
+            edge: "reduced",
+            heavy: false
+          },
+          {
+            kind: "compute",
+            name: "GPU / NPU",
+            note: "inference",
+            edge: "read once",
+            heavy: false
+          }
+        ],
+        costs: ["2 memory crossings", "CPU free for application work", "host traffic follows results, not raw rate"]
       }
     },
     doda: {
@@ -380,20 +435,75 @@ export const dictionaries = {
       kicker: "01 / WHY NEAR-SENSOR",
       title: "데이터 이동은 줄이고, 반응은 더 빠르게.",
       desc:
-        "센서가 늘어날수록 중앙 CPU/GPU로 이동하는 원시 데이터도 함께 증가합니다. RiDM은 필터링·융합·전처리 등 필요한 연산을 센서 가까이에서 먼저 수행합니다.",
+        "센서가 많은 시스템에서는 모든 원시 데이터가 공유 메모리에 쌓이고, CPU가 전처리한 뒤 다시 메모리에 기록되며, 그제서야 가속기가 읽어갑니다. RiDM은 이 연산을 데이터가 생성되는 지점에서 먼저 수행합니다.",
+      diagramNote: "개념적 데이터 경로",
+      sensorsLabel: "SENSORS",
       conventional: {
         overline: "CONVENTIONAL FLOW",
-        title: "원시 데이터를 중앙으로 이동",
-        body:
-          "센서 데이터가 시스템을 이동한 뒤 중앙 CPU/GPU에서 필터링·융합·추론이 이루어집니다.",
-        caption: "센서 수가 늘면 데이터 이동량, Host 부하, 지연 부담도 함께 커집니다."
+        title: "연산 이전에 원시 데이터가 메모리를 오갑니다.",
+        sensors: ["Camera", "Radar", "UWB", "Lidar"],
+        sensorsNote: "모든 스트림을 전체 대역으로",
+        stages: [
+          {
+            kind: "memory",
+            name: "DRAM / 공유 메모리",
+            note: "원시 프레임 버퍼링",
+            edge: "원시 데이터 · 전체 대역",
+            heavy: true
+          },
+          {
+            kind: "compute",
+            name: "CPU",
+            note: "필터링 · 인코딩/디코딩 · 리사이즈 · 포맷 변환",
+            edge: "다시 읽기",
+            heavy: true
+          },
+          {
+            kind: "memory",
+            name: "DRAM / 공유 메모리",
+            note: "전처리된 프레임",
+            edge: "다시 쓰기",
+            heavy: true
+          },
+          {
+            kind: "compute",
+            name: "GPU / NPU",
+            note: "추론",
+            edge: "또 한 번 읽기",
+            heavy: true
+          }
+        ],
+        costs: ["메모리 4회 통과", "CPU가 전처리에 소모됨", "센서가 늘수록 트래픽 증가"]
       },
       ridm: {
         overline: "RiDM APPROACH",
-        title: "센서 가까이에서 필요한 연산을 먼저",
-        body:
-          "DODA는 센서 데이터를 먼저 필터링·융합·처리하고, 필요한 데이터만 Host Processor로 전달하도록 설계됩니다.",
-        caption: "Runtime Programmability를 기반으로 알고리즘과 워크로드 변화에 대응합니다."
+        title: "발생 지점에서 처리하고, 필요한 데이터만 전달합니다.",
+        sensors: ["Camera", "Radar", "UWB", "Lidar"],
+        sensorsNote: "모든 스트림을 전체 대역으로",
+        stages: [
+          {
+            kind: "doda",
+            name: "DODA",
+            note: "인라인 필터링 · 융합 · 전처리",
+            edge: "원시 데이터는 로컬에 유지",
+            heavy: true
+          },
+          {
+            kind: "memory",
+            name: "DRAM / 공유 메모리",
+            note: "축약된 고부가 데이터",
+            edge: "축약된 데이터",
+            heavy: false
+          },
+          {
+            kind: "compute",
+            name: "GPU / NPU",
+            note: "추론",
+            edge: "한 번만 읽기",
+            heavy: false
+          }
+        ],
+        costs: ["메모리 2회 통과", "CPU는 애플리케이션 연산에 집중", "호스트 트래픽이 원시 데이터량에 비례하지 않음"]
       }
     },
     doda: {
@@ -616,6 +726,14 @@ export type TeamMember = {
   // A detail value is either a sentence or a list of lines, so the founder's
   // IP row can enumerate the PCT filings.
   details: readonly (readonly [string, string | readonly string[]])[];
+};
+
+export type PipeStage = {
+  kind: "memory" | "compute" | "doda";
+  name: string;
+  note: string;
+  edge: string;
+  heavy: boolean;
 };
 
 export type TeamGroup = { label: string; entity: string; note: string; members: readonly TeamMember[] };
