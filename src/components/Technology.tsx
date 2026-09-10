@@ -1,13 +1,5 @@
 import { Fragment } from "react";
-import type { Dictionary, PipeStage } from "@/lib/i18n";
-
-type Side = {
-  overline: string;
-  title: string;
-  sensors: readonly string[];
-  stages: readonly PipeStage[];
-  costs: readonly string[];
-};
+import type { Dictionary } from "@/lib/i18n";
 
 type Conventional = {
   overline: string;
@@ -76,15 +68,22 @@ function Dot({ path, start, travel, colour, back = false, r = 4.5 }: {
   );
 }
 
+// SVG text does not wrap, so a note that will not fit its box is passed as
+// separate lines rather than one string.
 function Box({ x, y, w, h, title, note, variant = "plain" }: {
-  x: number; y: number; w: number; h: number; title: string; note?: string;
-  variant?: "plain" | "memory" | "chip";
+  x: number; y: number; w: number; h: number; title: string;
+  note?: string | readonly string[];
+  variant?: "plain" | "memory" | "chip" | "doda";
 }) {
+  const lines = note === undefined ? [] : typeof note === "string" ? [note] : note;
+  const titleY = lines.length === 0 ? y + h / 2 + 4 : y + h / 2 - 4 - (lines.length - 1) * 6;
   return (
     <g className={`fl-box is-${variant}`}>
       <rect x={x} y={y} width={w} height={h} rx="10" />
-      <text x={x + 14} y={note ? y + h / 2 - 4 : y + h / 2 + 4} className="fl-title">{title}</text>
-      {note ? <text x={x + 14} y={y + h / 2 + 14} className="fl-note">{note}</text> : null}
+      <text x={x + 14} y={titleY} className="fl-title">{title}</text>
+      {lines.map((line, i) => (
+        <text key={line} x={x + 14} y={titleY + 18 + i * 13} className="fl-note">{line}</text>
+      ))}
     </g>
   );
 }
@@ -155,49 +154,91 @@ function ConventionalFlow({ side, sensorsLabel }: { side: Conventional; sensorsL
   );
 }
 
-// One vertical path per approach, run left to right. Node and edge widths are
-// fixed, so the RiDM row ends short of the conventional one.
-function Pipeline({ side, sensorsLabel }: { side: Side; sensorsLabel: string }) {
+type Ridm = {
+  overline: string;
+  title: string;
+  sensors: readonly string[];
+  doda: { name: string; note: readonly string[] };
+  memory: { name: string; note: string };
+  accel: { name: string; note: string };
+  edges: { ingest: string; reduced: string; infer: string };
+  costs: readonly string[];
+};
+
+/* The answer to the conventional diagram, on the same 10s clock and with the
+   same sensor rhythm, so the two can be watched side by side. Everything after
+   the sensors differs: the path is a straight spine rather than a fan out to a
+   stack, all four streams are handled in the same pass instead of in turn, and
+   what leaves DODA is reduced, so it crosses memory once. */
+
+const DODA = { x: 196, y: 90, w: 176, h: 100 };
+const RMEM = { x: 452, y: 102, w: 160, h: 76 };
+const SPINE = 140;
+
+function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
+  const ingest = SENSOR_Y.map((y, i) => ({
+    id: `rin${i}`,
+    d: `M140,${y + 18} C 166,${y + 18} 174,${SPINE} ${DODA.x},${SPINE}`
+  }));
+  // Sensors emit on the same beats as the conventional diagram.
+  const beats = [0, 1.7, 3.4, 5.1, 6.8];
+
   return (
-    <div className="pipe-wrap">
-      <div className="pipe">
-        <div className="pipe-sensors">
-          <span className="pipe-tag">{sensorsLabel}</span>
-          <div className="sensor-stack">
-            {side.sensors.map((sensor) => (
-              <span key={sensor}>{sensor}</span>
-            ))}
-            <i aria-hidden="true" />
-            <i aria-hidden="true" />
-          </div>
-        </div>
+    <svg className="flow-svg is-ridm" viewBox="0 0 980 250" role="img" aria-label={side.title}>
+      <defs>
+        <marker id="rdArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill={REDUCED} />
+        </marker>
+        <marker id="rdArrowCy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#30ddd4" />
+        </marker>
+        {ingest.map((p) => <path key={p.id} id={p.id} d={p.d} />)}
+        <path id="rdOut" d={`M${DODA.x + DODA.w},${SPINE} L ${RMEM.x},${SPINE}`} />
+        <path id="rdInfer" d={`M${RMEM.x + RMEM.w},${SPINE} L 700,${SPINE}`} />
+      </defs>
 
-        {side.stages.map((stage, index) => (
-          <div key={stage.name + index} className="pipe-step">
-            <div className={`pipe-edge${stage.heavy ? " is-heavy" : ""}`}>
-              <span>{stage.edge}</span>
-            </div>
-            <div className={`pipe-node is-${stage.kind}`}>
-              <b>{stage.name}</b>
-              <small>{stage.note}</small>
-            </div>
-          </div>
-        ))}
-      </div>
+      <text x="8" y="12" className="fl-tag">{sensorsLabel}</text>
+      {side.sensors.map((sensor, i) => (
+        <Box key={sensor} x={8} y={SENSOR_Y[i]} w={132} h={36} title={sensor} variant="chip" />
+      ))}
+      <rect className="fl-sliver" x="8" y="200" width="132" height="6" rx="3" />
+      <rect className="fl-sliver is-faint" x="8" y="212" width="132" height="6" rx="3" />
 
-      <ul className="pipe-costs">
-        {side.costs.map((cost) => (
-          <li key={cost}>{cost}</li>
+      {ingest.map((p) => <use key={p.id} href={`#${p.id}`} className="fl-path is-live" markerEnd="url(#rdArrowCy)" />)}
+      <use href="#rdOut" className="fl-path" markerEnd="url(#rdArrow)" />
+      <use href="#rdInfer" className="fl-path" markerEnd="url(#rdArrow)" />
+
+      <text x={DODA.x} y="78" className="fl-edge is-live">{side.edges.ingest}</text>
+      <text x={(DODA.x + DODA.w + RMEM.x) / 2} y="130" textAnchor="middle" className="fl-edge">{side.edges.reduced}</text>
+      <text x={(RMEM.x + RMEM.w + 700) / 2} y="130" textAnchor="middle" className="fl-edge">{side.edges.infer}</text>
+
+      <Box x={DODA.x} y={DODA.y} w={DODA.w} h={DODA.h} title={side.doda.name} note={side.doda.note} variant="doda" />
+      <Box x={RMEM.x} y={RMEM.y} w={RMEM.w} h={RMEM.h} title={side.memory.name} note={side.memory.note} variant="memory" />
+      <Box x={700} y={SPINE - 30} w={272} h={60} title={side.accel.name} note={side.accel.note} />
+
+      <g className="flow-dots">
+        {/* Four in together, on every beat. */}
+        {ingest.map((p) => (
+          <Fragment key={p.id}>
+            {beats.map((b) => <Dot key={b} path={p.id} start={b} travel={0.6} colour="#30ddd4" />)}
+          </Fragment>
         ))}
-      </ul>
-    </div>
+        {/* One reduced result straight out, no queue to wait in. */}
+        {beats.map((b) => (
+          <Fragment key={`out${b}`}>
+            <Dot path="rdOut" start={b + 0.75} travel={0.35} colour={REDUCED} r={3.5} />
+            <Dot path="rdInfer" start={b + 1.2} travel={0.4} colour={REDUCED} r={3.5} />
+          </Fragment>
+        ))}
+      </g>
+    </svg>
   );
 }
 
 export function TechnologySection({ dict }: { dict: Dictionary }) {
   const t = dict.technology;
   const conventional = t.conventional as Conventional;
-  const ridm = t.ridm as Side;
+  const ridm = t.ridm as Ridm;
 
   return (
     <section className="section dark-section">
@@ -226,7 +267,14 @@ export function TechnologySection({ dict }: { dict: Dictionary }) {
           <article className="ridm-side">
             <span>{ridm.overline}</span>
             <h3>{ridm.title}</h3>
-            <Pipeline side={ridm} sensorsLabel={t.sensorsLabel} />
+            <div className="flow-scroll">
+              <RidmFlow side={ridm} sensorsLabel={t.sensorsLabel} />
+            </div>
+            <ul className="pipe-costs">
+              {ridm.costs.map((cost) => (
+                <li key={cost}>{cost}</li>
+              ))}
+            </ul>
           </article>
         </div>
         <p className="diagram-note">{t.diagramNote}</p>

@@ -134,32 +134,13 @@ export const dictionaries = {
       },
       ridm: {
         overline: "RiDM APPROACH",
-        title: "Process at the source, move only what matters.",
+        title: "Every stream arrives at once. DODA handles them that way.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        stages: [
-          {
-            kind: "doda",
-            name: "DODA",
-            note: "filter · fuse · pre-process inline",
-            edge: "raw stays local",
-            heavy: true
-          },
-          {
-            kind: "memory",
-            name: "DRAM / shared memory",
-            note: "reduced, higher-value data",
-            edge: "reduced",
-            heavy: false
-          },
-          {
-            kind: "compute",
-            name: "GPU / NPU",
-            note: "inference",
-            edge: "read once",
-            heavy: false
-          }
-        ],
-        costs: ["Shorter path to a result — data is reduced before it reaches memory", "Steadier delay — streams are handled as they arrive, not in turn", "Host latency is designed to hold as sensors are added"]
+        doda: { name: "DODA", note: ["filter · fuse · pre-process", "every stream at once"] },
+        memory: { name: "DRAM / shared memory", note: "reduced, higher-value data" },
+        accel: { name: "GPU / NPU", note: "inference" },
+        edges: { ingest: "all streams, in parallel", reduced: "reduced", infer: "read once" },
+        costs: ["Shorter path to a result — data is reduced before it reaches memory", "Steadier delay — no stream waits its turn behind another", "Host latency is designed to hold as sensors are added"]
       }
     },
     doda: {
@@ -426,32 +407,13 @@ export const dictionaries = {
       },
       ridm: {
         overline: "RiDM APPROACH",
-        title: "발생 지점에서 처리하고, 필요한 데이터만 전달합니다.",
+        title: "모든 스트림이 동시에 도착하고, DODA도 동시에 처리합니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
-        stages: [
-          {
-            kind: "doda",
-            name: "DODA",
-            note: "인라인 필터링 · 융합 · 전처리",
-            edge: "원시 데이터는 로컬에 유지",
-            heavy: true
-          },
-          {
-            kind: "memory",
-            name: "DRAM / 공유 메모리",
-            note: "축약된 고부가 데이터",
-            edge: "축약된 데이터",
-            heavy: false
-          },
-          {
-            kind: "compute",
-            name: "GPU / NPU",
-            note: "추론",
-            edge: "한 번만 읽기",
-            heavy: false
-          }
-        ],
-        costs: ["결과까지의 경로 단축 — 메모리에 도달하기 전에 데이터를 축약", "지연 편차 감소 — 스트림을 차례가 아니라 도착하는 대로 처리", "센서가 늘어도 호스트 지연을 유지하도록 설계"]
+        doda: { name: "DODA", note: ["필터링 · 융합 · 전처리", "모든 스트림을 동시에"] },
+        memory: { name: "DRAM / 공유 메모리", note: "축약된 고부가 데이터" },
+        accel: { name: "GPU / NPU", note: "추론" },
+        edges: { ingest: "모든 스트림 동시 유입", reduced: "축약된 데이터", infer: "한 번만 읽기" },
+        costs: ["결과까지의 경로 단축 — 메모리에 도달하기 전에 데이터를 축약", "지연 편차 감소 — 어떤 스트림도 다른 스트림을 기다리지 않음", "센서가 늘어도 호스트 지연을 유지하도록 설계"]
       }
     },
     doda: {
@@ -674,14 +636,6 @@ export type TeamMember = {
   // A detail value is either a sentence or a list of lines, so the founder's
   // IP row can enumerate the PCT filings.
   details: readonly (readonly [string, string | readonly string[]])[];
-};
-
-export type PipeStage = {
-  kind: "memory" | "compute" | "doda";
-  name: string;
-  note: string;
-  edge: string;
-  heavy: boolean;
 };
 
 export type TeamGroup = { label: string; entity: string; note: string; members: readonly TeamMember[] };
