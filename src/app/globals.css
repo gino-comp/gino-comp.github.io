@@ -162,6 +162,26 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .pipe-node.is-doda { border-color: rgba(48,221,212,.42); background: linear-gradient(150deg,rgba(48,221,212,.09),rgba(76,120,255,.05)); }
 .pipe-node.is-doda b { color: #fff; }
 
+/* Animated conventional data path. Scrolls rather than shrinking its labels
+   into illegibility on narrow screens. */
+.flow-scroll { margin-top: 24px; overflow-x: auto; padding-bottom: 4px; }
+.flow-svg { display: block; width: 100%; min-width: 760px; height: auto; }
+.fl-box rect { fill: #0c121a; stroke: var(--line); stroke-width: 1; }
+.fl-box.is-chip rect { fill: #0c121a; stroke: var(--line); }
+.fl-box.is-chip .fl-title { font-size: 12px; fill: #c2cbd6; }
+/* The memory box is the thing everything crosses, so it carries the raw tint. */
+.fl-box.is-memory rect { fill: rgba(201,138,69,.09); stroke: rgba(201,138,69,.45); stroke-dasharray: 5 4; }
+.fl-box.is-memory .fl-title { fill: #e4c39c; }
+.fl-title { font-size: 13px; font-weight: 650; fill: var(--text); }
+.fl-note { font-size: 10px; fill: var(--text-3); }
+.fl-tag { font-size: 9px; letter-spacing: .14em; font-weight: 700; fill: var(--text-3); }
+.fl-edge { font-size: 10px; fill: var(--text-3); }
+.fl-edge.is-raw { fill: #d3a06a; }
+.fl-path { fill: none; stroke: #47525f; stroke-width: 1.5; }
+.fl-path.is-raw { stroke: rgba(201,138,69,.5); stroke-width: 2.5; }
+.fl-sliver { fill: #0c121a; stroke: var(--line); opacity: .55; }
+.fl-sliver.is-faint { opacity: .28; }
+
 .pipe-costs { list-style: none; margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 30px; }
 .pipe-costs li { position: relative; padding-left: 16px; font-size: 12px; color: #9aa5b2; line-height: 1.5; word-break: keep-all; }
 .pipe-costs li::before { content: ""; position: absolute; left: 0; top: 6px; width: 6px; height: 6px; border-radius: 2px; background: #c98a45; }
@@ -448,5 +468,6 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .flow-dots { display: none; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

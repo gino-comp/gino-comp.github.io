@@ -122,40 +122,17 @@ export const dictionaries = {
       sensorsLabel: "SENSORS",
       conventional: {
         overline: "CONVENTIONAL FLOW",
-        title: "Raw data crosses memory before anything looks at it.",
+        title: "Every stream arrives at once. The CPU takes them one at a time.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
         sensorsNote: "every stream, at full rate",
-        stages: [
-          {
-            kind: "memory",
-            name: "DRAM / shared memory",
-            note: "raw frames buffered",
-            edge: "raw · full bandwidth",
-            heavy: true
-          },
-          {
-            kind: "compute",
-            name: "CPU",
-            note: "filter · decode · resize · format",
-            edge: "read back",
-            heavy: true
-          },
-          {
-            kind: "memory",
-            name: "DRAM / shared memory",
-            note: "pre-processed frames",
-            edge: "write again",
-            heavy: true
-          },
-          {
-            kind: "compute",
-            name: "GPU / NPU",
-            note: "inference",
-            edge: "read again",
-            heavy: true
-          }
+        memory: { name: "DRAM / shared memory", note: "every raw frame lands here first" },
+        compute: [
+          { name: "CPU", note: "filter · decode · resize · format" },
+          { name: "GPU", note: "inference" },
+          { name: "NPU", note: "inference" }
         ],
-        costs: ["4 memory crossings", "CPU spent on pre-processing", "traffic grows with every sensor"]
+        edges: { ingest: "all streams, in parallel", cpu: "read one · write back", infer: "read again" },
+        costs: ["4 memory crossings", "CPU serializes what the sensors produce in parallel", "traffic grows with every sensor"]
       },
       ridm: {
         overline: "RiDM APPROACH",
@@ -440,40 +417,17 @@ export const dictionaries = {
       sensorsLabel: "SENSORS",
       conventional: {
         overline: "CONVENTIONAL FLOW",
-        title: "연산 이전에 원시 데이터가 메모리를 오갑니다.",
+        title: "모든 스트림이 동시에 도착하지만, CPU는 하나씩 처리합니다.",
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
         sensorsNote: "모든 스트림을 전체 대역으로",
-        stages: [
-          {
-            kind: "memory",
-            name: "DRAM / 공유 메모리",
-            note: "원시 프레임 버퍼링",
-            edge: "원시 데이터 · 전체 대역",
-            heavy: true
-          },
-          {
-            kind: "compute",
-            name: "CPU",
-            note: "필터링 · 인코딩/디코딩 · 리사이즈 · 포맷 변환",
-            edge: "다시 읽기",
-            heavy: true
-          },
-          {
-            kind: "memory",
-            name: "DRAM / 공유 메모리",
-            note: "전처리된 프레임",
-            edge: "다시 쓰기",
-            heavy: true
-          },
-          {
-            kind: "compute",
-            name: "GPU / NPU",
-            note: "추론",
-            edge: "또 한 번 읽기",
-            heavy: true
-          }
+        memory: { name: "DRAM / 공유 메모리", note: "모든 원시 프레임이 먼저 이곳에 쌓입니다" },
+        compute: [
+          { name: "CPU", note: "필터링 · 인코딩/디코딩 · 리사이즈 · 포맷 변환" },
+          { name: "GPU", note: "추론" },
+          { name: "NPU", note: "추론" }
         ],
-        costs: ["메모리 4회 통과", "CPU가 전처리에 소모됨", "센서가 늘수록 트래픽 증가"]
+        edges: { ingest: "모든 스트림 동시 유입", cpu: "하나씩 읽고 · 다시 쓰기", infer: "또 한 번 읽기" },
+        costs: ["메모리 4회 통과", "센서는 병렬로 생성하지만 CPU는 순차 처리", "센서가 늘수록 트래픽 증가"]
       },
       ridm: {
         overline: "RiDM APPROACH",
