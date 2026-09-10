@@ -138,8 +138,8 @@ export const dictionaries = {
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
         doda: {
           name: "DODA",
-          note: ["one element per stream, each its own work", "results fused before they leave"],
-          pes: ["decode · resize", "FFT · threshold", "correlate · range", "filter · downsample"]
+          note: ["one module per stream, each its own work", "results fused before they leave"],
+          modules: ["decode · resize", "FFT · threshold", "correlate · range", "filter · downsample"]
         },
         memory: { name: "DRAM / shared memory", note: "reduced, higher-value data" },
         accel: { name: "GPU / NPU", note: "inference" },
@@ -415,8 +415,8 @@ export const dictionaries = {
         sensors: ["Camera", "Radar", "UWB", "Lidar"],
         doda: {
           name: "DODA",
-          note: ["스트림마다 전용 PE가 각자 다른 연산을 수행", "결과는 융합된 뒤 전달됩니다"],
-          pes: ["디코딩 · 리사이즈", "FFT · 임계 처리", "상관 · 거리 산출", "필터링 · 다운샘플"]
+          note: ["스트림마다 전용 모듈이 각자 다른 연산을 수행", "결과는 융합된 뒤 전달됩니다"],
+          modules: ["디코딩 · 리사이즈", "FFT · 임계 처리", "상관 · 거리 산출", "필터링 · 다운샘플"]
         },
         memory: { name: "DRAM / 공유 메모리", note: "축약된 고부가 데이터" },
         accel: { name: "GPU / NPU", note: "추론" },

@@ -148,8 +148,8 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
    waiting, and it holds the per-stream elements. */
 .fl-doda { fill: rgba(48,221,212,.05); stroke: rgba(48,221,212,.4); stroke-width: 1; }
 .fl-doda-name { font-size: 16px; font-weight: 700; fill: #fff; letter-spacing: -.01em; }
-.fl-pe rect { fill: rgba(48,221,212,.1); stroke: rgba(48,221,212,.34); }
-.fl-pe text { font-size: 9.5px; font-weight: 600; fill: #b6efec; letter-spacing: .01em; }
+.fl-module rect { fill: rgba(48,221,212,.1); stroke: rgba(48,221,212,.34); }
+.fl-module text { font-size: 9.5px; font-weight: 600; fill: #b6efec; letter-spacing: .01em; }
 .fl-join { fill: #30ddd4; }
 .fl-sliver { fill: #0c121a; stroke: var(--line); opacity: .55; }
 .fl-sliver.is-faint { opacity: .28; }

@@ -158,7 +158,7 @@ type Ridm = {
   overline: string;
   title: string;
   sensors: readonly string[];
-  doda: { name: string; note: readonly string[]; pes: readonly string[] };
+  doda: { name: string; note: readonly string[]; modules: readonly string[] };
   memory: { name: string; note: string };
   accel: { name: string; note: string };
   edges: { reduced: string; infer: string };
@@ -171,7 +171,7 @@ type Ridm = {
    stack, all four streams are handled in the same pass instead of in turn, and
    what leaves DODA is reduced, so it crosses memory once. */
 
-/* Sensor rows and PE rows share the same y centres, so the lanes into DODA are
+/* Sensor rows and module rows share the same y centres, so the lanes into DODA are
    dead straight and never converge. Four arrows meeting at one box was reading
    as a funnel, the same shape as the DRAM bottleneck above it. Convergence
    happens only after the PEs, where it means sensor fusion. */
@@ -180,16 +180,16 @@ const R_SENSOR_Y = [74, 114, 154, 194];
 const R_SENSOR_H = 32;
 const R_CENTRES = R_SENSOR_Y.map((y) => y + R_SENSOR_H / 2);
 const DODA = { x: 200, y: 14, w: 210, h: 224 };
-const PE = { x: 216, w: 120, h: 26 };
+const MODULE = { x: 216, w: 120, h: 26 };
 const JOIN = { x: DODA.x + DODA.w, y: 150 };
 const RMEM = { x: 490, y: 120, w: 160, h: 60 };
 const R_ACCEL = { x: 710, y: 120, w: 262, h: 60 };
 
 function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
-  const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${PE.x},${c}` }));
+  const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${MODULE.x},${c}` }));
   const fuses = R_CENTRES.map((c, i) => ({
     id: `rf${i}`,
-    d: `M${PE.x + PE.w},${c} C ${PE.x + PE.w + 42},${c} ${JOIN.x - 36},${JOIN.y} ${JOIN.x},${JOIN.y}`
+    d: `M${MODULE.x + MODULE.w},${c} C ${MODULE.x + MODULE.w + 42},${c} ${JOIN.x - 36},${JOIN.y} ${JOIN.x},${JOIN.y}`
   }));
   const beats = [0, 1.7, 3.4, 5.1, 6.8];
 
@@ -225,9 +225,9 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
       <use href="#rdInfer" className="fl-path" markerEnd="url(#rdArrow)" />
 
       {R_CENTRES.map((c, i) => (
-        <g key={c} className="fl-pe">
-          <rect x={PE.x} y={c - PE.h / 2} width={PE.w} height={PE.h} rx="7" />
-          <text x={PE.x + PE.w / 2} y={c + 4} textAnchor="middle">{side.doda.pes[i]}</text>
+        <g key={c} className="fl-module">
+          <rect x={MODULE.x} y={c - MODULE.h / 2} width={MODULE.w} height={MODULE.h} rx="7" />
+          <text x={MODULE.x + MODULE.w / 2} y={c + 4} textAnchor="middle">{side.doda.modules[i]}</text>
         </g>
       ))}
 
@@ -243,7 +243,7 @@ function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) 
             {beats.map((b) => <Dot key={b} path={p.id} start={b} travel={0.45} colour="#30ddd4" />)}
           </Fragment>
         ))}
-        {/* All four leave their PE together and merge: that is the fusion. */}
+        {/* All four leave their module together and merge: that is the fusion. */}
         {fuses.map((p) => (
           <Fragment key={p.id}>
             {beats.map((b) => <Dot key={b} path={p.id} start={b + 0.6} travel={0.4} colour="#30ddd4" r={4} />)}
