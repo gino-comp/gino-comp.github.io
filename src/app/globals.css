@@ -65,7 +65,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .hero-section { padding: 76px 0 54px; }
 .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 380px; gap: 64px; align-items: center; }
 .eyebrow { font-size: 11px; letter-spacing: .18em; font-weight: 700; color: #9aa6b6; margin-bottom: 20px; }
-h1 { margin: 0; max-width: 760px; font-size: clamp(48px,5.2vw,78px); line-height: .98; letter-spacing: -.045em; font-weight: 720; }
+h1 { margin: 0; max-width: 760px; font-size: clamp(48px,5.2vw,78px); line-height: .98; letter-spacing: -.045em; font-weight: 720; word-break: keep-all; }
 h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#d0b6ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero-copy { padding-bottom: 6px; }
 .hero-copy p { font-size: 17px; line-height: 1.72; color: #aeb7c4; margin: 0 0 28px; }
@@ -111,8 +111,8 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .section-head { display: grid; grid-template-columns: .95fr 1.05fr; gap: 70px; margin-bottom: 70px; }
 .section-head > div:only-child { grid-column: 1 / -1; }
 .section-kicker { font-size: 11px; letter-spacing: .14em; color: var(--text-3); font-weight: 700; margin-bottom: 16px; }
-.section-head h2 { margin: 0; font-size: clamp(36px,3.6vw,54px); line-height: 1.06; letter-spacing: -.045em; max-width: 720px; }
-.section-head > p { color: #96a1b0; max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; align-self: end; }
+.section-head h2 { margin: 0; font-size: clamp(36px,3.6vw,54px); line-height: 1.06; letter-spacing: -.045em; max-width: 720px; word-break: keep-all; }
+.section-head > p { color: #96a1b0; max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; align-self: end; word-break: keep-all; }
 
 /* Conventional flow first, RiDM approach beneath it, so the two paths can be
    read against each other left to right. */
@@ -344,8 +344,8 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .brand small { display: none; }
   .brand { min-width: 0; }
   .hero-section { padding: 58px 0 42px; }
-  h1 { font-size: clamp(50px,16vw,76px); line-height: .92; word-break: keep-all; }
-  .hero-copy p, .section-head > p, .section-head h2 { word-break: keep-all; }
+  h1 { font-size: clamp(50px,16vw,76px); line-height: .92; }
+  .hero-copy p { word-break: keep-all; }
   .word-cycle { margin-top: 40px; }
   .word-cycle-window { display: none; }
   .word-cycle::after { content: "Sensing · Networking · Robotics · Edge AI"; font-size: 13px; color: #c7d0da; }

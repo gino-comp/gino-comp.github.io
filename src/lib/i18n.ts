@@ -176,7 +176,7 @@ export const dictionaries = {
         {
           step: "PUBLISHED",
           title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
-          body: "The first published result of that research, in IEEE Access, 2023.",
+          body: "An early published result of that research, in IEEE Access, 2023.",
           href: "https://doi.org/10.1109/ACCESS.2023.3319404",
           linkLabel: "IEEE Access"
         },
@@ -441,9 +441,9 @@ export const dictionaries = {
     },
     doda: {
       kicker: "02 / DODA ARCHITECTURE",
-      title: "런타임에 오케스트레이션되는 데이터플로우 머신.",
+      title: "DODA는 런타임에 오케스트레이션되는 데이터플로우 머신입니다.",
       desc:
-        "DODA는 컴파일 시점에 정해진 순서가 아니라, 데이터가 준비된 연산부터 실행합니다. 새로운 워크로드를 위해 실리콘을 다시 만들지 않고 파이프라인을 재구성할 수 있습니다.",
+        "컴파일 시점에 정해진 순서가 아니라, 데이터가 준비된 연산부터 실행합니다. 새로운 워크로드를 위해 실리콘을 다시 만들지 않고 파이프라인을 재구성할 수 있습니다.",
       acronym: {
         kicker: "DODA STANDS FOR",
         expansion: [
@@ -468,7 +468,7 @@ export const dictionaries = {
         {
           step: "PUBLISHED",
           title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
-          body: "해당 연구의 첫 공개 성과로, 2023년 IEEE Access에 게재되었습니다.",
+          body: "해당 연구의 초기 공개 성과로, 2023년 IEEE Access에 게재되었습니다.",
           href: "https://doi.org/10.1109/ACCESS.2023.3319404",
           linkLabel: "IEEE Access"
         },
