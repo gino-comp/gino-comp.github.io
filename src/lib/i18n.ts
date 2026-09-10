@@ -149,38 +149,53 @@ export const dictionaries = {
     },
     doda: {
       kicker: "02 / DODA ARCHITECTURE",
-      title: "Efficiency and programmability in one architecture.",
+      title: "A dataflow machine, orchestrated at runtime.",
       desc:
-        "DODA extends RiDM’s dynamic dataflow research toward a runtime-programmable architecture for near-sensor processing.",
-      fullName: "DYNAMICALLY ORCHESTRATED DATAFLOW ARCHITECTURE",
-      body:
-        "Designed to execute work as data becomes available, reduce dependence on rigid static scheduling and support changing sensing workloads.",
-      priorities: [
+        "DODA runs an operation when its data is ready, rather than following a schedule fixed when the program was compiled. The pipeline can be rebuilt for a new workload without new silicon.",
+      acronym: {
+        kicker: "DODA STANDS FOR",
+        expansion: [
+          ["D", "ynamically"],
+          ["O", "rchestrated"],
+          ["D", "ataflow"],
+          ["A", "rchitecture"]
+        ],
+        note:
+          "Orchestration happens as data arrives, not ahead of time. That is the difference between a dataflow machine and a fixed pipeline."
+      },
+      lineageKicker: "LINEAGE",
+      lineageTitle: "From a PhD thesis to filed IP.",
+      lineage: [
         {
-          n: "01",
-          title: "Efficiency",
-          body:
-            "Near-sensor processing is intended to reduce unnecessary data movement and host-side processing overhead."
+          step: "RESEARCH",
+          title: "Toward General-Purpose Dynamic Dataflow Processing",
+          body: "Jinho Lee’s PhD research at NUS, pursuing a general-purpose architecture that is both fast and efficient.",
+          href: "https://scholarbank.nus.edu.sg/entities/publication/5a4c1379-bfae-40b1-a98a-e2ede9c855aa",
+          linkLabel: "NUS ScholarBank"
         },
         {
-          n: "02",
-          title: "Runtime Programmability",
-          body:
-            "A programmable execution model is designed for workloads that change faster than fixed-function silicon."
+          step: "PUBLISHED",
+          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
+          body: "The first published result of that research, in IEEE Access, 2023.",
+          href: "https://doi.org/10.1109/ACCESS.2023.3319404",
+          linkLabel: "IEEE Access"
         },
         {
-          n: "03",
-          title: "Developer Usability",
-          body:
-            "RiDM’s R&D roadmap includes tooling intended to lower the barrier to programming the architecture."
+          step: "FILED",
+          title: "Three PCT patent families",
+          body: "Covering the core architecture, its interconnect, and runtime reconfiguration.",
+          href: null,
+          linkLabel: null
         }
       ],
-      proof: [
-        ["NUS", "Research-origin spin-off"],
-        ["3", "PCT patent families"],
-        ["3", "Selected research works"],
-        ["FPGA → Silicon", "Commercialization path"]
-      ]
+      simulator: {
+        kicker: "TRY IT",
+        title: "Run a program on DODA.",
+        body:
+          "doda_simulation is a Verilator-based simulator of the architecture. A small compiler captures a lambda from your code and runs it on DODA, and because the machine executes dataflow graphs you can hand it one directly. A few example graphs are included.",
+        href: "https://github.com/gino-comp/doda_simulation",
+        cta: "doda_simulation on GitHub"
+      }
     },
     applicationsCopy: {
       kicker: "03 / APPLICATIONS",
@@ -426,35 +441,53 @@ export const dictionaries = {
     },
     doda: {
       kicker: "02 / DODA ARCHITECTURE",
-      title: "효율성과 프로그래머빌리티를 하나의 아키텍처로.",
+      title: "런타임에 오케스트레이션되는 데이터플로우 머신.",
       desc:
-        "DODA는 RiDM의 Dynamic Dataflow 연구를 Near-Sensor Processing으로 확장한 Runtime Programmable Architecture입니다.",
-      fullName: "DYNAMICALLY ORCHESTRATED DATAFLOW ARCHITECTURE",
-      body:
-        "데이터가 준비되는 시점에 연산을 실행해 정적 스케줄링 의존도를 낮추고, 변화하는 센싱 워크로드에 대응합니다.",
-      priorities: [
+        "DODA는 컴파일 시점에 정해진 순서가 아니라, 데이터가 준비된 연산부터 실행합니다. 새로운 워크로드를 위해 실리콘을 다시 만들지 않고 파이프라인을 재구성할 수 있습니다.",
+      acronym: {
+        kicker: "DODA STANDS FOR",
+        expansion: [
+          ["D", "ynamically"],
+          ["O", "rchestrated"],
+          ["D", "ataflow"],
+          ["A", "rchitecture"]
+        ],
+        note:
+          "오케스트레이션이 사전에 정해지지 않고 데이터가 도착하는 대로 이루어집니다. 고정된 파이프라인과 데이터플로우 머신의 차이가 바로 이 지점입니다."
+      },
+      lineageKicker: "LINEAGE",
+      lineageTitle: "박사 연구에서 특허까지.",
+      lineage: [
         {
-          n: "01",
-          title: "Efficiency",
-          body: "센서 가까이에서 필요한 연산을 수행해 불필요한 데이터 이동과 Host 처리 부담을 줄입니다."
+          step: "RESEARCH",
+          title: "Toward General-Purpose Dynamic Dataflow Processing",
+          body: "빠르면서도 효율적인 범용 아키텍처를 목표로 한 이진호 CEO의 NUS 박사 연구입니다.",
+          href: "https://scholarbank.nus.edu.sg/entities/publication/5a4c1379-bfae-40b1-a98a-e2ede9c855aa",
+          linkLabel: "NUS ScholarBank"
         },
         {
-          n: "02",
-          title: "Runtime Programmability",
-          body: "고정 기능 Silicon으로 대응하기 어려운 빠른 알고리즘·워크로드 변화에 맞춰 재구성할 수 있습니다."
+          step: "PUBLISHED",
+          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
+          body: "해당 연구의 첫 공개 성과로, 2023년 IEEE Access에 게재되었습니다.",
+          href: "https://doi.org/10.1109/ACCESS.2023.3319404",
+          linkLabel: "IEEE Access"
         },
         {
-          n: "03",
-          title: "Developer Usability",
-          body: "프로그래밍과 검증에 필요한 도구를 함께 개발해 전용 하드웨어 활용의 진입장벽을 낮추고 있습니다."
+          step: "FILED",
+          title: "PCT 특허 3건",
+          body: "핵심 아키텍처, 인터커넥트, 런타임 재구성을 포괄합니다.",
+          href: null,
+          linkLabel: null
         }
       ],
-      proof: [
-        ["NUS", "Research-origin Spin-off"],
-        ["3", "PCT 특허"],
-        ["3", "주요 연구 성과"],
-        ["FPGA → Silicon", "사업화 로드맵"]
-      ]
+      simulator: {
+        kicker: "TRY IT",
+        title: "직접 실행해 보세요.",
+        body:
+          "doda_simulation은 Verilator로 구현한 DODA 시뮬레이터입니다. 간단한 컴파일러가 코드의 lambda 함수를 캡처해 DODA에서 실행하며, 데이터플로우 그래프를 그대로 실행하는 머신인 만큼 그래프를 직접 입력할 수도 있습니다. 예제 그래프도 함께 제공됩니다.",
+        href: "https://github.com/gino-comp/doda_simulation",
+        cta: "GitHub에서 doda_simulation 보기"
+      }
     },
     applicationsCopy: {
       kicker: "03 / APPLICATIONS",

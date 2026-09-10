@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import type { Dictionary } from "@/lib/i18n";
+import type { AcronymPart, Dictionary } from "@/lib/i18n";
 
 type Conventional = {
   overline: string;
@@ -308,8 +308,19 @@ export function TechnologySection({ dict }: { dict: Dictionary }) {
   );
 }
 
+type Lineage = {
+  step: string;
+  title: string;
+  body: string;
+  href: string | null;
+  linkLabel: string | null;
+};
+
 export function DodaSection({ dict }: { dict: Dictionary }) {
   const d = dict.doda;
+  const expansion = d.acronym.expansion as readonly AcronymPart[];
+  const lineage = d.lineage as readonly Lineage[];
+
   return (
     <section className="section dark-section">
       <div className="container">
@@ -321,42 +332,55 @@ export function DodaSection({ dict }: { dict: Dictionary }) {
           <p>{d.desc}</p>
         </div>
 
-        <div className="doda-grid">
-          <article className="doda-feature">
-            <span>{d.fullName}</span>
-            <div className="doda-word">DODA</div>
-            <p>{d.body}</p>
-            <div className="doda-flow">
-              <div><strong>Sensor Data</strong><small>continuous input</small></div>
-              <i>→</i>
-              <div className="center"><strong>DODA Fabric</strong><small>filter · fuse · process</small></div>
-              <i>→</i>
-              <div><strong>Host Compute</strong><small>higher-value data</small></div>
-            </div>
-          </article>
-
-          <div className="principles">
-            {d.priorities.map((item) => (
-              <article key={item.n}>
-                <span>{item.n}</span>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </div>
-              </article>
+        {/* Same treatment as the RiDM acronym on the About page: the initials
+            carry the brand ramp, the rest of each word recedes. */}
+        <div className="acronym">
+          <span>{d.acronym.kicker}</span>
+          <p className="acronym-expansion">
+            {expansion.map(([initial, rest], index) => (
+              <Fragment key={initial + rest}>
+                {index > 0 ? " " : null}
+                <b>{initial}</b>
+                <span>{rest}</span>
+              </Fragment>
             ))}
-          </div>
+          </p>
+          <p className="acronym-note">{d.acronym.note}</p>
         </div>
 
-        <div className="proof-grid">
-          {/* Two entries share the value "3"; the label is what's unique. */}
-          {d.proof.map(([value, label]) => (
-            <div key={label}>
-              <strong>{value}</strong>
-              <span>{label}</span>
-            </div>
+        <div className="lineage-head">
+          <span>{d.lineageKicker}</span>
+          <h3>{d.lineageTitle}</h3>
+        </div>
+        <div className="lineage">
+          {lineage.map((item) => (
+            <article key={item.step}>
+              <b>{item.step}</b>
+              <h4>{item.title}</h4>
+              <p>{item.body}</p>
+              {item.href && item.linkLabel ? (
+                <a href={item.href} target="_blank" rel="noopener noreferrer">{item.linkLabel} ↗</a>
+              ) : (
+                <ul className="patent-codes">
+                  {dict.patents.map((patent) => (
+                    <li key={patent.code}><b>{patent.code}</b><span>{patent.title}</span></li>
+                  ))}
+                </ul>
+              )}
+            </article>
           ))}
         </div>
+
+        <aside className="simulator">
+          <div>
+            <span>{d.simulator.kicker}</span>
+            <h3>{d.simulator.title}</h3>
+            <p>{d.simulator.body}</p>
+          </div>
+          <a className="button primary" href={d.simulator.href} target="_blank" rel="noopener noreferrer">
+            {d.simulator.cta}
+          </a>
+        </aside>
       </div>
     </section>
   );
