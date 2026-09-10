@@ -307,7 +307,7 @@ export const dictionaries = {
         kicker: "ORIGIN",
         title: "It started in a computer architecture lab.",
         body: [
-          "RiDM began at the National University of Singapore, inside Trevor E. Carlson’s Computer Architecture Group. The founding team spent years there researching faster and more efficient computer architectures together, and the dynamic dataflow work that became DODA existed as published research and PCT filings long before it was a product.",
+          "RiDM began at the National University of Singapore, inside Dr. Trevor E. Carlson’s Computer Architecture Group. The founding team spent years there researching faster and more efficient computer architectures together, and the dynamic dataflow work that became DODA existed as published research and PCT filings long before it was a product.",
           "In 2023 the team graduated from NUS GRIP, the university’s flagship deep-tech startup incubation programme, now National GRIP. RiDM carries that architecture from research toward silicon with the same people who designed it."
         ]
       },
@@ -453,7 +453,7 @@ export const dictionaries = {
       kicker: "ABOUT US",
       title: "핵심 기술을 연구한 팀이 직접 만듭니다.",
       desc:
-        "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 사업 담당자가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
+        "RiDM은 NUS 컴퓨터 아키텍처 연구진과 NUS MBA 출신 CFO가 함께 설립한 NUS Spin-off입니다. 핵심 기술을 직접 연구한 공동창업자들이 아키텍처 구현과 사업화까지 이어가고 있습니다.",
       acronym: {
         kicker: "THE NAME",
         expansion: [
