@@ -9,7 +9,7 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ridm.tec
 
 const common = {
   nav: {
-    technology: "DODA",
+    technology: "Technology",
     applications: "Applications",
     research: "Research",
     about: "About",
@@ -220,7 +220,7 @@ export const dictionaries = {
         name: "Jinho Lee, PhD",
         school: "NUS School of Computing",
         portrait: "/team/jinho-lee.jpg",
-        links: [],
+        links: [{ type: "linkedin", href: "https://www.linkedin.com/in/jinho-lee-phd-200a1212a" }],
         details: [
           ["Research", "General-purpose dynamic dataflow processing and reconfigurable computer architecture."],
           ["IP", patentEntries],
@@ -476,7 +476,7 @@ export const dictionaries = {
         name: "이진호, PhD",
         school: "NUS School of Computing",
         portrait: "/team/jinho-lee.jpg",
-        links: [],
+        links: [{ type: "linkedin", href: "https://www.linkedin.com/in/jinho-lee-phd-200a1212a" }],
         details: [
           ["연구분야", "General-purpose Dynamic Dataflow Processing, Reconfigurable Computer Architecture"],
           ["IP", patentEntries],

@@ -7,7 +7,7 @@ import { makeMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? makeMetadata(locale, "technology", "DODA Architecture") : {};
+  return isLocale(locale) ? makeMetadata(locale, "technology", "Technology") : {};
 }
 
 export default async function TechnologyPage({ params }: { params: Promise<{ locale: string }> }) {

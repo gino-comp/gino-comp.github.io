@@ -15,7 +15,7 @@ export default function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="footer-links">
           <Link href={`/${locale}/about`}>About</Link>
-          <Link href={`/${locale}/technology`}>DODA</Link>
+          <Link href={`/${locale}/technology`}>Technology</Link>
           <Link href={`/${locale}/applications`}>Applications</Link>
           <Link href={`/${locale}/research`}>Research</Link>
         </div>
