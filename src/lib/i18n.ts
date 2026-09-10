@@ -103,7 +103,7 @@ export const dictionaries = {
       hostSub: "System-level workloads"
     },
     index: [
-      ["01", "DODA Architecture", "Dynamic data-driven execution"],
+      ["01", "DODA Architecture", "Dynamically orchestrated dataflow"],
       ["02", "FPGA Overlay", "R&D and early commercialization path"],
       ["03", "Silicon Roadmap", "From architecture IP to dedicated silicon"]
     ],
@@ -148,7 +148,7 @@ export const dictionaries = {
       title: "Efficiency and programmability in one architecture.",
       desc:
         "DODA extends RiDM’s dynamic dataflow research toward a runtime-programmable architecture for near-sensor processing.",
-      fullName: "DYNAMIC, ON-DEMAND DATAFLOW ARCHITECTURE",
+      fullName: "DYNAMICALLY ORCHESTRATED DATAFLOW ARCHITECTURE",
       body:
         "Designed to execute work as data becomes available, reduce dependence on rigid static scheduling and support changing sensing workloads.",
       priorities: [
@@ -376,7 +376,7 @@ export const dictionaries = {
       hostSub: "상위 시스템 연산"
     },
     index: [
-      ["01", "DODA Architecture", "Dynamic Data-Driven Execution"],
+      ["01", "DODA Architecture", "Dynamically Orchestrated Dataflow"],
       ["02", "FPGA Overlay", "초기 검증 및 사업화 경로"],
       ["03", "Silicon Roadmap", "Architecture IP에서 전용 Silicon으로"]
     ],
@@ -421,7 +421,7 @@ export const dictionaries = {
       title: "효율성과 프로그래머빌리티를 하나의 아키텍처로.",
       desc:
         "DODA는 RiDM의 Dynamic Dataflow 연구를 Near-Sensor Processing으로 확장한 Runtime Programmable Architecture입니다.",
-      fullName: "DYNAMIC, ON-DEMAND DATAFLOW ARCHITECTURE",
+      fullName: "DYNAMICALLY ORCHESTRATED DATAFLOW ARCHITECTURE",
       body:
         "데이터가 준비되는 시점에 연산을 실행해 정적 스케줄링 의존도를 낮추고, 변화하는 센싱 워크로드에 대응합니다.",
       priorities: [
