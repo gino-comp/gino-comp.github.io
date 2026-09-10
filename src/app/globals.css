@@ -114,51 +114,57 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .section-head h2 { margin: 0; font-size: clamp(36px,3.6vw,54px); line-height: 1.06; letter-spacing: -.045em; max-width: 720px; }
 .section-head > p { color: #96a1b0; max-width: 570px; font-size: 16px; line-height: 1.72; margin: 0; align-self: end; }
 
-.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+/* Conventional flow first, RiDM approach beneath it, so the two paths can be
+   read against each other left to right. */
+.problem-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
 .problem-grid article { background: var(--bg2); padding: 34px; display: flex; flex-direction: column; }
 .problem-grid article.ridm-side { background: linear-gradient(160deg,#0b1219,#0c1017); }
 .problem-grid article > span { font-size: 11px; letter-spacing: .14em; color: var(--text-3); font-weight: 700; }
 .problem-grid article.ridm-side > span { color: var(--accent-text); }
-.problem-grid article h3 { font-size: 22px; letter-spacing: -.03em; line-height: 1.25; margin: 14px 0 0; max-width: 30ch; word-break: keep-all; }
+.problem-grid article h3 { font-size: 22px; letter-spacing: -.03em; line-height: 1.25; margin: 12px 0 0; max-width: 46ch; word-break: keep-all; }
 
-/* Vertical data path. The two panels use the same node and edge vocabulary so
-   the shapes can be compared directly; only the weight and colour differ. */
-.pipe { margin-top: 30px; display: flex; flex-direction: column; flex: 1; }
+/* Both rows use the same node and edge vocabulary, and the same fixed widths,
+   so the shorter RiDM path is legible as a shorter row rather than as the same
+   row with longer arrows. Scrolls rather than squeezing when space runs out. */
+.pipe-wrap { margin-top: 26px; }
+.pipe { display: flex; align-items: center; overflow-x: auto; padding-bottom: 4px; }
 .pipe-tag { font-size: 10px; letter-spacing: .14em; color: var(--text-3); font-weight: 700; }
 
-/* Stacked chips, plus two blank slivers implying the stack continues. */
-.sensor-stack { display: grid; gap: 5px; margin-top: 10px; }
-.sensor-stack span, .sensor-stack i { border: 1px solid var(--line); border-left: 2px solid #55636f; border-radius: 8px; background: #0c121a; padding: 9px 12px; font-size: 12px; color: #c2cbd6; }
-.sensor-stack i { height: 7px; padding: 0; opacity: .55; }
+.pipe-sensors { flex: none; width: 146px; }
+.sensor-stack { display: grid; gap: 5px; margin-top: 9px; }
+.sensor-stack span, .sensor-stack i { border: 1px solid var(--line); border-left: 2px solid #55636f; border-radius: 8px; background: #0c121a; padding: 8px 11px; font-size: 12px; color: #c2cbd6; }
+.sensor-stack i { height: 6px; padding: 0; opacity: .55; }
 .sensor-stack i + i { opacity: .28; }
 .ridm-side .sensor-stack span, .ridm-side .sensor-stack i { border-left-color: rgba(48,221,212,.5); }
-.pipe-sensors > small { display: block; margin-top: 9px; font-size: 11px; color: var(--text-3); }
+.pipe-sensors > small { display: block; margin-top: 8px; font-size: 11px; color: var(--text-3); }
 
-/* Connector: a line with an arrowhead, its label set beside the shaft. */
-.pipe-edge { position: relative; height: 52px; }
-.pipe-edge::before { content: ""; position: absolute; left: 26px; top: 0; bottom: 7px; width: 1.5px; background: #3d4855; }
-.pipe-edge::after { content: ""; position: absolute; left: 26px; bottom: 0; transform: translateX(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #3d4855; }
-.pipe-edge span { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text-3); }
-/* Heavy = raw, full-rate traffic. Amber on the conventional side reads as cost. */
-.pipe-edge.is-heavy::before { width: 4px; left: 25px; background: #c98a45; }
-.pipe-edge.is-heavy::after { border-top-color: #c98a45; border-left-width: 7px; border-right-width: 7px; border-top-width: 9px; }
+.pipe-step { flex: none; display: flex; align-items: center; }
+/* Horizontal connector, label centred above the shaft. */
+.pipe-edge { position: relative; flex: none; width: 104px; height: 34px; }
+.pipe-edge::before { content: ""; position: absolute; left: 4px; right: 9px; top: 50%; transform: translateY(-50%); height: 1.5px; background: #3d4855; }
+.pipe-edge::after { content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%); border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid #3d4855; }
+.pipe-edge span { position: absolute; left: 0; right: 0; bottom: calc(50% + 9px); text-align: center; font-size: 10px; line-height: 1.35; color: var(--text-3); }
+/* Heavy = raw traffic at full rate. Amber is the only warm colour on the site,
+   so it reads as cost without needing a legend. */
+.pipe-edge.is-heavy::before { height: 5px; background: #c98a45; }
+.pipe-edge.is-heavy::after { border-left-color: #c98a45; border-top-width: 8px; border-bottom-width: 8px; border-left-width: 11px; }
 .pipe-edge.is-heavy span { color: #d3a06a; }
 .ridm-side .pipe-edge.is-heavy::before { background: var(--cyan); }
-.ridm-side .pipe-edge.is-heavy::after { border-top-color: var(--cyan); }
+.ridm-side .pipe-edge.is-heavy::after { border-left-color: var(--cyan); }
 .ridm-side .pipe-edge.is-heavy span { color: var(--accent-text); }
 
-.pipe-node { border: 1px solid var(--line); border-radius: 12px; background: #0c121a; padding: 13px 16px; display: grid; gap: 3px; }
-.pipe-node b { font-size: 14px; font-weight: 650; }
-.pipe-node small { font-size: 11px; color: var(--text-3); line-height: 1.45; word-break: keep-all; }
-/* Memory is a buffer, not a processing step: dashed, and visually recessed. */
+.pipe-node { flex: none; width: 152px; min-height: 66px; border: 1px solid var(--line); border-radius: 12px; background: #0c121a; padding: 12px 14px; display: grid; align-content: center; gap: 3px; }
+.pipe-node b { font-size: 13px; font-weight: 650; letter-spacing: -.01em; }
+.pipe-node small { font-size: 10px; color: var(--text-3); line-height: 1.45; word-break: keep-all; }
+/* Memory is a buffer you pay to cross, not a processing step. */
 .pipe-node.is-memory { border-style: dashed; background: rgba(255,255,255,.018); }
 .pipe-node.is-memory b { color: #b9c3cf; }
 .pipe-node.is-doda { border-color: rgba(48,221,212,.42); background: linear-gradient(150deg,rgba(48,221,212,.09),rgba(76,120,255,.05)); }
 .pipe-node.is-doda b { color: #fff; }
 
-.pipe-costs { list-style: none; margin: 26px 0 0; margin-top: auto; padding: 20px 0 0; border-top: 1px solid var(--line); display: grid; gap: 8px; }
-.pipe-costs li { position: relative; padding-left: 18px; font-size: 12px; color: #9aa5b2; line-height: 1.5; word-break: keep-all; }
-.pipe-costs li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 2px; background: #c98a45; }
+.pipe-costs { list-style: none; margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 30px; }
+.pipe-costs li { position: relative; padding-left: 16px; font-size: 12px; color: #9aa5b2; line-height: 1.5; word-break: keep-all; }
+.pipe-costs li::before { content: ""; position: absolute; left: 0; top: 6px; width: 6px; height: 6px; border-radius: 2px; background: #c98a45; }
 .ridm-side .pipe-costs li::before { background: var(--cyan); }
 
 .diagram-note { margin: 16px 0 0; font-size: 11px; letter-spacing: .06em; color: var(--text-3); text-align: right; }
@@ -349,6 +355,22 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .footer-links { flex-wrap: wrap; }
 }
 
+@media (max-width: 900px) {
+  .pipe { flex-direction: column; align-items: stretch; overflow-x: visible; }
+  .pipe-sensors { width: auto; }
+  .pipe-step { display: block; }
+  .pipe-edge { width: auto; height: 46px; }
+  .pipe-edge::before { left: 26px; right: auto; top: 0; bottom: 7px; width: 1.5px; height: auto; transform: none; background: #3d4855; }
+  .pipe-edge::after { left: 26px; right: auto; bottom: 0; top: auto; transform: translateX(-50%); border: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #3d4855; }
+  .pipe-edge span { left: 44px; bottom: auto; top: 50%; transform: translateY(-50%); width: auto; text-align: left; white-space: nowrap; }
+  .pipe-edge.is-heavy::before { width: 4px; left: 25px; height: auto; background: #c98a45; }
+  .pipe-edge.is-heavy::after { border: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 9px solid #c98a45; }
+  .ridm-side .pipe-edge.is-heavy::before { background: var(--cyan); }
+  .ridm-side .pipe-edge.is-heavy::after { border-top-color: var(--cyan); }
+  .pipe-node { width: auto; min-height: 0; }
+  .pipe-costs { display: grid; gap: 8px; }
+}
+
 @media (max-width: 820px) {
   .container { width: min(var(--max), calc(100% - 32px)); }
   .desktop-nav, .contact-link, .locale-link { display: none; }
@@ -377,7 +399,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .section { padding: 86px 0; }
   .section-head { margin-bottom: 42px; }
   .section-head h2 { font-size: 42px; }
-  .problem-grid, .applications-grid, .ip-grid, .team-columns, .explore-grid { grid-template-columns: 1fr; }
+  .applications-grid, .ip-grid, .team-columns, .explore-grid { grid-template-columns: 1fr; }
   .team-columns > * { grid-column: 1 !important; grid-row: auto !important; }
   .explore-card { min-height: 0; padding: 26px; }
   .problem-grid article { padding: 26px; }

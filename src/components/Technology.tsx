@@ -14,30 +14,34 @@ type Side = {
 // that repetition is the point the diagram is making.
 function Pipeline({ side, sensorsLabel }: { side: Side; sensorsLabel: string }) {
   return (
-    <div className="pipe">
-      <div className="pipe-sensors">
-        <span className="pipe-tag">{sensorsLabel}</span>
-        <div className="sensor-stack">
-          {side.sensors.map((sensor) => (
-            <span key={sensor}>{sensor}</span>
-          ))}
-          <i aria-hidden="true" />
-          <i aria-hidden="true" />
+    <div className="pipe-wrap">
+      {/* Node and edge widths are fixed, so the RiDM row ends short of the
+          conventional one. That length difference is the comparison. */}
+      <div className="pipe">
+        <div className="pipe-sensors">
+          <span className="pipe-tag">{sensorsLabel}</span>
+          <div className="sensor-stack">
+            {side.sensors.map((sensor) => (
+              <span key={sensor}>{sensor}</span>
+            ))}
+            <i aria-hidden="true" />
+            <i aria-hidden="true" />
+          </div>
+          <small>{side.sensorsNote}</small>
         </div>
-        <small>{side.sensorsNote}</small>
-      </div>
 
-      {side.stages.map((stage, index) => (
-        <div key={stage.name + index} className="pipe-step">
-          <div className={`pipe-edge${stage.heavy ? " is-heavy" : ""}`}>
-            <span>{stage.edge}</span>
+        {side.stages.map((stage, index) => (
+          <div key={stage.name + index} className="pipe-step">
+            <div className={`pipe-edge${stage.heavy ? " is-heavy" : ""}`}>
+              <span>{stage.edge}</span>
+            </div>
+            <div className={`pipe-node is-${stage.kind}`}>
+              <b>{stage.name}</b>
+              <small>{stage.note}</small>
+            </div>
           </div>
-          <div className={`pipe-node is-${stage.kind}`}>
-            <b>{stage.name}</b>
-            <small>{stage.note}</small>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       <ul className="pipe-costs">
         {side.costs.map((cost) => (
