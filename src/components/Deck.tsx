@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import { ConventionalFlow, RidmFlow, type Conventional, type Ridm } from "@/components/DataFlow";
-import DeckToolbar from "@/components/DeckToolbar";
+import DeckShell from "@/components/DeckShell";
 import { DataMovementStats, DataMovementSvg, type Why } from "@/components/DataMovement";
 import { formatDate, newestFirst } from "@/components/News";
 import {
@@ -22,11 +22,15 @@ import {
 
 type Lineage = { step: string; title: string; body: string; href: string | null; linkLabel: string | null };
 
-function Slide({ kicker, className, children }: { kicker?: string; className?: string; children: ReactNode }) {
+// `.slide-body` is what auto-fit measures and scales; the section is the
+// fixed 16:9 page around it.
+function Slide({ id, kicker, className, fitMax, children }: { id: string; kicker?: string; className?: string; fitMax?: number; children: ReactNode }) {
   return (
-    <section className={`slide${className ? ` ${className}` : ""}`}>
-      {kicker ? <div className="slide-kicker">{kicker}</div> : null}
-      {children}
+    <section className={`slide${className ? ` ${className}` : ""}`} data-slide={id} data-fit-max={fitMax}>
+      <div className="slide-body">
+        {kicker ? <div className="slide-kicker">{kicker}</div> : null}
+        {children}
+      </div>
     </section>
   );
 }
@@ -45,8 +49,8 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
   const newsCopy = (key: string) => dict.newsCopy.items[key as keyof typeof dict.newsCopy.items] as NewsCopy;
   const leadResearch = lead.details[0]?.[1];
 
-  const slides: ReactNode[] = [
-    <Slide key="title" className="slide-title">
+  const slides: { id: string; node: ReactNode }[] = [
+    { id: "title", node: <Slide key="title" id="title" className="slide-title">
       <div className="slide-kicker">{dict.hero.label}</div>
       <h1>{dict.hero.lead} <span>{dict.hero.accent}</span></h1>
       <p className="slide-lead">{dict.hero.body}</p>
@@ -55,30 +59,30 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
         <img src="/brand/ridm-logo.png" alt="" />
         <div><strong>RiDM Technology</strong><small>{dict.brandSub}</small></div>
       </div>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="why" kicker={why.homeKicker}>
+    { id: "why", node: <Slide key="why" id="why" kicker={why.homeKicker}>
       <h2>{why.title}</h2>
       <p className="slide-lead slide-lead-tight">{why.desc}</p>
       <div className="slide-figure"><DataMovementSvg why={why} /></div>
       <DataMovementStats why={why} />
-    </Slide>,
+    </Slide> },
 
-    <Slide key="problem" kicker={t.kicker}>
+    { id: "problem", node: <Slide key="problem" id="problem" kicker={t.kicker}>
       <h2>{t.title}</h2>
       <p className="slide-sub">{conventional.title}</p>
       <div className="slide-figure"><ConventionalFlow side={conventional} sensorsLabel={t.sensorsLabel} /></div>
       <ul className="slide-costs">{conventional.costs.map((cost) => <li key={cost}>{cost}</li>)}</ul>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="approach" kicker={ridm.overline} className="is-ridm">
+    { id: "approach", node: <Slide key="approach" id="approach" kicker={ridm.overline} className="is-ridm">
       <h2>{ridm.title}</h2>
       <p className="slide-lead slide-lead-tight">{dict.hero.stageLead}</p>
       <div className="slide-figure"><RidmFlow side={ridm} sensorsLabel={t.sensorsLabel} /></div>
       <ul className="slide-costs">{ridm.costs.map((cost) => <li key={cost}>{cost}</li>)}</ul>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="builtfor" kicker={dict.hero.builtFor}>
+    { id: "builtfor", node: <Slide key="builtfor" id="builtfor" kicker={dict.hero.builtFor}>
       <h2>{dict.applicationsCopy.title}</h2>
       <div className="slide-grid cols-5">
         {dict.applications.map((area) => (
@@ -89,9 +93,9 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
           </div>
         ))}
       </div>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="doda" kicker={dict.doda.kicker}>
+    { id: "doda", node: <Slide key="doda" id="doda" kicker={dict.doda.kicker}>
       <h2>{dict.doda.title}</h2>
       <p className="slide-lead">{dict.doda.desc}</p>
       <div className="acronym">
@@ -103,12 +107,12 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
         </p>
         <p className="acronym-note">{dict.doda.acronym.note}</p>
       </div>
-    </Slide>,
+    </Slide> },
 
     // Lineage and the simulator share a slide: research, filed IP and "try it
     // yourself" read as one three-part story, and each alone left the slide
     // mostly empty below a two- or one-column grid.
-    <Slide key="lineage" kicker={dict.doda.lineageKicker}>
+    { id: "lineage", node: <Slide key="lineage" id="lineage" kicker={dict.doda.lineageKicker}>
       <h2>{dict.doda.lineageTitle}</h2>
       <div className="slide-grid cols-3">
         {lineage.map((item) => (
@@ -132,9 +136,9 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
           <div className="link">{dict.doda.simulator.href}</div>
         </div>
       </div>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="team" kicker={dict.about.teamKicker}>
+    { id: "team", node: <Slide key="team" id="team" kicker={dict.about.teamKicker} fitMax={1.3}>
       <h2>{dict.about.teamTitle}</h2>
       <div className="slide-team">
         <div className="slide-founder">
@@ -163,9 +167,9 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
           ))}
         </div>
       </div>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="milestones" kicker={dict.about.milestonesKicker}>
+    { id: "milestones", node: <Slide key="milestones" id="milestones" kicker={dict.about.milestonesKicker}>
       <h2>{dict.about.milestonesTitle}</h2>
       <div className="slide-grid cols-3">
         {milestones.map((milestone) => (
@@ -184,9 +188,9 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
           </div>
         ))}
       </div>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="news" kicker={dict.newsCopy.kicker}>
+    { id: "news", node: <Slide key="news" id="news" kicker={dict.newsCopy.kicker}>
       <h2>{dict.newsCopy.title}</h2>
       <ul className="slide-news">
         {news.map((entry) => (
@@ -197,31 +201,30 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
           </li>
         ))}
       </ul>
-    </Slide>,
+    </Slide> },
 
-    <Slide key="contact" kicker={dict.contact.kicker} className="slide-contact">
+    { id: "contact", node: <Slide key="contact" id="contact" kicker={dict.contact.kicker} className="slide-contact">
       <h2>{dict.contact.title}</h2>
       <p className="slide-lead">{dict.contact.body}</p>
       <div className="slide-email">{dict.contact.email}</div>
       <div className="slide-url">{siteUrl}</div>
-    </Slide>
+    </Slide> }
   ];
 
+  const labels = dict.deck.slides as Record<string, string>;
   return (
-    <div className="deck-page">
-      <DeckToolbar
-        exportLabel={dict.deck.export}
-        backLabel={dict.deck.back}
-        backHref={`/${locale}/`}
-        hint={dict.deck.hint}
-      />
-      <div className="deck-stack">
-        {slides.map((slide, index) => (
-          <Fragment key={index}>
-            {slide}
-          </Fragment>
-        ))}
-      </div>
-    </div>
+    <DeckShell
+      slides={slides.map((s) => ({ ...s, label: labels[s.id] ?? s.id }))}
+      text={{
+        export: dict.deck.export,
+        back: dict.deck.back,
+        backHref: `/${locale}/`,
+        hint: dict.deck.hint,
+        include: dict.deck.include,
+        all: dict.deck.all,
+        none: dict.deck.none,
+        autofit: dict.deck.autofit
+      }}
+    />
   );
 }

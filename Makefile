@@ -7,6 +7,7 @@
 # make rebuild   clean then build, after renaming or deleting a route
 # make clean     drop .next/ and out/
 # make deploy    build, then push main (the workflow publishes)
+# make deck-audit  report how full each deck slide is (LOCALE=ko, ONLY=a,b,c)
 
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
@@ -22,7 +23,7 @@ SITE_URL ?= https://gino-comp.github.io
 BROWSER ?= $(shell command -v google-chrome || command -v google-chrome-stable \
 	|| command -v chromium || command -v xdg-open)
 
-.PHONY: help install check build rebuild preview dev clean deploy
+.PHONY: help install check build rebuild preview dev clean deploy deck-audit
 
 help:
 	@sed -n 's/^# \(make .*\)/  \1/p' $(MAKEFILE_LIST)
@@ -71,3 +72,9 @@ clean:
 
 deploy: build
 	git push origin main
+
+LOCALE ?= en
+
+# Per-slide fill before/after auto-fit, from a headless render of out/.
+deck-audit: build
+	@./scripts/deck-audit.sh $(LOCALE)

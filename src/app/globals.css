@@ -466,11 +466,22 @@ section[id], aside[id] { scroll-margin-top: 92px; }
    Sizes inside a slide are in cqw (container-query width units), so a slide
    lays out identically on screen and on a 13.333in printed page. */
 .deck-page { padding: 18px 0 72px; }
-.deck-toolbar { position: sticky; top: 74px; z-index: 50; width: min(1240px, calc(100% - 48px)); margin: 0 auto 18px; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(7,10,15,.86); backdrop-filter: blur(14px); }
+.deck-toolbar { position: sticky; top: 74px; z-index: 50; width: min(1240px, calc(100% - 48px)); margin: 0 auto 18px; display: grid; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(7,10,15,.86); backdrop-filter: blur(14px); }
+.deck-toolbar-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.deck-check { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-2); cursor: pointer; padding: 0 6px; }
+.deck-check input, .deck-chip input { accent-color: var(--cyan); width: 14px; height: 14px; margin: 0; cursor: pointer; }
+.deck-include { padding-top: 10px; border-top: 1px solid var(--line); gap: 6px; }
+.deck-include-label { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: var(--text-3); margin-right: 6px; }
+.deck-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 5px 10px 5px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--text-2); cursor: pointer; transition: color .15s ease, border-color .15s ease, background-color .15s ease; }
+.deck-chip[data-on="1"] { color: #fff; border-color: rgba(48,221,212,.34); background: rgba(48,221,212,.07); }
+.deck-mini { margin-left: 4px; padding: 5px 9px; border: 0; border-radius: 999px; background: transparent; color: var(--text-3); font: inherit; font-size: 12px; cursor: pointer; }
+.deck-mini:hover { color: #fff; }
 .deck-toolbar .button { cursor: pointer; }
 .deck-toolbar small { margin-left: auto; font-size: 12px; color: var(--text-3); }
 .deck-stack { display: grid; gap: 26px; width: min(1240px, calc(100% - 48px)); margin: 0 auto; }
-.slide { container-type: inline-size; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); padding: 4.2cqw 5cqw; display: flex; flex-direction: column; scroll-snap-align: start; scroll-margin-top: 150px; }
+.slide { container-type: inline-size; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); padding: 4.2cqw 5cqw; scroll-snap-align: start; scroll-margin-top: 150px; }
+/* The measured, scaled box; auto-fit sets its width, height and transform. */
+.slide-body { display: flex; flex-direction: column; width: 100%; height: 100%; transform-origin: 0 0; }
 .slide-kicker { font-size: .9cqw; letter-spacing: .14em; font-weight: 700; color: var(--text-3); margin-bottom: 1.2cqw; }
 .slide h1 { max-width: none; font-size: 6.2cqw; line-height: .98; margin: 0 0 2cqw; }
 .slide h2 { margin: 0; font-size: 3.2cqw; line-height: 1.08; letter-spacing: -.04em; max-width: 64cqw; word-break: keep-all; }
@@ -507,7 +518,7 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .slide .acronym > span { font-size: .9cqw; }
 .slide .acronym-expansion { font-size: 3.4cqw; margin-top: 1cqw; }
 .slide .acronym-note { font-size: 1.25cqw; margin-top: 1.4cqw; max-width: 60cqw; }
-.slide-team { margin-top: 2cqw; display: grid; grid-template-columns: 36cqw 1fr; gap: 3cqw; align-items: start; }
+.slide-team { margin-top: 2cqw; display: grid; grid-template-columns: 2fr 3fr; gap: 3cqw; align-items: start; }
 .slide-founder { display: grid; grid-template-columns: 11cqw 1fr; gap: 1.6cqw; align-items: center; border: 1px solid var(--line); border-radius: 1.4cqw; background: #0c121a; padding: 1.4cqw; }
 .slide-founder img { width: 11cqw; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1cqw; display: block; }
 .slide-founder span { font-size: .8cqw; letter-spacing: .12em; color: var(--accent-text); font-weight: 700; text-transform: uppercase; }
@@ -533,7 +544,7 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .button.outline-dark:hover { border-color: #0a0e13; }
 
 @media (max-width: 820px) {
-  .deck-toolbar { top: 66px; flex-wrap: wrap; }
+  .deck-toolbar { top: 66px; }
   .deck-toolbar small { margin-left: 0; flex-basis: 100%; }
   .deck-stack, .deck-toolbar { width: calc(100% - 24px); }
   .contact-actions { align-items: flex-start; justify-self: start; }
@@ -545,8 +556,9 @@ section[id], aside[id] { scroll-margin-top: 92px; }
   body:has(.deck-page) .site-header, body:has(.deck-page) .site-footer, body:has(.deck-page) .deck-toolbar { display: none !important; }
   .deck-page { padding: 0; }
   .deck-stack { display: block; width: 13.333in; margin: 0; }
-  .slide { width: 13.333in; height: 7.5in; aspect-ratio: auto; margin: 0; border: 0; border-radius: 0; break-after: page; page-break-after: always; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .deck-item { break-after: page; page-break-after: always; }
+  .deck-item:last-child { break-after: auto; page-break-after: auto; }
+  .slide { width: 13.333in; height: 7.5in; aspect-ratio: auto; margin: 0; border: 0; border-radius: 0; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .flow-dots, .dm-trucks { display: none; }
   .dm-trucks-static { display: block; }
   /* Chrome's print rasteriser leaks the box of background-clip:text as a faint

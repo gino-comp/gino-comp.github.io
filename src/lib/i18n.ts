@@ -461,7 +461,24 @@ export const dictionaries = {
       open: "View as slides",
       export: "Export to PDF",
       back: "Back to site",
-      hint: "Each slide prints as one 16:9 page. Arrow keys move between slides."
+      hint: "Each slide prints as one 16:9 page. Arrow keys move between slides.",
+      include: "Include",
+      all: "All",
+      none: "None",
+      autofit: "Auto-fit to page",
+      slides: {
+        title: "Title",
+        why: "Why it matters",
+        problem: "Conventional flow",
+        approach: "RiDM approach",
+        builtfor: "Built for",
+        doda: "DODA",
+        lineage: "Lineage & simulator",
+        team: "Team",
+        milestones: "Milestones",
+        news: "What’s new",
+        contact: "Contact"
+      }
     }
   },
   ko: {
@@ -812,7 +829,24 @@ export const dictionaries = {
       open: "슬라이드로 보기",
       export: "PDF로 내보내기",
       back: "사이트로 돌아가기",
-      hint: "각 슬라이드가 16:9 한 페이지로 인쇄됩니다. 화살표 키로 이동할 수 있습니다."
+      hint: "각 슬라이드가 16:9 한 페이지로 인쇄됩니다. 화살표 키로 이동할 수 있습니다.",
+      include: "포함",
+      all: "전체",
+      none: "없음",
+      autofit: "페이지에 맞춤",
+      slides: {
+        title: "표지",
+        why: "왜 중요한가",
+        problem: "기존 방식",
+        approach: "RiDM 방식",
+        builtfor: "적용 분야",
+        doda: "DODA",
+        lineage: "연구 계보 · 시뮬레이터",
+        team: "팀",
+        milestones: "마일스톤",
+        news: "새 소식",
+        contact: "연락처"
+      }
     }
   }
 } as const;
