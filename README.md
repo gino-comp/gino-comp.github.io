@@ -17,7 +17,8 @@ Production-oriented Next.js implementation of the RiDM Technology website concep
 
 ```text
 /
-└── redirect → /ko
+└── English by default; Korean if the browser's first
+    language preference is Korean (public/index.html)
 
 /ko                     /en
 /ko/technology          /en/technology
@@ -80,8 +81,9 @@ One-time repository setup:
 GitHub Pages serves files only — no Node server. The following therefore apply
 and must not be reintroduced:
 
-- No `middleware.ts`. The `/` → `/ko` redirect is a static `public/index.html`
-  meta-refresh instead.
+- No `middleware.ts`. Locale routing for `/` happens in `public/index.html`:
+  a script picks `/en/` or `/ko/` from the browser's first language preference,
+  with a meta-refresh to `/en/` as the no-JavaScript fallback.
 - No request-time APIs (`headers()`, `cookies()`, dynamic `searchParams`).
   The root layout lives at `src/app/[locale]/layout.tsx` and takes `lang` from
   the route param.

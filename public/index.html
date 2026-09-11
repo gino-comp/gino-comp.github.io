@@ -1,15 +1,34 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>RiDM Technology</title>
-    <link rel="canonical" href="https://gino-comp.github.io/ko/" />
-    <meta http-equiv="refresh" content="0; url=/ko/" />
+    <meta name="robots" content="noindex" />
+
+    <!--
+      This file is the site root. GitHub Pages serves files only, so locale
+      routing happens here rather than in a server redirect.
+
+      English is the default. A visitor whose browser's first language
+      preference is Korean is sent to /ko/ instead. The script runs during
+      parsing, so it wins over the meta refresh below; the refresh is the
+      fallback for anyone without JavaScript, and it goes to the default.
+    -->
     <script>
-      window.location.replace("/ko/");
+      (function () {
+        var langs = navigator.languages;
+        var first = (langs && langs.length ? langs[0] : navigator.language) || "";
+        window.location.replace(/^ko\b/i.test(first) ? "/ko/" : "/en/");
+      })();
     </script>
+    <meta http-equiv="refresh" content="0; url=/en/" />
+
+    <!-- Tell crawlers both locales exist and which one is the fallback. -->
+    <link rel="alternate" hreflang="en" href="https://gino-comp.github.io/en/" />
+    <link rel="alternate" hreflang="ko" href="https://gino-comp.github.io/ko/" />
+    <link rel="alternate" hreflang="x-default" href="https://gino-comp.github.io/en/" />
   </head>
   <body>
-    <p><a href="/ko/">RiDM Technology</a></p>
+    <p><a href="/en/">RiDM Technology</a> · <a href="/ko/">한국어</a></p>
   </body>
 </html>
