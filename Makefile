@@ -7,7 +7,7 @@
 # make rebuild   clean then build, after renaming or deleting a route
 # make clean     drop .next/ and out/
 # make deploy    build, then push main (the workflow publishes)
-# make deck-audit  report how full each deck slide is (LOCALE=ko, ONLY=a,b,c)
+# make deck-audit  report how full each deck slide is (LOCALE=ko, SLIDES=a,b,c)
 
 SHELL := /bin/bash
 .DEFAULT_GOAL := help

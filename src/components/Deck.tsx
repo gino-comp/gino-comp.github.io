@@ -220,7 +220,9 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
         include: dict.deck.include,
         all: dict.deck.all,
         none: dict.deck.none,
-        autofit: dict.deck.autofit
+        autofit: dict.deck.autofit,
+        reorderHint: dict.deck.reorderHint,
+        reset: dict.deck.reset
       }}
     />
   );

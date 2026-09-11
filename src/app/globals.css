@@ -472,7 +472,15 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .deck-check input, .deck-chip input { accent-color: var(--cyan); width: 14px; height: 14px; margin: 0; cursor: pointer; }
 .deck-include { padding-top: 10px; border-top: 1px solid var(--line); gap: 6px; }
 .deck-include-label { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: var(--text-3); margin-right: 6px; }
-.deck-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 5px 10px 5px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--text-2); cursor: pointer; transition: color .15s ease, border-color .15s ease, background-color .15s ease; }
+.deck-chip { position: relative; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 5px 10px 5px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--text-2); cursor: grab; user-select: none; transition: color .15s ease, border-color .15s ease, background-color .15s ease, opacity .15s ease; }
+.deck-chip.is-dragging { opacity: .35; }
+/* insertion marker while dragging */
+.deck-chip[data-drop]::before { content: ""; position: absolute; top: 3px; bottom: 3px; width: 2px; border-radius: 2px; background: var(--cyan); }
+.deck-chip[data-drop="before"]::before { left: -5px; }
+.deck-chip[data-drop="after"]::before { right: -5px; }
+.deck-grip { font-size: 10px; letter-spacing: -3px; color: var(--text-3); margin-right: 1px; }
+.deck-reset { color: var(--accent-text); }
+.deck-reorder-hint { flex-basis: 100%; font-size: 11px; color: var(--text-3); margin-top: 2px; }
 .deck-chip[data-on="1"] { color: #fff; border-color: rgba(48,221,212,.34); background: rgba(48,221,212,.07); }
 .deck-mini { margin-left: 4px; padding: 5px 9px; border: 0; border-radius: 999px; background: transparent; color: var(--text-3); font: inherit; font-size: 12px; cursor: pointer; }
 .deck-mini:hover { color: #fff; }

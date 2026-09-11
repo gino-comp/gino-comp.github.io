@@ -4,7 +4,7 @@
 #
 #   make deck-audit                 # English, every slide
 #   make deck-audit LOCALE=ko       # Korean
-#   ONLY=title,why,contact make deck-audit
+#   SLIDES=contact,title,why make deck-audit   # this subset, in this order
 set -euo pipefail
 LOCALE="${1:-en}"
 PORT="${PORT:-8455}"
@@ -14,6 +14,7 @@ srv=$!
 trap 'kill $srv 2>/dev/null' EXIT
 until curl -sfo /dev/null "http://localhost:$PORT/"; do sleep 0.2; done
 url="http://localhost:$PORT/$LOCALE/deck/"
-[ -n "${ONLY:-}" ] && url="$url?only=$ONLY"
+sel="${SLIDES:-${ONLY:-}}"
+[ -n "$sel" ] && url="$url?slides=$sel"
 google-chrome --headless --disable-gpu --no-sandbox --window-size=1440,1000 --virtual-time-budget=6000 --dump-dom "$url" 2>/dev/null \
 | python3 "$(dirname "$0")/deck-audit.py"

@@ -466,6 +466,8 @@ export const dictionaries = {
       all: "All",
       none: "None",
       autofit: "Auto-fit to page",
+      reorderHint: "Drag a chip to change the order. Alt + ← / → moves the focused one.",
+      reset: "Reset order",
       slides: {
         title: "Title",
         why: "Why it matters",
@@ -835,6 +837,8 @@ export const dictionaries = {
       all: "전체",
       none: "없음",
       autofit: "페이지에 맞춤",
+      reorderHint: "칩을 끌어 순서를 바꿀 수 있습니다. 포커스된 칩은 Alt + ← / → 로도 옮길 수 있습니다.",
+      reset: "순서 초기화",
       slides: {
         title: "표지",
         why: "왜 중요한가",

@@ -145,8 +145,10 @@ browser's print-to-PDF against the deck's print stylesheet: one slide per page,
 dark theme preserved (`print-color-adjust: exact`). Reached from the Contact
 page; unlinked elsewhere, absent from the sitemap and `noindex`.
 
-The toolbar has a checkbox per slide; the selection is kept in the URL as
-`?only=title,why,contact`, so a subset of the deck is a link. **Auto-fit** scales
+The toolbar has a chip per slide: tick to include, drag to reorder (or focus
+a chip and press Alt + ← / →). The arrangement is kept in the URL as
+`?slides=contact,title,why` — the slides that are in, in that order — so any
+version of the deck is a link. **Auto-fit** scales
 each slide's content to fill the page — up when it is sparse, down when it would
 overflow — and can be switched off in the toolbar. `make deck-audit` renders the
 deck and reports, per slide, how full it was before and after fitting.
