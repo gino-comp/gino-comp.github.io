@@ -31,7 +31,7 @@ const RAW = "#c98a45";
 const REDUCED = "#7f8b99";
 
 const SENSOR_Y = [24, 68, 112, 156];
-const MEM = { x: 320, y: 90, w: 180, h: 100 };
+const MEM = { x: 310, y: 90, w: 205, h: 100 };
 const CPU_Y = 60;
 const GPU_Y = 208;
 
@@ -124,8 +124,8 @@ export function ConventionalFlow({ side, sensorsLabel }: { side: Conventional; s
       <use href="#cvGpu" className="fl-path" markerEnd="url(#cvArrow)" />
 
       <text x="168" y="206" className="fl-edge is-raw">{side.edges.ingest}</text>
-      <text x="528" y="84" className="fl-edge is-raw">{side.edges.cpu}</text>
-      <text x="548" y="196" className="fl-edge">{side.edges.infer}</text>
+      <text x="520" y="66" className="fl-edge is-raw">{side.edges.cpu}</text>
+      <text x="530" y="202" className="fl-edge">{side.edges.infer}</text>
 
       <Box x={MEM.x} y={MEM.y} w={MEM.w} h={MEM.h} title={side.memory.name} note={side.memory.note} variant="memory" />
       <Box x={700} y={CPU_Y - 30} w={272} h={60} title={cpu.name} note={cpu.note} />
@@ -185,8 +185,8 @@ const R_CENTRES = R_SENSOR_Y.map((y) => y + R_SENSOR_H / 2);
 const PROC = { x: 200, y: 14, w: 250, h: 224 };
 const MODULE = { x: 216, w: 150, h: 26 };
 const JOIN = { x: PROC.x + PROC.w, y: 150 };
-const RMEM = { x: 530, y: 120, w: 160, h: 60 };
-const R_ACCEL = { x: 750, y: 120, w: 222, h: 60 };
+const RMEM = { x: 520, y: 120, w: 200, h: 60 };
+const R_ACCEL = { x: 790, y: 120, w: 182, h: 60 };
 
 export function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
   const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${MODULE.x},${c}` }));
