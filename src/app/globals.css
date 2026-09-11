@@ -89,14 +89,6 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .system-flow-lead { margin: 14px 0 0; max-width: 74ch; font-size: 14px; line-height: 1.72; color: var(--text-2); word-break: keep-all; }
 .system-flow .flow-scroll { margin-top: 0; }
 
-.technology-index { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.technology-index-grid { display: grid; grid-template-columns: repeat(4,1fr); }
-.technology-index a { min-height: 126px; padding: 24px 26px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--line); }
-.technology-index a:last-child { border-right: 0; }
-.technology-index a > span { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: var(--text-3); }
-.technology-index strong { display: block; font-size: 19px; letter-spacing: -.02em; }
-.technology-index small { display: block; margin-top: 5px; color: var(--text-3); font-size: 12px; word-break: keep-all; }
-
 .section { padding: 104px 0; }
 /* Deep-link targets stop short of the sticky header instead of under it. */
 section[id], aside[id] { scroll-margin-top: 92px; }
@@ -379,9 +371,6 @@ section[id], aside[id] { scroll-margin-top: 92px; }
   .built-for li { font-size: 15px; gap: 0; }
   .built-for li + li::before { content: none; }
   .system-flow { padding: 16px; border-radius: 20px; }
-  .technology-index-grid { grid-template-columns: 1fr; }
-  .technology-index a { min-height: 104px; border-right: 0; border-bottom: 1px solid var(--line); }
-  .technology-index a:last-child { border-bottom: 0; }
   .section { padding: 86px 0; }
   .section-head { margin-bottom: 42px; }
   .section-head h2 { font-size: 42px; }

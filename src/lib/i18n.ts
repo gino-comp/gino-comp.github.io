@@ -127,12 +127,6 @@ export const dictionaries = {
       stageLead:
         "Pre-processing is where sensing systems stall: every raw stream is written to shared memory, worked on by the CPU and written back before an accelerator ever sees it. RiDM’s proprietary DODA architecture does that work beside the sensors, so only fused, reduced data crosses the system."
     },
-    index: [
-      ["01", "Why It Matters", "Moving data is the bottleneck"],
-      ["02", "Why Near-Sensor", "Move less data. React sooner."],
-      ["03", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
-      ["04", "Run It Yourself", "Verilator simulator on GitHub"]
-    ],
     explore: {
       kicker: "EXPLORE",
       title: "Go deeper.",
@@ -489,12 +483,6 @@ export const dictionaries = {
       stageLead:
         "센싱 시스템의 병목은 전처리입니다. 모든 원시 데이터가 공유 메모리에 기록되고, CPU가 처리한 뒤 다시 기록되어야 비로소 가속기가 읽어갑니다. RiDM의 독자 아키텍처 DODA는 이 연산을 센서 옆에서 수행해, 융합·축약된 데이터만 시스템을 이동하도록 합니다."
     },
-    index: [
-      ["01", "Why It Matters", "데이터 이동이 병목입니다"],
-      ["02", "Why Near-Sensor", "데이터 이동은 줄이고, 반응은 더 빠르게"],
-      ["03", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
-      ["04", "직접 실행해 보기", "Verilator 시뮬레이터 · GitHub"]
-    ],
     explore: {
       kicker: "EXPLORE",
       title: "더 깊이 살펴보기.",
