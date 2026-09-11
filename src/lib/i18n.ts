@@ -454,7 +454,8 @@ export const dictionaries = {
       body:
         "We are open to collaboration in any form — technology evaluation, licensing, joint development, research partnership, or something we have not thought of yet. Tell us what you have in mind.",
       email: "hello@ridm.tech",
-      cta: "hello@ridm.tech"
+      cta: "hello@ridm.tech",
+      linkCta: "Contact RiDM"
     },
     deck: {
       title: "RiDM Technology deck",
@@ -826,7 +827,8 @@ export const dictionaries = {
       body:
         "기술 검토, 라이선스, 공동개발, 연구 협력 등 어떤 형태의 협업도 환영합니다. 생각하고 계신 내용을 편하게 알려주세요.",
       email: "hello@ridm.tech",
-      cta: "hello@ridm.tech"
+      cta: "hello@ridm.tech",
+      linkCta: "RiDM에 문의하기"
     },
     deck: {
       title: "RiDM Technology 소개 자료",

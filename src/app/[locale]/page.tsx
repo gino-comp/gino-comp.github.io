@@ -20,7 +20,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <Hero locale={locale} dict={dict} />
       <ExploreSection locale={locale} dict={dict} />
-      <ContactSection dict={dict} />
+      <ContactSection dict={dict} contactHref={`/${locale}/contact/`} />
     </>
   );
 }

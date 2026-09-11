@@ -16,5 +16,5 @@ export default async function ApplicationsPage({ params }: { params: Promise<{ l
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
-  return <div className="subpage"><ApplicationsSection dict={dict} /><ContactSection dict={dict} /></div>;
+  return <div className="subpage"><ApplicationsSection dict={dict} /><ContactSection dict={dict} contactHref={`/${locale}/contact/`} /></div>;
 }

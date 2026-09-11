@@ -9,9 +9,10 @@ function MailIcon() {
   );
 }
 
-// `deckHref` is passed only by the Contact page: the same panel on the
-// homepage keeps a single action.
-export default function ContactSection({ dict, deckHref }: { dict: Dictionary; deckHref?: string }) {
+// The Contact page is the destination: it passes `deckHref` and shows the
+// address itself. Every other page passes `contactHref` instead and the panel
+// leads there rather than straight into a mail client.
+export default function ContactSection({ dict, deckHref, contactHref }: { dict: Dictionary; deckHref?: string; contactHref?: string }) {
   const c = dict.contact;
   return (
     <section className="section contact-section">
@@ -23,12 +24,18 @@ export default function ContactSection({ dict, deckHref }: { dict: Dictionary; d
             <p>{c.body}</p>
           </div>
           <div className="contact-actions">
-            {/* The address is the label, so it can be read without clicking. */}
-            <a className="button dark contact-email" href={`mailto:${c.email}`}>
-              <MailIcon />
-              {c.cta}
-            </a>
-            {deckHref ? <a className="button outline-dark" href={deckHref}>{dict.deck.open}</a> : null}
+            {contactHref ? (
+              <a className="button dark" href={contactHref}>{c.linkCta}</a>
+            ) : (
+              <>
+                {/* The address is the label, so it can be read without clicking. */}
+                <a className="button dark contact-email" href={`mailto:${c.email}`}>
+                  <MailIcon />
+                  {c.cta}
+                </a>
+                {deckHref ? <a className="button outline-dark" href={deckHref}>{dict.deck.open}</a> : null}
+              </>
+            )}
           </div>
         </div>
       </div>

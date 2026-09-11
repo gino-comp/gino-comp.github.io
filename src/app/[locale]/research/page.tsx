@@ -16,5 +16,5 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
-  return <div className="subpage"><ResearchSection dict={dict} /><ContactSection dict={dict} /></div>;
+  return <div className="subpage"><ResearchSection dict={dict} /><ContactSection dict={dict} contactHref={`/${locale}/contact/`} /></div>;
 }
