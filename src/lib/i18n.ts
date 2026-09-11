@@ -86,8 +86,8 @@ const common = {
   // actually have — "2026", "2026-03" or "2026-03-14" — and the page renders
   // and sorts each entry at that precision.
   news: [
-    { key: "iscaHiT", date: "2026", category: "Research" },
     { key: "koreaTips", date: "2026", category: "Company" },
+    { key: "iscaHiT", date: "2026", category: "Research" },
     { key: "seedRound", date: "2026", category: "Funding" },
     { key: "patent2026", date: "2026", category: "IP" },
     { key: "patent2024", date: "2024", category: "IP" },
