@@ -266,7 +266,7 @@ export function TechnologySection({ dict }: { dict: Dictionary }) {
   const ridm = t.ridm as Ridm;
 
   return (
-    <section className="section dark-section">
+    <section id="near-sensor" className="section dark-section">
       <div className="container">
         <div className="section-head">
           <div>
@@ -322,7 +322,7 @@ export function DodaSection({ dict }: { dict: Dictionary }) {
   const lineage = d.lineage as readonly Lineage[];
 
   return (
-    <section className="section dark-section">
+    <section id="doda" className="section dark-section">
       <div className="container">
         <div className="section-head">
           <div>
@@ -371,7 +371,7 @@ export function DodaSection({ dict }: { dict: Dictionary }) {
           ))}
         </div>
 
-        <aside className="simulator">
+        <aside id="simulator" className="simulator">
           <div>
             <span>{d.simulator.kicker}</span>
             <h3>{d.simulator.title}</h3>

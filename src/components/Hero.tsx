@@ -68,22 +68,22 @@ function SystemFlow({ dict }: { dict: Dictionary }) {
         <rect x="365" y="68" width="270" height="224" rx="34" className="doda-box" />
         <text x="500" y="124" textAnchor="middle" className="flow-accent">RiDM</text>
         <text x="500" y="182" textAnchor="middle" className="doda-label">DODA</text>
-        <text x="500" y="218" textAnchor="middle" className="flow-accent">FILTER · FUSE · PROCESS · INFER</text>
+        <text x="500" y="218" textAnchor="middle" className="flow-accent">FILTER · FUSE · PRE-PROCESS</text>
         <text x="500" y="246" textAnchor="middle" className="flow-sub">Runtime-programmable dataflow</text>
 
         <path d="M635 180 C710 180 735 180 790 180" className="flow-line" />
 
         <rect x="790" y="103" width="175" height="154" rx="22" className="flow-box" />
         <text x="877" y="152" textAnchor="middle" className="flow-title">HOST COMPUTE</text>
-        <text x="877" y="181" textAnchor="middle" className="flow-sub">CPU / GPU</text>
+        <text x="877" y="181" textAnchor="middle" className="flow-sub">CPU / GPU / NPU</text>
         <text x="877" y="205" textAnchor="middle" className="flow-sub">{dict.hero.hostSub}</text>
       </svg>
 
       <div className="system-flow-mobile">
         {[
           ["01", "Sensor Array", `${dict.hero.sensorSub1} · ${dict.hero.sensorSub2}`],
-          ["02", "DODA", "Filter · Fuse · Process · Infer"],
-          ["03", "Host Compute", `CPU / GPU · ${dict.hero.hostSub}`],
+          ["02", "DODA", "Filter · Fuse · Pre-process"],
+          ["03", "Host Compute", `CPU / GPU / NPU · ${dict.hero.hostSub}`],
         ].map(([n, title, sub], index) => (
           <div key={title}>
             {index > 0 && <div className="mobile-arrow">↓</div>}

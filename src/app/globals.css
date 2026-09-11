@@ -107,6 +107,8 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .technology-index small { display: block; margin-top: 5px; color: #6e7b8b; font-size: 11px; }
 
 .section { padding: 104px 0; }
+/* Deep-link targets stop short of the sticky header instead of under it. */
+section[id], aside[id] { scroll-margin-top: 92px; }
 .dark-section { background: var(--bg); color: var(--text); }
 .section-head { display: grid; grid-template-columns: .95fr 1.05fr; gap: 70px; margin-bottom: 70px; }
 .section-head > div:only-child { grid-column: 1 / -1; }

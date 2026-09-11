@@ -120,20 +120,20 @@ export const dictionaries = {
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW",
       stageNote: "Illustrative architecture",
-      sensorSub1: "Vision · Radar · UWB",
+      sensorSub1: "Camera · Radar · UWB · Lidar",
       sensorSub2: "Industrial sensors",
-      hostSub: "System-level workloads"
+      hostSub: "Inference · system-level workloads"
     },
     index: [
-      ["01", "DODA Architecture", "Dynamically orchestrated dataflow"],
-      ["02", "FPGA Overlay", "R&D and early commercialization path"],
-      ["03", "Silicon Roadmap", "From architecture IP to dedicated silicon"]
+      ["01", "Why Near-Sensor", "Move less data. React sooner."],
+      ["02", "DODA Architecture", "Dynamically orchestrated dataflow"],
+      ["03", "Run It Yourself", "Verilator simulator on GitHub"]
     ],
     explore: {
       kicker: "EXPLORE",
       title: "Go deeper.",
       desc:
-        "The architecture, application areas, research foundation, team and latest updates each have a dedicated page.",
+        "The architecture, the team and the latest updates each have a dedicated page.",
       more: "Learn more"
     },
     technology: {
@@ -459,20 +459,20 @@ export const dictionaries = {
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW",
       stageNote: "개념 아키텍처",
-      sensorSub1: "Vision · Radar · UWB",
+      sensorSub1: "Camera · Radar · UWB · Lidar",
       sensorSub2: "산업용 센서",
-      hostSub: "상위 시스템 연산"
+      hostSub: "추론 · 상위 시스템 연산"
     },
     index: [
-      ["01", "DODA Architecture", "Dynamically Orchestrated Dataflow"],
-      ["02", "FPGA Overlay", "초기 검증 및 사업화 경로"],
-      ["03", "Silicon Roadmap", "Architecture IP에서 전용 Silicon으로"]
+      ["01", "Why Near-Sensor", "데이터 이동은 줄이고, 반응은 더 빠르게"],
+      ["02", "DODA Architecture", "Dynamically Orchestrated Dataflow"],
+      ["03", "직접 실행해 보기", "Verilator 시뮬레이터 · GitHub"]
     ],
     explore: {
       kicker: "EXPLORE",
       title: "더 깊이 살펴보기.",
       desc:
-        "아키텍처, 응용 분야, 연구 기반, 팀 소개, 최신 소식은 각 페이지에서 자세히 확인할 수 있습니다.",
+        "아키텍처, 팀 소개, 최신 소식은 각 페이지에서 자세히 확인할 수 있습니다.",
       more: "자세히 보기"
     },
     technology: {
