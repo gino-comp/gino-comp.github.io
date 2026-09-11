@@ -58,7 +58,7 @@ export default function NewsSection({ locale, dict }: { locale: Locale; dict: Di
           </div>
           <h3>{leadCopy.title}</h3>
           <p>{leadCopy.body}</p>
-          {lead.href ? <EntryLink href={lead.href} label={leadCopy.linkLabel ?? n.link} /> : null}
+          {leadCopy.href ? <EntryLink href={leadCopy.href} label={leadCopy.linkLabel ?? n.link} /> : null}
         </article>
 
         <div className="news-feed">
@@ -73,7 +73,7 @@ export default function NewsSection({ locale, dict }: { locale: Locale; dict: Di
                 <div>
                   <h3>{copy.title}</h3>
                   <p>{copy.body}</p>
-                  {entry.href ? <EntryLink href={entry.href} label={copy.linkLabel ?? n.link} /> : null}
+                  {copy.href ? <EntryLink href={copy.href} label={copy.linkLabel ?? n.link} /> : null}
                 </div>
               </article>
             );

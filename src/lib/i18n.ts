@@ -83,16 +83,8 @@ const common = {
     { key: "seedRound", date: "2026", category: "Funding" },
     { key: "patent2026", date: "2026", category: "IP" },
     { key: "patent2024", date: "2024", category: "IP" },
-    {
-      key: "paper3dra",
-      date: "2023-09-26",
-      category: "Research",
-      href: "https://doi.org/10.1109/ACCESS.2023.3319404"
-    },
     { key: "grip", date: "2023", category: "Company" },
-    { key: "patent2023", date: "2023", category: "IP" },
-    { key: "graphwave", date: "2022", category: "Research" },
-    { key: "cgraScheduling", date: "2021", category: "Research" }
+    { key: "patent2023", date: "2023", category: "IP" }
   ]
 };
 
@@ -249,12 +241,16 @@ export const dictionaries = {
         koreaTips: {
           title: "RiDM Korea opens, TIPS R&D grant secured",
           body:
-            "The Korea subsidiary takes on silicon implementation and business development, and RiDM was selected for a TIPS R&D grant."
+            "The Korea subsidiary takes on silicon implementation and business development, and RiDM was selected for a TIPS R&D grant.",
+          href: "https://www.linkedin.com/posts/jinho-lee-phd-200a1212a_big-news-for-ridm-we-are-incredibly-activity-7483049570373955584-wvhT",
+          linkLabel: "Announcement on LinkedIn"
         },
         seedRound: {
           title: "Seed round closed",
           body:
-            "Seed funding from Qube Research & Technologies and The Invention Lab, to carry the architecture from research toward silicon."
+            "Seed funding from Qube Research & Technologies and The Invention Lab, to carry the architecture from research toward silicon.",
+          href: "https://www.kspost.biz/en-us/articles/2326",
+          linkLabel: "KSPost"
         },
         patent2026: {
           title: "Adaptive and Reconfigurable Dataflow Computing System and Method",
@@ -265,30 +261,17 @@ export const dictionaries = {
           title: "Hierarchical Network Design for Dynamic Dataflow Style Architectures",
           body: "PCT publication WO2024/242626 A1, the second patent family behind DODA."
         },
-        paper3dra: {
-          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
-          body:
-            "Published in IEEE Access. The dynamic dataflow research the DODA architecture is built on.",
-          linkLabel: "IEEE Access"
-        },
         grip: {
           title: "Graduated NUS GRIP",
           body:
-            "Completed the National University of Singapore’s flagship deep-tech startup incubation programme, now National GRIP."
+            "Completed the National University of Singapore’s flagship deep-tech startup incubation programme, now National GRIP.",
+          href: "https://www.nus.edu.sg/grip/wp-content/uploads/2023/02/GRIP-RUN-8-Team-Booklet.pdf",
+          linkLabel: "GRIP Run 8 team booklet (PDF)"
         },
         patent2023: {
           title: "Reconfigurable Computing Architecture",
           body: "PCT publication WO2023/234867, the first patent family behind DODA."
         },
-        graphwave: {
-          title: "GraphWave: A Highly-Parallel Compute-at-Memory Graph Processing Accelerator",
-          body: "Presented at DATE 2022 by the founding research team at NUS."
-        },
-        cgraScheduling: {
-          title: "Ultra-Fast CGRA Scheduling to Enable Run-Time Programmable CGRAs",
-          body:
-            "NUS research on run-time CGRA scheduling, where the architecture line behind DODA begins."
-        }
       }
     },
     about: {
@@ -584,12 +567,16 @@ export const dictionaries = {
         koreaTips: {
           title: "RiDM Korea 설립 및 TIPS 과제 선정",
           body:
-            "실리콘 구현과 사업개발을 담당하는 자회사 RiDM Korea를 설립하고, TIPS R&D 과제에 선정되었습니다."
+            "실리콘 구현과 사업개발을 담당하는 자회사 RiDM Korea를 설립하고, TIPS R&D 과제에 선정되었습니다.",
+          href: "https://www.linkedin.com/posts/jinho-lee-phd-200a1212a_big-news-for-ridm-we-are-incredibly-activity-7483049570373955584-wvhT",
+          linkLabel: "LinkedIn 발표 보기"
         },
         seedRound: {
           title: "시드 투자 유치",
           body:
-            "Qube Research & Technologies와 The Invention Lab으로부터 시드 투자를 유치하여 연구 단계의 아키텍처를 실리콘으로 이어가고 있습니다."
+            "Qube Research & Technologies와 The Invention Lab으로부터 시드 투자를 유치하여 연구 단계의 아키텍처를 실리콘으로 이어가고 있습니다.",
+          href: "https://m.thebell.co.kr/m/newsview.asp?newskey=202606221313048600106435",
+          linkLabel: "더벨 기사 보기"
         },
         patent2026: {
           title: "Adaptive and Reconfigurable Dataflow Computing System and Method",
@@ -600,30 +587,17 @@ export const dictionaries = {
           title: "Hierarchical Network Design for Dynamic Dataflow Style Architectures",
           body: "DODA를 뒷받침하는 두 번째 특허 패밀리로, PCT 공개번호는 WO2024/242626 A1입니다."
         },
-        paper3dra: {
-          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
-          body:
-            "IEEE Access에 게재된 논문으로, DODA 아키텍처가 기반을 두고 있는 Dynamic Dataflow 연구입니다.",
-          linkLabel: "IEEE Access"
-        },
         grip: {
           title: "NUS GRIP 수료",
           body:
-            "싱가포르국립대학교(NUS)의 대표 딥테크 창업 인큐베이팅 프로그램 GRIP(현 National GRIP)을 수료했습니다."
+            "싱가포르국립대학교(NUS)의 대표 딥테크 창업 인큐베이팅 프로그램 GRIP(현 National GRIP)을 수료했습니다.",
+          href: "https://www.nus.edu.sg/grip/wp-content/uploads/2023/02/GRIP-RUN-8-Team-Booklet.pdf",
+          linkLabel: "GRIP Run 8 팀 부클릿 (PDF)"
         },
         patent2023: {
           title: "Reconfigurable Computing Architecture",
           body: "DODA를 뒷받침하는 첫 번째 특허 패밀리로, PCT 공개번호는 WO2023/234867입니다."
         },
-        graphwave: {
-          title: "GraphWave: A Highly-Parallel Compute-at-Memory Graph Processing Accelerator",
-          body: "NUS 창업 연구팀이 DATE 2022에서 발표한 논문입니다."
-        },
-        cgraScheduling: {
-          title: "Ultra-Fast CGRA Scheduling to Enable Run-Time Programmable CGRAs",
-          body:
-            "Runtime Programmable CGRA 스케줄링에 관한 NUS 연구로, DODA로 이어지는 아키텍처 계보의 시작점입니다."
-        }
       }
     },
     about: {
@@ -812,10 +786,12 @@ export type NewsEntry = {
   // Partial ISO date: "2021", "2023-09" or "2023-09-26".
   date: string;
   category: string;
-  href?: string;
 };
 
-export type NewsCopy = { title: string; body: string; linkLabel?: string };
+// The outbound link lives here rather than on the entry, because coverage of
+// the same milestone differs by language: the seed round points at a Korean
+// outlet in ko and an English one in en.
+export type NewsCopy = { title: string; body: string; href?: string; linkLabel?: string };
 
 // [highlighted initial, rest of the word]; the initials spell RiDM.
 export type AcronymPart = readonly [string, string];

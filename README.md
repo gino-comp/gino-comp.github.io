@@ -119,9 +119,11 @@ This includes:
 - Team profiles
 - Contact copy
 
-A What's New entry is two edits in that file: the date, category and optional
-outbound link go in `common.news`, and the title and body go in `newsCopy.items`
-under each locale, keyed the same. A date carries only the precision that is
+A What's New entry is two edits in that file: the date and category go in
+`common.news`, and the title, body and optional outbound link go in
+`newsCopy.items` under each locale, keyed the same. The link sits with the
+prose because coverage of a milestone differs by language — the seed round
+points at a Korean outlet in `ko` and an English one in `en`. A date carries only the precision that is
 known (`"2026"`, `"2026-03"` or `"2026-03-14"`); the page renders and sorts each
 entry at that precision, newest first, so a new entry can be added anywhere in
 the list.
