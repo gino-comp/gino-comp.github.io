@@ -16,8 +16,6 @@ export default function Footer({ locale }: { locale: Locale }) {
         <div className="footer-links">
           <Link href={`/${locale}/about`}>About</Link>
           <Link href={`/${locale}/technology`}>Technology</Link>
-          <Link href={`/${locale}/applications`}>Applications</Link>
-          <Link href={`/${locale}/research`}>Research</Link>
           <Link href={`/${locale}/news`}>What’s New</Link>
         </div>
         <div className="footer-meta">© 2026 RiDM Technology.</div>

@@ -9,8 +9,6 @@ import type { Locale } from "@/lib/i18n";
 const navItems = [
   ["about", "About"],
   ["technology", "Technology"],
-  ["applications", "Applications"],
-  ["research", "Research"],
   ["news", "What’s New"],
 ] as const;
 

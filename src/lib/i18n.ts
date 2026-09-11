@@ -116,7 +116,7 @@ export const dictionaries = {
       body:
         "RiDM develops DODA, a programmable dataflow architecture designed to process sensing data closer to its source before it becomes a system-level data movement problem.",
       ctaPrimary: "Explore DODA",
-      ctaSecondary: "Research & IP",
+      ctaSecondary: "About RiDM",
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW",
       stageNote: "Illustrative architecture",
@@ -249,7 +249,7 @@ export const dictionaries = {
         iscaHiT: {
           title: "HiT accepted at ISCA 2026",
           body:
-            "Tingting Xiang’s HiT: A Unified Sparsity-Adaptive Architecture for High-Throughput Matrix Multiplication appears at ISCA, the most prestigious venue in computer architecture, co-authored with Trevor E. Carlson. It closes her work at NUS, and she now joins RiDM full time as CTO.",
+            "Tingting Xiang’s HiT: A Unified Sparsity-Adaptive Architecture for High-Throughput Matrix Multiplication appears at ISCA, the most prestigious venue in computer architecture, co-authored with Dr. Trevor E. Carlson. It closes her work at NUS, and she now joins RiDM full time as CTO.",
           href: "https://doi.org/10.1109/ISCA66397.2026.00187",
           linkLabel: "ISCA 2026"
         },
@@ -453,7 +453,7 @@ export const dictionaries = {
       body:
         "RiDM은 센서 가까이에서 데이터를 먼저 처리하는 Runtime Programmable Dataflow Architecture, DODA를 개발합니다. 필요한 연산을 데이터 발생 지점에 가깝게 배치해 중앙 CPU/GPU로 이동하는 데이터와 처리 부담을 줄입니다.",
       ctaPrimary: "DODA 기술 보기",
-      ctaSecondary: "연구·특허 보기",
+      ctaSecondary: "회사 소개",
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW",
       stageNote: "개념 아키텍처",

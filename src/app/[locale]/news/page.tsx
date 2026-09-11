@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import NewsSection from "@/components/News";
-import ContactSection from "@/components/Contact";
 import { getDictionary, isLocale } from "@/lib/i18n";
 import { makeMetadata } from "@/lib/metadata";
 
@@ -19,7 +18,6 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   return (
     <div className="subpage news-page">
       <NewsSection locale={locale} dict={dict} />
-      <ContactSection dict={dict} />
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionar
               <Link className="button primary" href={`/${locale}/technology`}>
                 {dict.hero.ctaPrimary}
               </Link>
-              <Link className="button secondary" href={`/${locale}/research`}>
+              <Link className="button secondary" href={`/${locale}/about`}>
                 {dict.hero.ctaSecondary}
               </Link>
             </div>

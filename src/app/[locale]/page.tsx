@@ -27,7 +27,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 }
 
 function TechnologyIndex({ locale, dict }: { locale: Locale; dict: ReturnType<typeof getDictionary> }) {
-  const hrefs = [`/${locale}/technology`, `/${locale}/technology`, `/${locale}/research`];
+  const hrefs = [`/${locale}/technology`, `/${locale}/technology`, `/${locale}/technology`];
   return (
     <div className="technology-index">
       <div className="container technology-index-grid">

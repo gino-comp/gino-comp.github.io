@@ -7,7 +7,9 @@ import { makeMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? makeMetadata(locale, "applications", "Applications") : {};
+  if (!isLocale(locale)) return {};
+  // Hidden page: reachable by direct URL, but unlinked and not indexed.
+  return { ...makeMetadata(locale, "applications", "Applications"), robots: { index: false, follow: false } };
 }
 
 export default async function ApplicationsPage({ params }: { params: Promise<{ locale: string }> }) {

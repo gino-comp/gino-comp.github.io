@@ -5,7 +5,9 @@ import { locales, siteUrl } from "@/lib/i18n";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/technology", "/applications", "/research", "/news", "/about", "/contact"];
+  // "/applications" and "/research" are built but hidden: unlinked, absent
+  // here, and marked noindex on the pages themselves.
+  const routes = ["", "/technology", "/news", "/about", "/contact"];
   const lastModified = new Date();
   return locales.flatMap((locale) =>
     routes.map((route) => ({
