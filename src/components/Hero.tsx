@@ -17,16 +17,13 @@ export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionar
           </div>
         </div>
 
-        <div className="word-cycle" aria-label="Application areas">
-          <span className="word-cycle-label">{dict.hero.builtFor}</span>
-          <div className="word-cycle-window">
-            <div className="word-cycle-list">
-              {dict.applications.map((item) => (
-                <span key={item.key}>{item.title}</span>
-              ))}
-              <span>{dict.applications[0].title}</span>
-            </div>
-          </div>
+        <div className="built-for">
+          <span className="built-for-label">{dict.hero.builtFor}</span>
+          <ul>
+            {dict.applications.map((item) => (
+              <li key={item.key}>{item.title}</li>
+            ))}
+          </ul>
         </div>
 
         {/* Same diagram as the Technology page's RiDM approach, same component. */}
@@ -35,6 +32,7 @@ export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionar
             <span>{dict.hero.stageTitle}</span>
             <small>{dict.technology.diagramNote}</small>
           </div>
+          <p className="system-flow-lead">{dict.hero.stageLead}</p>
           <div className="flow-scroll">
             <RidmFlow side={dict.technology.ridm as Ridm} sensorsLabel={dict.technology.sensorsLabel} />
           </div>

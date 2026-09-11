@@ -36,6 +36,11 @@ const common = {
       key: "edge",
       title: "Edge AI",
       tags: ["Filtering", "Pre-processing", "Inference"]
+    },
+    {
+      key: "physicalAI",
+      title: "Physical AI",
+      tags: ["Embodied Systems", "Perception", "Real-Time Control"]
     }
   ],
   papers: [
@@ -116,11 +121,13 @@ export const dictionaries = {
       body:
         "RiDM develops DODA, a programmable dataflow architecture designed to process sensing data closer to its source before it becomes a system-level data movement problem.",
       builtFor: "BUILT FOR",
-      stageTitle: "SYSTEM FLOW"
+      stageTitle: "SYSTEM FLOW",
+      stageLead:
+        "Pre-processing is where sensing systems stall: every raw stream is written to shared memory, worked on by the CPU and written back before an accelerator ever sees it. RiDM’s proprietary DODA architecture does that work beside the sensors, so only fused, reduced data crosses the system."
     },
     index: [
       ["01", "Why Near-Sensor", "Move less data. React sooner."],
-      ["02", "DODA Architecture", "Dynamically orchestrated dataflow"],
+      ["02", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
       ["03", "Run It Yourself", "Verilator simulator on GitHub"]
     ],
     explore: {
@@ -210,7 +217,7 @@ export const dictionaries = {
     applicationsCopy: {
       kicker: "03 / APPLICATIONS",
       title: "Built for sensing-intensive systems.",
-      desc: "Four initial application areas reflect where RiDM’s architecture can be evaluated first.",
+      desc: "Five initial application areas reflect where RiDM’s architecture can be evaluated first.",
       bodies: {
         networking:
           "SmartNIC, HFT and market-data pipelines where transport and processing latency matter.",
@@ -219,7 +226,9 @@ export const dictionaries = {
         robotics:
           "Multi-sensor systems and time-sensitive control loops that require efficient sensor fusion.",
         edge:
-          "Filtering, pre-processing and selective inference before data reaches the next compute layer."
+          "Filtering, pre-processing and selective inference before data reaches the next compute layer.",
+        physicalAI:
+          "Embodied systems that sense, decide and act in a closed loop, where perception latency sets the control rate."
       }
     },
     researchCopy: {
@@ -449,11 +458,13 @@ export const dictionaries = {
       body:
         "RiDM은 센서 가까이에서 데이터를 먼저 처리하는 Runtime Programmable Dataflow Architecture, DODA를 개발합니다. 필요한 연산을 데이터 발생 지점에 가깝게 배치해 중앙 CPU/GPU로 이동하는 데이터와 처리 부담을 줄입니다.",
       builtFor: "BUILT FOR",
-      stageTitle: "SYSTEM FLOW"
+      stageTitle: "SYSTEM FLOW",
+      stageLead:
+        "센싱 시스템의 병목은 전처리입니다. 모든 원시 데이터가 공유 메모리에 기록되고, CPU가 처리한 뒤 다시 기록되어야 비로소 가속기가 읽어갑니다. RiDM의 독자 아키텍처 DODA는 이 연산을 센서 옆에서 수행해, 융합·축약된 데이터만 시스템을 이동하도록 합니다."
     },
     index: [
       ["01", "Why Near-Sensor", "데이터 이동은 줄이고, 반응은 더 빠르게"],
-      ["02", "DODA Architecture", "Dynamically Orchestrated Dataflow"],
+      ["02", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
       ["03", "직접 실행해 보기", "Verilator 시뮬레이터 · GitHub"]
     ],
     explore: {
@@ -543,12 +554,13 @@ export const dictionaries = {
     applicationsCopy: {
       kicker: "03 / APPLICATIONS",
       title: "센서 데이터가 많은 환경부터.",
-      desc: "RiDM은 데이터 이동량과 지연이 시스템 성능에 직접 영향을 주는 네 가지 영역을 우선 적용 분야로 보고 있습니다.",
+      desc: "RiDM은 데이터 이동량과 지연이 시스템 성능에 직접 영향을 주는 다섯 가지 영역을 우선 적용 분야로 보고 있습니다.",
       bodies: {
         networking: "SmartNIC, HFT, 시장 데이터 처리처럼 전송 및 처리 지연이 중요한 네트워크 워크로드",
         sensing: "Sonar, UWB, Beamforming, Imaging 등 센서 가까이에서 필터링과 데이터 융합이 필요한 워크로드",
         robotics: "다중 센서와 실시간 제어가 필요한 로보틱스 환경에서의 Sensor Fusion 처리",
-        edge: "상위 연산 계층으로 데이터를 전달하기 전 Filtering, Pre-processing, 선택적 Inference 처리"
+        edge: "상위 연산 계층으로 데이터를 전달하기 전 Filtering, Pre-processing, 선택적 Inference 처리",
+        physicalAI: "감지·판단·구동이 하나의 제어 루프로 이어지는 임바디드 시스템으로, 인지 지연이 제어 주기를 결정하는 영역"
       }
     },
     researchCopy: {

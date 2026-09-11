@@ -75,17 +75,18 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .button.secondary { background: transparent; color: #fff; }
 .button.dark { background: #0a0e13; color: #fff; border-color: #0a0e13; }
 
-.word-cycle { margin-top: 48px; padding: 18px 0 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 22px; min-height: 64px; }
-.word-cycle-label { font-size: 11px; letter-spacing: .14em; font-weight: 700; color: var(--text-3); white-space: nowrap; }
-.word-cycle-window { height: 28px; position: relative; overflow: hidden; flex: 1; }
-.word-cycle-list { position: absolute; left: 0; top: 0; display: grid; animation: wordCycle 12s cubic-bezier(.65,0,.35,1) infinite; }
-.word-cycle-list span { height: 28px; display: flex; align-items: center; font-size: 17px; font-weight: 620; }
-@keyframes wordCycle { 0%,19%{transform:translateY(0)} 25%,44%{transform:translateY(-28px)} 50%,69%{transform:translateY(-56px)} 75%,94%{transform:translateY(-84px)} 100%{transform:translateY(-112px)} }
+/* All the use cases at once, rather than one at a time on a timer. */
+.built-for { margin-top: 48px; padding: 18px 0 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; }
+.built-for-label { font-size: 11px; letter-spacing: .14em; font-weight: 700; color: var(--text-3); white-space: nowrap; }
+.built-for ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.built-for li { font-size: 16px; font-weight: 620; color: var(--text); display: flex; align-items: baseline; gap: 14px; }
+.built-for li + li::before { content: "·"; color: var(--text-3); font-weight: 400; }
 
 .system-flow { margin-top: 32px; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; background: radial-gradient(circle at 50% 42%,rgba(48,221,212,.055),transparent 30%), linear-gradient(180deg,#0a0e14,#080c12); padding: 28px 30px 24px; }
 .system-flow-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 16px; }
 .system-flow-top span { font-size: 11px; letter-spacing: .14em; color: var(--text-3); font-weight: 700; }
 .system-flow-top small { font-size: 11px; letter-spacing: .06em; color: var(--text-3); }
+.system-flow-lead { margin: 14px 0 0; max-width: 74ch; font-size: 14px; line-height: 1.72; color: var(--text-2); word-break: keep-all; }
 .system-flow .flow-scroll { margin-top: 0; }
 
 .technology-index { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -373,9 +374,10 @@ section[id], aside[id] { scroll-margin-top: 92px; }
   .hero-section { padding: 58px 0 42px; }
   h1 { font-size: clamp(50px,16vw,76px); line-height: .92; }
   .hero-copy p { word-break: keep-all; }
-  .word-cycle { margin-top: 40px; }
-  .word-cycle-window { display: none; }
-  .word-cycle::after { content: "Sensing · Networking · Robotics · Edge AI"; font-size: 13px; color: #c7d0da; }
+  .built-for { margin-top: 40px; gap: 12px; }
+  .built-for ul { gap: 4px 18px; }
+  .built-for li { font-size: 15px; gap: 0; }
+  .built-for li + li::before { content: none; }
   .system-flow { padding: 16px; border-radius: 20px; }
   .technology-index-grid { grid-template-columns: 1fr; }
   .technology-index a { min-height: 104px; border-right: 0; border-bottom: 1px solid var(--line); }
