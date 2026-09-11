@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Locale, Dictionary } from "@/lib/i18n";
 import { RidmFlow, type Ridm } from "@/components/DataFlow";
 
@@ -15,14 +14,6 @@ export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionar
           </div>
           <div className="hero-copy">
             <p>{dict.hero.body}</p>
-            <div className="button-row">
-              <Link className="button primary" href={`/${locale}/technology`}>
-                {dict.hero.ctaPrimary}
-              </Link>
-              <Link className="button secondary" href={`/${locale}/about`}>
-                {dict.hero.ctaSecondary}
-              </Link>
-            </div>
           </div>
         </div>
 

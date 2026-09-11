@@ -115,8 +115,6 @@ export const dictionaries = {
       accent: "where data begins.",
       body:
         "RiDM develops DODA, a programmable dataflow architecture designed to process sensing data closer to its source before it becomes a system-level data movement problem.",
-      ctaPrimary: "Explore DODA",
-      ctaSecondary: "About RiDM",
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW"
     },
@@ -450,8 +448,6 @@ export const dictionaries = {
       accent: "연산을 더하다.",
       body:
         "RiDM은 센서 가까이에서 데이터를 먼저 처리하는 Runtime Programmable Dataflow Architecture, DODA를 개발합니다. 필요한 연산을 데이터 발생 지점에 가깝게 배치해 중앙 CPU/GPU로 이동하는 데이터와 처리 부담을 줄입니다.",
-      ctaPrimary: "DODA 기술 보기",
-      ctaSecondary: "회사 소개",
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW"
     },
