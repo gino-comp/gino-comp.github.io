@@ -57,6 +57,13 @@ const common = {
       authors: "Jinho Lee · Burin Amornpaisannon · Andreas Diavastos · Trevor E. Carlson · IEEE Access",
       tag: "Dynamic Dataflow",
       href: "https://doi.org/10.1109/ACCESS.2023.3319404"
+    },
+    {
+      year: "2026",
+      title: "HiT: A Unified Sparsity-Adaptive Architecture for High-Throughput Matrix Multiplication",
+      authors: "Tingting Xiang · Xiaochen Wang · Miao Yu · Trevor E. Carlson · ISCA 2026",
+      tag: "Sparse Acceleration",
+      href: "https://doi.org/10.1109/ISCA66397.2026.00187"
     }
   ],
   patents: [
@@ -79,6 +86,7 @@ const common = {
   // actually have — "2026", "2026-03" or "2026-03-14" — and the page renders
   // and sorts each entry at that precision.
   news: [
+    { key: "iscaHiT", date: "2026", category: "Research" },
     { key: "koreaTips", date: "2026", category: "Company" },
     { key: "seedRound", date: "2026", category: "Funding" },
     { key: "patent2026", date: "2026", category: "IP" },
@@ -238,6 +246,13 @@ export const dictionaries = {
       latest: "LATEST",
       link: "Read more",
       items: {
+        iscaHiT: {
+          title: "HiT accepted at ISCA 2026",
+          body:
+            "Tingting Xiang’s HiT: A Unified Sparsity-Adaptive Architecture for High-Throughput Matrix Multiplication appears at ISCA, the most prestigious venue in computer architecture, co-authored with Trevor E. Carlson. It closes her work at NUS, and she now joins RiDM full time as CTO.",
+          href: "https://doi.org/10.1109/ISCA66397.2026.00187",
+          linkLabel: "ISCA 2026"
+        },
         koreaTips: {
           title: "RiDM Korea opens, TIPS R&D grant secured",
           body:
@@ -564,6 +579,13 @@ export const dictionaries = {
       latest: "LATEST",
       link: "자세히 보기",
       items: {
+        iscaHiT: {
+          title: "ISCA 2026 논문 게재",
+          body:
+            "컴퓨터 아키텍처 분야 최고 권위 학회인 ISCA에 Tingting Xiang의 HiT: A Unified Sparsity-Adaptive Architecture for High-Throughput Matrix Multiplication이 게재되었습니다. Trevor E. Carlson 교수가 공저자로 참여했으며, NUS에서의 마지막 연구입니다. 이제 RiDM에 CTO로 전임 합류합니다.",
+          href: "https://doi.org/10.1109/ISCA66397.2026.00187",
+          linkLabel: "ISCA 2026"
+        },
         koreaTips: {
           title: "RiDM Korea 설립 및 TIPS 과제 선정",
           body:
