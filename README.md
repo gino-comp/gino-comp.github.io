@@ -23,6 +23,7 @@ Production-oriented Next.js implementation of the RiDM Technology website concep
 /ko/technology          /en/technology
 /ko/applications        /en/applications
 /ko/research            /en/research
+/ko/news                /en/news
 /ko/about               /en/about
 /ko/contact             /en/contact
 ```
@@ -114,8 +115,16 @@ This includes:
 - Applications
 - Research publications
 - Patents
+- What's New announcements
 - Team profiles
 - Contact copy
+
+A What's New entry is two edits in that file: the date, category and optional
+outbound link go in `common.news`, and the title and body go in `newsCopy.items`
+under each locale, keyed the same. A date carries only the precision that is
+known (`"2026"`, `"2026-03"` or `"2026-03-14"`); the page renders and sorts each
+entry at that precision, newest first, so a new entry can be added anywhere in
+the list.
 
 The site components live in:
 

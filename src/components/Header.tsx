@@ -11,6 +11,7 @@ const navItems = [
   ["technology", "Technology"],
   ["applications", "Applications"],
   ["research", "Research"],
+  ["news", "What’s New"],
 ] as const;
 
 export default function Header({ locale }: { locale: Locale }) {

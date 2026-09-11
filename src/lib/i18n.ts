@@ -12,6 +12,7 @@ const common = {
     technology: "Technology",
     applications: "Applications",
     research: "Research",
+    news: "What’s New",
     about: "About",
     contact: "Contact"
   },
@@ -71,6 +72,27 @@ const common = {
       code: "WO2026/015086 A1",
       title: "Adaptive and Reconfigurable Dataflow Computing System and Method"
     }
+  ],
+  // Announcement spine. Dates, categories and outbound links are facts rather
+  // than copy, so they live here once and only the prose is translated, in
+  // `newsCopy.items` under each locale. `date` carries only the precision we
+  // actually have — "2026", "2026-03" or "2026-03-14" — and the page renders
+  // and sorts each entry at that precision.
+  news: [
+    { key: "koreaTips", date: "2026", category: "Company" },
+    { key: "seedRound", date: "2026", category: "Funding" },
+    { key: "patent2026", date: "2026", category: "IP" },
+    { key: "patent2024", date: "2024", category: "IP" },
+    {
+      key: "paper3dra",
+      date: "2023-09-26",
+      category: "Research",
+      href: "https://doi.org/10.1109/ACCESS.2023.3319404"
+    },
+    { key: "grip", date: "2023", category: "Company" },
+    { key: "patent2023", date: "2023", category: "IP" },
+    { key: "graphwave", date: "2022", category: "Research" },
+    { key: "cgraScheduling", date: "2021", category: "Research" }
   ]
 };
 
@@ -110,7 +132,8 @@ export const dictionaries = {
     explore: {
       kicker: "EXPLORE",
       title: "Go deeper.",
-      desc: "The architecture, application areas, research foundation and team each have a dedicated page.",
+      desc:
+        "The architecture, application areas, research foundation, team and latest updates each have a dedicated page.",
       more: "Learn more"
     },
     technology: {
@@ -214,6 +237,59 @@ export const dictionaries = {
       ipTitle: "NUS research, exclusively licensed to RiDM.",
       ipBody:
         "Three PCT patent families originated from the founders’ NUS research, and RiDM holds an exclusive license to the core IP."
+    },
+    newsCopy: {
+      kicker: "WHAT’S NEW",
+      title: "Announcements and research updates.",
+      desc:
+        "Company milestones, patent publications and research output from the founding team, newest first.",
+      latest: "LATEST",
+      link: "Read more",
+      items: {
+        koreaTips: {
+          title: "RiDM Korea opens, TIPS R&D grant secured",
+          body:
+            "The Korea subsidiary takes on silicon implementation and business development, and RiDM was selected for a TIPS R&D grant."
+        },
+        seedRound: {
+          title: "Seed round closed",
+          body:
+            "Seed funding from Qube Research & Technologies and The Invention Lab, to carry the architecture from research toward silicon."
+        },
+        patent2026: {
+          title: "Adaptive and Reconfigurable Dataflow Computing System and Method",
+          body:
+            "PCT publication WO2026/015086 A1, the third patent family from the founders’ NUS research. RiDM holds an exclusive license to the core IP."
+        },
+        patent2024: {
+          title: "Hierarchical Network Design for Dynamic Dataflow Style Architectures",
+          body: "PCT publication WO2024/242626 A1, the second patent family behind DODA."
+        },
+        paper3dra: {
+          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
+          body:
+            "Published in IEEE Access. The dynamic dataflow research the DODA architecture is built on.",
+          linkLabel: "IEEE Access"
+        },
+        grip: {
+          title: "Graduated NUS GRIP",
+          body:
+            "Completed the National University of Singapore’s flagship deep-tech startup incubation programme, now National GRIP."
+        },
+        patent2023: {
+          title: "Reconfigurable Computing Architecture",
+          body: "PCT publication WO2023/234867, the first patent family behind DODA."
+        },
+        graphwave: {
+          title: "GraphWave: A Highly-Parallel Compute-at-Memory Graph Processing Accelerator",
+          body: "Presented at DATE 2022 by the founding research team at NUS."
+        },
+        cgraScheduling: {
+          title: "Ultra-Fast CGRA Scheduling to Enable Run-Time Programmable CGRAs",
+          body:
+            "NUS research on run-time CGRA scheduling, where the architecture line behind DODA begins."
+        }
+      }
     },
     about: {
       kicker: "ABOUT US",
@@ -395,7 +471,8 @@ export const dictionaries = {
     explore: {
       kicker: "EXPLORE",
       title: "더 깊이 살펴보기.",
-      desc: "아키텍처, 응용 분야, 연구 기반, 팀 소개는 각 페이지에서 자세히 확인할 수 있습니다.",
+      desc:
+        "아키텍처, 응용 분야, 연구 기반, 팀 소개, 최신 소식은 각 페이지에서 자세히 확인할 수 있습니다.",
       more: "자세히 보기"
     },
     technology: {
@@ -495,6 +572,59 @@ export const dictionaries = {
       ipTitle: "NUS 연구에서 출발한 핵심 IP",
       ipBody:
         "공동창업자들의 NUS 연구에서 출발한 PCT 특허 3건이 핵심 IP를 구성하며, RiDM은 해당 IP에 대한 독점 라이선스를 보유하고 있습니다."
+    },
+    newsCopy: {
+      kicker: "WHAT’S NEW",
+      title: "새로운 소식과 연구 업데이트",
+      desc:
+        "회사 주요 이정표, 특허 공개, 창업팀의 연구 성과를 최신순으로 정리했습니다.",
+      latest: "LATEST",
+      link: "자세히 보기",
+      items: {
+        koreaTips: {
+          title: "RiDM Korea 설립 및 TIPS 과제 선정",
+          body:
+            "실리콘 구현과 사업개발을 담당하는 자회사 RiDM Korea를 설립하고, TIPS R&D 과제에 선정되었습니다."
+        },
+        seedRound: {
+          title: "시드 투자 유치",
+          body:
+            "Qube Research & Technologies와 The Invention Lab으로부터 시드 투자를 유치하여 연구 단계의 아키텍처를 실리콘으로 이어가고 있습니다."
+        },
+        patent2026: {
+          title: "Adaptive and Reconfigurable Dataflow Computing System and Method",
+          body:
+            "공동창업자들의 NUS 연구에서 시작된 세 번째 특허 패밀리로, PCT 공개번호는 WO2026/015086 A1입니다. RiDM은 핵심 IP에 대한 독점 라이선스를 보유하고 있습니다."
+        },
+        patent2024: {
+          title: "Hierarchical Network Design for Dynamic Dataflow Style Architectures",
+          body: "DODA를 뒷받침하는 두 번째 특허 패밀리로, PCT 공개번호는 WO2024/242626 A1입니다."
+        },
+        paper3dra: {
+          title: "3DRA: Dynamic Data-Driven Reconfigurable Architecture",
+          body:
+            "IEEE Access에 게재된 논문으로, DODA 아키텍처가 기반을 두고 있는 Dynamic Dataflow 연구입니다.",
+          linkLabel: "IEEE Access"
+        },
+        grip: {
+          title: "NUS GRIP 수료",
+          body:
+            "싱가포르국립대학교(NUS)의 대표 딥테크 창업 인큐베이팅 프로그램 GRIP(현 National GRIP)을 수료했습니다."
+        },
+        patent2023: {
+          title: "Reconfigurable Computing Architecture",
+          body: "DODA를 뒷받침하는 첫 번째 특허 패밀리로, PCT 공개번호는 WO2023/234867입니다."
+        },
+        graphwave: {
+          title: "GraphWave: A Highly-Parallel Compute-at-Memory Graph Processing Accelerator",
+          body: "NUS 창업 연구팀이 DATE 2022에서 발표한 논문입니다."
+        },
+        cgraScheduling: {
+          title: "Ultra-Fast CGRA Scheduling to Enable Run-Time Programmable CGRAs",
+          body:
+            "Runtime Programmable CGRA 스케줄링에 관한 NUS 연구로, DODA로 이어지는 아키텍처 계보의 시작점입니다."
+        }
+      }
     },
     about: {
       kicker: "ABOUT US",
@@ -675,6 +805,17 @@ export type Milestone = {
   body: string;
   logos?: readonly MilestoneLogo[];
 };
+
+// One announcement: the locale-independent half, matched to its prose by `key`.
+export type NewsEntry = {
+  key: string;
+  // Partial ISO date: "2021", "2023-09" or "2023-09-26".
+  date: string;
+  category: string;
+  href?: string;
+};
+
+export type NewsCopy = { title: string; body: string; linkLabel?: string };
 
 // [highlighted initial, rest of the word]; the initials spell RiDM.
 export type AcronymPart = readonly [string, string];

@@ -200,6 +200,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .explore-card p { font-size: 14px; color: #8e9aa9; line-height: 1.65; margin: 0; max-width: 520px; }
 .explore-card b { margin-top: auto; padding-top: 24px; font-size: 12px; font-weight: 620; color: #aeb8c4; }
 .explore-card:hover b { color: #fff; }
+.explore-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
 
 .light-section { background: var(--paper); color: var(--ink); }
 .light-section .section-kicker { color: #6e7680; }
@@ -308,6 +309,38 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .milestone-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: auto; padding-top: 26px; }
 .milestone-logos img { width: auto; object-fit: contain; opacity: .92; }
 
+/* ---------- What's New ---------- */
+.news-page .section { padding: 80px 0; }
+.news-page .section-head { margin-bottom: 56px; }
+.news-page .section-head > p { color: var(--text-2); }
+.news-tag { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--accent-text); }
+.news-link { display: inline-block; margin-top: 16px; font-size: 13px; color: var(--accent-text); }
+.news-link:hover { color: #fff; }
+
+/* Same gradient border as .acronym: panel fill to the padding box, brand ramp
+   to the border box. The newest entry is the only one that gets it. */
+.news-lead { border: 1px solid transparent; border-radius: 24px; padding: 36px 40px;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(48,221,212,.12),transparent 46%) padding-box,
+    radial-gradient(circle at 94% 92%,rgba(140,76,255,.11),transparent 48%) padding-box,
+    linear-gradient(180deg,#0a0e14,#080c12) padding-box,
+    linear-gradient(100deg,#30ddd4,#4c78ff 52%,#8c4cff) border-box; }
+.news-lead-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.news-lead-top > span { font-size: 11px; letter-spacing: .14em; font-weight: 700;
+  background: linear-gradient(100deg,#5fe7df,#7fa4ff 55%,#bb8bff);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.news-lead-top time { font-size: 12px; color: var(--text-3); }
+.news-lead h3 { font-size: clamp(26px,2.6vw,34px); letter-spacing: -.04em; line-height: 1.14; margin: 20px 0 12px; max-width: 720px; word-break: keep-all; }
+.news-lead p { font-size: 15px; color: var(--text-2); line-height: 1.72; margin: 0; max-width: 680px; word-break: keep-all; }
+
+.news-feed { margin-top: 16px; border: 1px solid var(--line); border-radius: 24px; background: var(--bg2); padding: 6px 34px; }
+.news-row { display: grid; grid-template-columns: 170px 1fr; gap: 28px; padding: 28px 0; border-top: 1px solid var(--hairline); }
+.news-row:first-child { border-top: 0; }
+.news-meta { display: grid; gap: 8px; align-content: start; }
+.news-meta time { font-size: 12px; color: var(--text-3); }
+.news-row h3 { font-size: 19px; letter-spacing: -.025em; line-height: 1.32; margin: 0 0 9px; max-width: 52ch; word-break: keep-all; }
+.news-row p { font-size: 14px; color: var(--text-2); line-height: 1.65; margin: 0; max-width: 74ch; word-break: keep-all; }
+
 .contact-section { background: var(--bg); padding-top: 0; }
 .contact-panel { border-radius: 28px; background: #eef1f3; color: #0a0e13; padding: 64px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 42px; align-items: end; }
 .contact-panel > div > span { font-size: 10px; letter-spacing: .14em; color: #5f6974; }
@@ -390,6 +423,12 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
   .founder-copy h3 { font-size: 27px; }
   .founder-copy dl > div { grid-template-columns: 1fr; gap: 4px; }
   .milestones article { min-height: 0; padding: 26px; }
+  .news-page .section { padding: 64px 0; }
+  .news-page .section-head { margin-bottom: 40px; }
+  .news-lead { padding: 26px 22px; }
+  .news-feed { padding: 2px 22px; }
+  .news-row { grid-template-columns: 1fr; gap: 12px; }
+  .news-meta { display: flex; align-items: center; gap: 12px; }
   .profile-body dl > div { grid-template-columns: 1fr; gap: 4px; }
   .contact-panel { grid-template-columns: 1fr; padding: 34px; }
   .contact-panel .button { justify-self: start; }
