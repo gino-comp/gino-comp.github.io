@@ -29,8 +29,8 @@ const LANES = ROWS.map((y) => y + 14);
 const LANE_START = 250;
 const LANE_END = 690;
 const CHIP_COLS = [740, 786, 832, 878];
-const TRUCKS_PER_LANE = 5;
-const LANE_SECONDS = 4.2;
+const TRUCKS_PER_LANE = 10;
+const LANE_SECONDS = 14;
 
 export function DataMovementSvg({ why }: { why: Why }) {
   return (
@@ -84,7 +84,7 @@ export function DataMovementSvg({ why }: { why: Why }) {
               <animateMotion
                 dur={`${LANE_SECONDS}s`}
                 repeatCount="indefinite"
-                begin={`${-(k * (LANE_SECONDS / TRUCKS_PER_LANE) + lane * 0.23)}s`}
+                begin={`${-(k * (LANE_SECONDS / TRUCKS_PER_LANE) + lane * 0.7)}s`}
                 path={`M${LANE_START},${y - 9} L${LANE_END},${y - 9}`}
               />
             </use>
@@ -93,8 +93,8 @@ export function DataMovementSvg({ why }: { why: Why }) {
       </g>
       <g className="dm-trucks-static">
         {LANES.map((y, lane) =>
-          [280, 380, 480, 580].map((x) => (
-            <use key={`${lane}-${x}`} href="#dmTruck" x={x + lane * 18} y={y - 9} width="26" height="18" className="dm-truck" />
+          Array.from({ length: 8 }, (_, i) => 262 + i * 48).map((x) => (
+            <use key={`${lane}-${x}`} href="#dmTruck" x={x + lane * 12} y={y - 9} width="26" height="18" className="dm-truck" />
           ))
         )}
       </g>
