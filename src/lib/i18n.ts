@@ -443,6 +443,13 @@ export const dictionaries = {
         "We are open to collaboration in any form — technology evaluation, licensing, joint development, research partnership, or something we have not thought of yet. Tell us what you have in mind.",
       email: "hello@ridm.tech",
       cta: "hello@ridm.tech"
+    },
+    deck: {
+      title: "RiDM Technology deck",
+      open: "View as slides",
+      export: "Export to PDF",
+      back: "Back to site",
+      hint: "Each slide prints as one 16:9 page. Arrow keys move between slides."
     }
   },
   ko: {
@@ -775,6 +782,13 @@ export const dictionaries = {
         "기술 검토, 라이선스, 공동개발, 연구 협력 등 어떤 형태의 협업도 환영합니다. 생각하고 계신 내용을 편하게 알려주세요.",
       email: "hello@ridm.tech",
       cta: "hello@ridm.tech"
+    },
+    deck: {
+      title: "RiDM Technology 소개 자료",
+      open: "슬라이드로 보기",
+      export: "PDF로 내보내기",
+      back: "사이트로 돌아가기",
+      hint: "각 슬라이드가 16:9 한 페이지로 인쇄됩니다. 화살표 키로 이동할 수 있습니다."
     }
   }
 } as const;

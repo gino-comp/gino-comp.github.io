@@ -9,7 +9,9 @@ function MailIcon() {
   );
 }
 
-export default function ContactSection({ dict }: { dict: Dictionary }) {
+// `deckHref` is passed only by the Contact page: the same panel on the
+// homepage keeps a single action.
+export default function ContactSection({ dict, deckHref }: { dict: Dictionary; deckHref?: string }) {
   const c = dict.contact;
   return (
     <section className="section contact-section">
@@ -20,11 +22,14 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
             <h2>{c.title}</h2>
             <p>{c.body}</p>
           </div>
-          {/* The address is the label, so it can be read without clicking. */}
-          <a className="button dark contact-email" href={`mailto:${c.email}`}>
-            <MailIcon />
-            {c.cta}
-          </a>
+          <div className="contact-actions">
+            {/* The address is the label, so it can be read without clicking. */}
+            <a className="button dark contact-email" href={`mailto:${c.email}`}>
+              <MailIcon />
+              {c.cta}
+            </a>
+            {deckHref ? <a className="button outline-dark" href={deckHref}>{dict.deck.open}</a> : null}
+          </div>
         </div>
       </div>
     </section>

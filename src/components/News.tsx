@@ -7,7 +7,7 @@ const months = {
 
 // Entries carry a partial ISO date, and are rendered at exactly the precision
 // they were written with rather than padded out to a day we do not know.
-function formatDate(date: string, locale: Locale): string {
+export function formatDate(date: string, locale: Locale): string {
   const [year, month, day] = date.split("-");
   if (!month) return year;
   const monthName = months[locale][Number(month) - 1];
@@ -19,7 +19,7 @@ function formatDate(date: string, locale: Locale): string {
 
 // Partial ISO strings compare as plain strings, so "2026-03" sorts after the
 // year-only "2026" and a new entry can be added anywhere in the dictionary.
-function newestFirst(a: NewsEntry, b: NewsEntry): number {
+export function newestFirst(a: NewsEntry, b: NewsEntry): number {
   if (a.date === b.date) return 0;
   return a.date < b.date ? 1 : -1;
 }

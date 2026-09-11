@@ -13,5 +13,5 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
-  return <div className="subpage standalone-contact"><ContactSection dict={dict} /></div>;
+  return <div className="subpage standalone-contact"><ContactSection dict={dict} deckHref={`/${locale}/deck/`} /></div>;
 }

@@ -27,6 +27,7 @@ Production-oriented Next.js implementation of the RiDM Technology website concep
 /ko/news                /en/news
 /ko/about               /en/about
 /ko/contact             /en/contact
+/ko/deck                /en/deck        (slides; export to PDF)
 ```
 
 The homepage keeps the full editorial scroll experience, while the sub-routes expose the major content areas independently for navigation and SEO.
@@ -134,6 +135,21 @@ The site components live in:
 
 ```text
 src/components/
+```
+
+## Deck
+
+`/deck` renders the site as 16:9 slides — every slide is built from the same
+dictionary the pages use, so it cannot go stale. **Export to PDF** is the
+browser's print-to-PDF against the deck's print stylesheet: one slide per page,
+dark theme preserved (`print-color-adjust: exact`). Reached from the Contact
+page; unlinked elsewhere, absent from the sitemap and `noindex`.
+
+To produce the PDF without a browser window:
+
+```bash
+google-chrome --headless --no-pdf-header-footer \
+  --print-to-pdf=ridm-deck.pdf https://gino-comp.github.io/en/deck/
 ```
 
 ## Brand assets
