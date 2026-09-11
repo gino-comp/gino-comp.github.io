@@ -162,8 +162,7 @@ The implementation intentionally avoids guessing on company information. Please 
 1. Official current title for each co-founder, especially Serena Xie and Tingting Xiang.
 2. Whether `Near-Sensor Processor` is the preferred top-level market positioning.
 3. Whether all three listed PCT patent families may be publicly displayed.
-4. Official contact email or whether the existing `ridm.tech/contact-us` page should remain the primary contact endpoint.
-5. Final outbound links for publications, patents and founder LinkedIn profiles.
+4. Final outbound links for publications, patents and founder LinkedIn profiles.
 
 ## SEO / GEO included
 

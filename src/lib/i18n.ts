@@ -434,8 +434,10 @@ export const dictionaries = {
     contact: {
       kicker: "CONTACT",
       title: "Work with RiDM.",
-      body: "Technology evaluation, licensing, joint development and research collaboration.",
-      cta: "Contact RiDM"
+      body:
+        "We are open to collaboration in any form — technology evaluation, licensing, joint development, research partnership, or something we have not thought of yet. Tell us what you have in mind.",
+      email: "hello@ridm.tech",
+      cta: "hello@ridm.tech"
     }
   },
   ko: {
@@ -767,8 +769,10 @@ export const dictionaries = {
     contact: {
       kicker: "CONTACT",
       title: "RiDM과 협업을 논의해보세요.",
-      body: "기술 검토, 라이선스, 공동개발, 연구 협력 관련 논의를 환영합니다.",
-      cta: "Contact RiDM"
+      body:
+        "기술 검토, 라이선스, 공동개발, 연구 협력 등 어떤 형태의 협업도 환영합니다. 생각하고 계신 내용을 편하게 알려주세요.",
+      email: "hello@ridm.tech",
+      cta: "hello@ridm.tech"
     }
   }
 } as const;

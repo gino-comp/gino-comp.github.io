@@ -345,7 +345,9 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .contact-panel { border-radius: 28px; background: #eef1f3; color: #0a0e13; padding: 64px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 42px; align-items: end; }
 .contact-panel > div > span { font-size: 10px; letter-spacing: .14em; color: #5f6974; }
 .contact-panel h2 { font-size: 42px; letter-spacing: -.045em; line-height: 1.06; margin: 14px 0 12px; }
-.contact-panel p { margin: 0; color: #5f6974; font-size: 16px; }
+.contact-panel p { margin: 0; color: #5f6974; font-size: 16px; line-height: 1.7; max-width: 58ch; word-break: keep-all; }
+.contact-email { gap: 9px; }
+.contact-email svg { width: 16px; height: 16px; flex: none; }
 .contact-panel .button { justify-self: end; }
 .subpage { padding-top: 28px; }
 .standalone-contact { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
