@@ -8,7 +8,7 @@ html = sys.stdin.read()
 rows = []
 for tag in re.findall(r"<section[^>]*\bclass=\"slide[^\"]*\"[^>]*>", html):
     attr = dict(re.findall(r"data-([a-z]+)=\"([^\"]*)\"", tag))
-    if "slide" in attr:
+    if "slide" in attr and "fill" in attr:
         rows.append((attr["slide"], attr.get("natural"), attr.get("scale"), attr.get("fill")))
 
 if not rows:

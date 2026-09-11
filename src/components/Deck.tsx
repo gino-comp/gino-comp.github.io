@@ -138,7 +138,7 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       </div>
     </Slide> },
 
-    { id: "team", node: <Slide key="team" id="team" kicker={dict.about.teamKicker} fitMax={1.3}>
+    { id: "team", node: <Slide key="team" id="team" kicker={dict.about.teamKicker} fitMax={1.45}>
       <h2>{dict.about.teamTitle}</h2>
       <div className="slide-team">
         <div className="slide-founder">
