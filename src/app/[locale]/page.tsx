@@ -28,7 +28,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
 function TechnologyIndex({ locale, dict }: { locale: Locale; dict: ReturnType<typeof getDictionary> }) {
   // One card per Technology-page section, deep-linked by id.
-  const hrefs = [`/${locale}/technology/#near-sensor`, `/${locale}/technology/#doda`, `/${locale}/technology/#simulator`];
+  const hrefs = [`/${locale}/technology/#why`, `/${locale}/technology/#near-sensor`, `/${locale}/technology/#doda`, `/${locale}/technology/#simulator`];
   return (
     <div className="technology-index">
       <div className="container technology-index-grid">

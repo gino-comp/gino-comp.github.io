@@ -90,7 +90,7 @@ h1 span { background: linear-gradient(90deg,#f7fafc 0%,#b8f8f2 40%,#9fb2ff 72%,#
 .system-flow .flow-scroll { margin-top: 0; }
 
 .technology-index { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.technology-index-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+.technology-index-grid { display: grid; grid-template-columns: repeat(4,1fr); }
 .technology-index a { min-height: 126px; padding: 24px 26px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--line); }
 .technology-index a:last-child { border-right: 0; }
 .technology-index a > span { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: var(--text-3); }
@@ -401,6 +401,8 @@ section[id], aside[id] { scroll-margin-top: 92px; }
   .paper-row { grid-template-columns: 1fr; gap: 8px; }
   .paper-row > b { justify-self: start; }
   .about-page .section { padding: 64px 0; }
+  .dm-stats { grid-template-columns: 1fr; }
+  .dm-panel { padding: 16px 16px 6px; }
   .about-page .section-head { margin-bottom: 40px; }
   .acronym { padding: 26px 22px; margin-top: 36px; }
   .acronym-note { font-size: 14px; }
@@ -436,6 +438,39 @@ section[id], aside[id] { scroll-margin-top: 92px; }
   html { scroll-behavior: auto; }
   .flow-dots { display: none; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* ---------- Why it matters: raw data hauled from sensors to processors ---------- */
+.dm-panel { border: 1px solid var(--line); border-radius: 24px; background: var(--bg2); padding: 22px 26px 10px; }
+.dm-svg { min-width: 760px; }
+.dm-sensor, .dm-chip { fill: #0c121a; stroke: #6f7f92; stroke-width: 1.4; }
+.dm-future .dm-sensor { stroke-dasharray: 3 3; }
+.dm-lane { stroke: #3d4855; stroke-width: 1.2; stroke-dasharray: 5 6; }
+/* Raw traffic wears the same amber as the conventional path's heavy edges. */
+.dm-truck { fill: #c98a45; stroke: none; }
+.dm-caption { font-size: 10px; letter-spacing: .16em; font-weight: 700; fill: #d3a06a; }
+.dm-trucks-static { display: none; }
+.dm-stats { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.dm-stats > div { background: var(--bg2); padding: 22px 26px; }
+.dm-stats b { display: block; font-size: 30px; letter-spacing: -.04em; font-weight: 700; line-height: 1; }
+.dm-stats span { display: block; margin-top: 8px; font-size: 12px; color: var(--text-3); word-break: keep-all; }
+.dm-trend { grid-column: 1 / -1; margin: 0; padding: 16px 26px; background: var(--bg2); font-size: 14px; color: var(--text-2); border-top: 1px solid var(--line); word-break: keep-all; }
+.why-panel { margin-top: 32px; }
+.why-claim { margin: 14px 0 0; font-size: 22px; font-weight: 650; letter-spacing: -.03em; line-height: 1.25; max-width: 40ch; word-break: keep-all; }
+.why-panel .system-flow-lead { margin-top: 10px; }
+.why-panel .flow-scroll { margin-top: 18px; }
+.why-panel .dm-stats { margin-bottom: 6px; }
+/* deck slide */
+.slide .dm-svg { max-width: 76cqw; margin: 0 auto; display: block; }
+.slide .dm-stats { margin-top: .8cqw; border-radius: 1.2cqw; }
+.slide .dm-stats > div { padding: .9cqw 1.6cqw; }
+.slide .dm-stats b { font-size: 2.2cqw; }
+.slide .dm-stats span { font-size: .95cqw; margin-top: .4cqw; }
+.slide .dm-trend { padding: .7cqw 1.6cqw; font-size: 1.05cqw; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-trucks, .dm-future animate { display: none; }
+  .dm-trucks-static { display: block; }
 }
 
 /* ---------- Deck: the site as slides, one 16:9 page each in print ----------
@@ -523,7 +558,8 @@ section[id], aside[id] { scroll-margin-top: 92px; }
   .deck-stack { display: block; width: 13.333in; margin: 0; }
   .slide { width: 13.333in; height: 7.5in; aspect-ratio: auto; margin: 0; border: 0; border-radius: 0; break-after: page; page-break-after: always; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .slide:last-child { break-after: auto; page-break-after: auto; }
-  .flow-dots { display: none; }
+  .flow-dots, .dm-trucks { display: none; }
+  .dm-trucks-static { display: block; }
   /* Chrome's print rasteriser leaks the box of background-clip:text as a faint
      halo around the glyphs; solid colour for gradient text on paper. */
   .slide h1 span, .slide .acronym-expansion b { background: none; -webkit-text-fill-color: #b8f8f2; color: #b8f8f2; }

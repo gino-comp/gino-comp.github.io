@@ -1,6 +1,7 @@
 import { Fragment, type ReactNode } from "react";
 import { ConventionalFlow, RidmFlow, type Conventional, type Ridm } from "@/components/DataFlow";
 import DeckToolbar from "@/components/DeckToolbar";
+import { DataMovementStats, DataMovementSvg, type Why } from "@/components/DataMovement";
 import { formatDate, newestFirst } from "@/components/News";
 import {
   siteUrl,
@@ -32,6 +33,7 @@ function Slide({ kicker, className, children }: { kicker?: string; className?: s
 
 export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const t = dict.technology;
+  const why = dict.why as Why;
   const conventional = t.conventional as Conventional;
   const ridm = t.ridm as Ridm;
   const expansion = dict.doda.acronym.expansion as readonly AcronymPart[];
@@ -53,6 +55,13 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
         <img src="/brand/ridm-logo.png" alt="" />
         <div><strong>RiDM Technology</strong><small>{dict.brandSub}</small></div>
       </div>
+    </Slide>,
+
+    <Slide key="why" kicker={why.homeKicker}>
+      <h2>{why.title}</h2>
+      <p className="slide-lead slide-lead-tight">{why.desc}</p>
+      <div className="slide-figure"><DataMovementSvg why={why} /></div>
+      <DataMovementStats why={why} />
     </Slide>,
 
     <Slide key="problem" kicker={t.kicker}>

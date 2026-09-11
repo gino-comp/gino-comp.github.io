@@ -128,9 +128,10 @@ export const dictionaries = {
         "Pre-processing is where sensing systems stall: every raw stream is written to shared memory, worked on by the CPU and written back before an accelerator ever sees it. RiDM’s proprietary DODA architecture does that work beside the sensors, so only fused, reduced data crosses the system."
     },
     index: [
-      ["01", "Why Near-Sensor", "Move less data. React sooner."],
-      ["02", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
-      ["03", "Run It Yourself", "Verilator simulator on GitHub"]
+      ["01", "Why It Matters", "Moving data is the bottleneck"],
+      ["02", "Why Near-Sensor", "Move less data. React sooner."],
+      ["03", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
+      ["04", "Run It Yourself", "Verilator simulator on GitHub"]
     ],
     explore: {
       kicker: "EXPLORE",
@@ -139,8 +140,25 @@ export const dictionaries = {
         "The architecture, the team and the latest updates each have a dedicated page.",
       more: "Learn more"
     },
+    why: {
+      kicker: "01 / WHY IT MATTERS",
+      homeKicker: "WHY IT MATTERS",
+      title: "Moving raw data is expensive. There is more of it every year.",
+      desc:
+        "Every sensor produces a raw stream, and every stream is hauled to a processor before anything useful happens to it. In sensor-dense systems that movement, not the computation, is becoming the bottleneck — and sensor counts are still climbing.",
+      sensors: "SENSORS",
+      processors: "PROCESSORS",
+      processorsNote: "CPU · NPU · GPU",
+      caption: "MASSIVE RAW DATA MOVEMENT",
+      stats: [
+        ["10–15", "sensors in a phone"],
+        ["60–100", "in a car"],
+        ["2,000–25,000", "in an aircraft"]
+      ],
+      trend: "Every one of those numbers is still rising, and each sensor adds a stream."
+    },
     technology: {
-      kicker: "01 / WHY NEAR-SENSOR",
+      kicker: "02 / WHY NEAR-SENSOR",
       title: "Move less data. React sooner.",
       desc:
         "In sensing-intensive systems every raw stream is written to shared memory, pre-processed by the CPU, written back, and only then read by the accelerator. RiDM does that work where the data is produced.",
@@ -174,7 +192,7 @@ export const dictionaries = {
       }
     },
     doda: {
-      kicker: "02 / DODA ARCHITECTURE",
+      kicker: "03 / DODA ARCHITECTURE",
       title: "A dataflow machine, orchestrated at runtime.",
       desc:
         "DODA runs an operation when its data is ready, rather than following a schedule fixed when the program was compiled. The pipeline can be rebuilt for a new workload without new silicon.",
@@ -472,9 +490,10 @@ export const dictionaries = {
         "센싱 시스템의 병목은 전처리입니다. 모든 원시 데이터가 공유 메모리에 기록되고, CPU가 처리한 뒤 다시 기록되어야 비로소 가속기가 읽어갑니다. RiDM의 독자 아키텍처 DODA는 이 연산을 센서 옆에서 수행해, 융합·축약된 데이터만 시스템을 이동하도록 합니다."
     },
     index: [
-      ["01", "Why Near-Sensor", "데이터 이동은 줄이고, 반응은 더 빠르게"],
-      ["02", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
-      ["03", "직접 실행해 보기", "Verilator 시뮬레이터 · GitHub"]
+      ["01", "Why It Matters", "데이터 이동이 병목입니다"],
+      ["02", "Why Near-Sensor", "데이터 이동은 줄이고, 반응은 더 빠르게"],
+      ["03", "DODA Architecture", "Dynamically Orchestrated Dataflow Architecture"],
+      ["04", "직접 실행해 보기", "Verilator 시뮬레이터 · GitHub"]
     ],
     explore: {
       kicker: "EXPLORE",
@@ -483,8 +502,25 @@ export const dictionaries = {
         "아키텍처, 팀 소개, 최신 소식은 각 페이지에서 자세히 확인할 수 있습니다.",
       more: "자세히 보기"
     },
+    why: {
+      kicker: "01 / WHY IT MATTERS",
+      homeKicker: "WHY IT MATTERS",
+      title: "원시 데이터 이동은 비쌉니다. 그리고 해마다 늘어납니다.",
+      desc:
+        "센서 하나하나가 원시 스트림을 만들고, 그 스트림은 무엇이든 유용한 일이 일어나기 전에 프로세서까지 실려 갑니다. 센서가 밀집된 시스템에서는 연산이 아니라 이 이동이 병목이 되고 있으며, 센서 수는 계속 늘고 있습니다.",
+      sensors: "SENSORS",
+      processors: "PROCESSORS",
+      processorsNote: "CPU · NPU · GPU",
+      caption: "대량의 원시 데이터 이동",
+      stats: [
+        ["10–15", "스마트폰 한 대의 센서"],
+        ["60–100", "자동차 한 대"],
+        ["2,000–25,000", "항공기 한 대"]
+      ],
+      trend: "이 숫자들은 지금도 커지고 있고, 센서 하나가 스트림 하나를 더합니다."
+    },
     technology: {
-      kicker: "01 / WHY NEAR-SENSOR",
+      kicker: "02 / WHY NEAR-SENSOR",
       title: "데이터 이동은 줄이고, 반응은 더 빠르게.",
       desc:
         "센서가 많은 시스템에서는 모든 원시 데이터가 공유 메모리에 쌓이고, CPU가 전처리한 뒤 다시 메모리에 기록되며, 그제서야 가속기가 읽어갑니다. RiDM은 이 연산을 데이터가 생성되는 지점에서 먼저 수행합니다.",
@@ -518,7 +554,7 @@ export const dictionaries = {
       }
     },
     doda: {
-      kicker: "02 / DODA ARCHITECTURE",
+      kicker: "03 / DODA ARCHITECTURE",
       title: "실행 중에 연산 흐름을 조율하는 데이터플로우 머신, DODA.",
       desc:
         "컴파일 시점에 정해진 순서가 아니라, 데이터가 준비된 연산부터 실행합니다. 새로운 워크로드를 위해 실리콘을 다시 만들지 않고 파이프라인을 재구성할 수 있습니다.",

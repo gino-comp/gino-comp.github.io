@@ -1,5 +1,6 @@
 import type { Locale, Dictionary } from "@/lib/i18n";
 import { RidmFlow, type Ridm } from "@/components/DataFlow";
+import { WhyPanel } from "@/components/DataMovement";
 
 export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
@@ -25,6 +26,9 @@ export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionar
             ))}
           </ul>
         </div>
+
+        {/* The problem first, then the approach. */}
+        <WhyPanel dict={dict} />
 
         {/* Same diagram as the Technology page's RiDM approach, same component. */}
         <div className="system-flow">
