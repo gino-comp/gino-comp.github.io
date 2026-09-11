@@ -109,12 +109,9 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       </div>
     </Slide> },
 
-    // Lineage and the simulator share a slide: research, filed IP and "try it
-    // yourself" read as one three-part story, and each alone left the slide
-    // mostly empty below a two- or one-column grid.
     { id: "lineage", node: <Slide key="lineage" id="lineage" kicker={dict.doda.lineageKicker}>
       <h2>{dict.doda.lineageTitle}</h2>
-      <div className="slide-grid cols-3">
+      <div className="slide-grid cols-2">
         {lineage.map((item) => (
           <div className="slide-card" key={item.step}>
             <b>{item.step}</b>
@@ -129,13 +126,13 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
             )}
           </div>
         ))}
-        <div className="slide-card" key="simulator">
-          <b>{dict.doda.simulator.kicker}</b>
-          <h3>{dict.doda.simulator.title}</h3>
-          <p>{dict.doda.simulator.body}</p>
-          <div className="link">{dict.doda.simulator.href}</div>
-        </div>
       </div>
+    </Slide> },
+
+    { id: "simulator", node: <Slide key="simulator" id="simulator" kicker={dict.doda.simulator.kicker}>
+      <h2>{dict.doda.simulator.title}</h2>
+      <p className="slide-lead">{dict.doda.simulator.body}</p>
+      <p className="slide-sub slide-mono">{dict.doda.simulator.href}</p>
     </Slide> },
 
     { id: "team", node: <Slide key="team" id="team" kicker={dict.about.teamKicker} fitMax={1.45}>
