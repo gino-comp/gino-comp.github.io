@@ -4,7 +4,7 @@
 # make preview   build the static export and serve it exactly as Pages will
 # make build     static export into out/
 # make check     TypeScript only, no build
-# make rebuild   clean then build, after renaming or deleting a route
+# make rebuild   clean then build; also the fix when out/ is mysteriously stale
 # make clean     drop .next/ and out/
 # make deploy    build, then push main (the workflow publishes)
 # make deck-audit  report how full each deck slide is (LOCALE=ko, SLIDES=a,b,c)
@@ -68,7 +68,7 @@ dev: node_modules
 	npx next dev -p $(DEV_PORT)
 
 clean:
-	rm -rf .next $(OUT)
+	rm -rf .next $(OUT) node_modules/.cache
 
 deploy: build
 	git push origin main
