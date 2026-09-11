@@ -16,21 +16,13 @@ const common = {
     about: "About",
     contact: "Contact"
   },
+  // Order is the running order everywhere these appear: the homepage's BUILT
+  // FOR line and the Applications grid.
   applications: [
     {
-      key: "networking",
-      title: "Low-Latency Networking",
-      tags: ["SmartNIC", "HFT", "Market Data"]
-    },
-    {
-      key: "sensing",
-      title: "Sensing Systems",
-      tags: ["Sonar", "UWB", "Beamforming"]
-    },
-    {
-      key: "robotics",
-      title: "Robotics",
-      tags: ["Multi-Sensor", "Sensor Fusion", "Control"]
+      key: "physicalAI",
+      title: "Physical AI",
+      tags: ["Embodied Systems", "Perception", "Real-Time Control"]
     },
     {
       key: "edge",
@@ -38,9 +30,19 @@ const common = {
       tags: ["Filtering", "Pre-processing", "Inference"]
     },
     {
-      key: "physicalAI",
-      title: "Physical AI",
-      tags: ["Embodied Systems", "Perception", "Real-Time Control"]
+      key: "robotics",
+      title: "Robotics",
+      tags: ["Multi-Sensor", "Sensor Fusion", "Control"]
+    },
+    {
+      key: "sensing",
+      title: "Sensing Systems",
+      tags: ["Sonar", "UWB", "Beamforming"]
+    },
+    {
+      key: "networking",
+      title: "Low-Latency Networking",
+      tags: ["SmartNIC", "HFT", "Market Data"]
     }
   ],
   papers: [
