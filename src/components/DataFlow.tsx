@@ -185,8 +185,8 @@ const R_CENTRES = R_SENSOR_Y.map((y) => y + R_SENSOR_H / 2);
 const PROC = { x: 200, y: 14, w: 250, h: 224 };
 const MODULE = { x: 216, w: 150, h: 26 };
 const JOIN = { x: PROC.x + PROC.w, y: 150 };
-const RMEM = { x: 520, y: 120, w: 200, h: 60 };
-const R_ACCEL = { x: 790, y: 120, w: 182, h: 60 };
+const RMEM = { x: 550, y: 120, w: 190, h: 60 };
+const R_ACCEL = { x: 820, y: 120, w: 152, h: 60 };
 
 export function RidmFlow({ side, sensorsLabel }: { side: Ridm; sensorsLabel: string }) {
   const lanes = R_CENTRES.map((c, i) => ({ id: `rl${i}`, d: `M140,${c} L ${MODULE.x},${c}` }));
