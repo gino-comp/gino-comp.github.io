@@ -214,6 +214,7 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       slides={slides.map((s) => ({ ...s, label: labels[s.id] ?? s.id }))}
       text={{
         export: dict.deck.export,
+        fullscreen: dict.deck.fullscreen,
         back: dict.deck.back,
         backHref: `/${locale}/`,
         hint: dict.deck.hint,

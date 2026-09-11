@@ -19,7 +19,7 @@ import { useCallback, useEffect, useRef, useState, type DragEvent, type Keyboard
 
 export type DeckSlide = { id: string; label: string; node: ReactNode };
 export type DeckText = {
-  export: string; back: string; backHref: string; hint: string;
+  export: string; fullscreen: string; back: string; backHref: string; hint: string;
   include: string; all: string; none: string; autofit: string;
   reorderHint: string; reset: string;
 };
@@ -114,7 +114,17 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
   const [ready, setReady] = useState(false);
   const [dragging, setDragging] = useState<string | null>(null);
   const [drop, setDrop] = useState<{ id: string; place: "before" | "after" } | null>(null);
+  const [presenting, setPresenting] = useState(false);
   const stack = useRef<HTMLDivElement>(null);
+
+  // Full screen is requested on the stack alone, so the site header and this
+  // toolbar are left out of it without any hiding.
+  useEffect(() => {
+    const onChange = () => setPresenting(document.fullscreenElement === stack.current);
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+  const present = () => { stack.current?.requestFullscreen?.(); };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -178,10 +188,13 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
       if (!forward && !back) return;
       const visible = Array.from(document.querySelectorAll<HTMLElement>(".slide")).filter((el) => el.offsetParent !== null);
       if (visible.length === 0) return;
-      const tops = visible.map((el) => el.getBoundingClientRect().top + window.scrollY);
-      const here = window.scrollY + 160;
-      const firstBelow = tops.findIndex((top) => top > here);
-      const current = firstBelow === -1 ? visible.length - 1 : Math.max(0, firstBelow - 1);
+      // on the page a slide sits below the sticky header; in full screen at the top
+      const offset = document.fullscreenElement ? 0 : 150;
+      let current = 0, nearest = Infinity;
+      visible.forEach((el, i) => {
+        const d = Math.abs(el.getBoundingClientRect().top - offset);
+        if (d < nearest) { nearest = d; current = i; }
+      });
       const next = Math.min(visible.length - 1, Math.max(0, current + (forward ? 1 : -1)));
       event.preventDefault();
       visible[next].scrollIntoView({ behavior: "smooth", block: "start" });
@@ -232,6 +245,7 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
       <div className="deck-toolbar">
         <div className="deck-toolbar-row">
           <button type="button" className="button primary" onClick={() => window.print()}>{text.export}</button>
+          <button type="button" className="button secondary" onClick={present}>{text.fullscreen}</button>
           <a className="button secondary" href={text.backHref}>{text.back}</a>
           <label className="deck-check">
             <input type="checkbox" checked={autofit} onChange={(e) => setAutofit(e.target.checked)} />
@@ -270,9 +284,9 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
           stylesheet suppresses the page break after the last item, and a
           hidden last item would leave the last visible slide forcing a blank
           trailing page. */}
-      <div className="deck-stack" ref={stack}>
-        {order.filter((id) => enabled[id]).map((id) => (
-          <div key={id} className="deck-item">
+      <div className={`deck-stack${presenting ? " is-presenting" : ""}`} ref={stack} tabIndex={-1}>
+        {order.filter((id) => enabled[id]).map((id, i, on) => (
+          <div key={id} className="deck-item" data-n={`${i + 1} / ${on.length}`}>
             {byId[id].node}
           </div>
         ))}

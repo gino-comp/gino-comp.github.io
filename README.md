@@ -145,7 +145,9 @@ browser's print-to-PDF against the deck's print stylesheet: one slide per page,
 dark theme preserved (`print-color-adjust: exact`). Reached from the Contact
 page; unlinked elsewhere, absent from the sitemap and `noindex`.
 
-The toolbar has a chip per slide: tick to include, drag to reorder (or focus
+**Full screen** presents the deck one slide per screen, letterboxed to 16:9;
+arrow keys or scrolling move between slides and Esc leaves. The toolbar has a
+chip per slide: tick to include, drag to reorder (or focus
 a chip and press Alt + ← / →). The arrangement is kept in the URL as
 `?slides=contact,title,why` — the slides that are in, in that order — so any
 version of the deck is a link. **Auto-fit** scales
