@@ -118,11 +118,7 @@ export const dictionaries = {
       ctaPrimary: "Explore DODA",
       ctaSecondary: "About RiDM",
       builtFor: "BUILT FOR",
-      stageTitle: "SYSTEM FLOW",
-      stageNote: "Illustrative architecture",
-      sensorSub1: "Camera · Radar · UWB · Lidar",
-      sensorSub2: "Industrial sensors",
-      hostSub: "Inference · system-level workloads"
+      stageTitle: "SYSTEM FLOW"
     },
     index: [
       ["01", "Why Near-Sensor", "Move less data. React sooner."],
@@ -457,11 +453,7 @@ export const dictionaries = {
       ctaPrimary: "DODA 기술 보기",
       ctaSecondary: "회사 소개",
       builtFor: "BUILT FOR",
-      stageTitle: "SYSTEM FLOW",
-      stageNote: "개념 아키텍처",
-      sensorSub1: "Camera · Radar · UWB · Lidar",
-      sensorSub2: "산업용 센서",
-      hostSub: "추론 · 상위 시스템 연산"
+      stageTitle: "SYSTEM FLOW"
     },
     index: [
       ["01", "Why Near-Sensor", "데이터 이동은 줄이고, 반응은 더 빠르게"],
