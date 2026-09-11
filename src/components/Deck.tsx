@@ -41,7 +41,7 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
   const lead = dict.about.lead as TeamMember;
   const groups = dict.about.groups as readonly TeamGroup[];
   const milestones = dict.about.milestones as readonly Milestone[];
-  const news = [...(dict.news as readonly NewsEntry[])].sort(newestFirst).slice(0, 4);
+  const news = [...(dict.news as readonly NewsEntry[])].sort(newestFirst).slice(0, 7);
   const newsCopy = (key: string) => dict.newsCopy.items[key as keyof typeof dict.newsCopy.items] as NewsCopy;
   const leadResearch = lead.details[0]?.[1];
 
@@ -105,9 +105,12 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       </div>
     </Slide>,
 
+    // Lineage and the simulator share a slide: research, filed IP and "try it
+    // yourself" read as one three-part story, and each alone left the slide
+    // mostly empty below a two- or one-column grid.
     <Slide key="lineage" kicker={dict.doda.lineageKicker}>
       <h2>{dict.doda.lineageTitle}</h2>
-      <div className="slide-grid cols-2">
+      <div className="slide-grid cols-3">
         {lineage.map((item) => (
           <div className="slide-card" key={item.step}>
             <b>{item.step}</b>
@@ -122,13 +125,13 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
             )}
           </div>
         ))}
+        <div className="slide-card" key="simulator">
+          <b>{dict.doda.simulator.kicker}</b>
+          <h3>{dict.doda.simulator.title}</h3>
+          <p>{dict.doda.simulator.body}</p>
+          <div className="link">{dict.doda.simulator.href}</div>
+        </div>
       </div>
-    </Slide>,
-
-    <Slide key="simulator" kicker={dict.doda.simulator.kicker}>
-      <h2>{dict.doda.simulator.title}</h2>
-      <p className="slide-lead">{dict.doda.simulator.body}</p>
-      <p className="slide-sub slide-mono">{dict.doda.simulator.href}</p>
     </Slide>,
 
     <Slide key="team" kicker={dict.about.teamKicker}>
