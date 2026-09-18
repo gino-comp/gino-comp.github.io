@@ -17,7 +17,10 @@ import { useCallback, useEffect, useRef, useState, type DragEvent, type Keyboard
    container-query units and the fitted box is expressed in them too, so a
    scale factor computed on screen is exact on the printed 13.333in page. */
 
-export type DeckSlide = { id: string; label: string; node: ReactNode };
+// A slide with a `group` shares one toolbar chip with the others in that
+// group; the chip opens a menu to pick which of them are in.
+export type DeckSlide = { id: string; label: string; node: ReactNode; group?: string };
+export type DeckGroup = { id: string; label: string };
 export type DeckText = {
   export: string; fullscreen: string; back: string; backHref: string; hint: string;
   include: string; all: string; none: string; autofit: string;
@@ -104,11 +107,22 @@ function fitSlide(slide: HTMLElement, on: boolean) {
   slide.dataset.fill = fill.toFixed(2);
 }
 
-export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text: DeckText }) {
+export default function DeckShell({ slides, groups = [], text }: { slides: DeckSlide[]; groups?: DeckGroup[]; text: DeckText }) {
+  // `ids` are slide ids (what is in, and what the URL lists); `chipIds` are
+  // what the toolbar shows and orders — a group's slides collapse into one
+  // chip at the position of the group's first slide.
   const ids = slides.map((s) => s.id);
   const byId = Object.fromEntries(slides.map((s) => [s.id, s]));
+  const groupById = Object.fromEntries(groups.map((g) => [g.id, g]));
+  const members = (groupId: string) => slides.filter((s) => s.group === groupId).map((s) => s.id);
+  const chipIds = slides.flatMap((s, i) => {
+    if (!s.group || !groupById[s.group]) return [s.id];
+    return slides.findIndex((o) => o.group === s.group) === i ? [s.group] : [];
+  });
+  const expand = (chipId: string) => (groupById[chipId] ? members(chipId) : [chipId]);
   // Server renders everything on, in default order; stored choices apply after hydration.
-  const [order, setOrder] = useState<string[]>(ids);
+  const [order, setOrder] = useState<string[]>(chipIds);
+  const [menu, setMenu] = useState<string | null>(null);
   const [enabled, setEnabled] = useState<Record<string, boolean>>(() => Object.fromEntries(ids.map((id) => [id, true])));
   const [autofit, setAutofit] = useState(true);
   const [ready, setReady] = useState(false);
@@ -130,12 +144,13 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
     const params = new URLSearchParams(window.location.search);
     const fromUrl = parseList(ids, params.get("slides") ?? params.get("only"));
     if (fromUrl) {
-      setOrder(complete(ids, fromUrl));
+      const chipsFromUrl = fromUrl.map((id) => byId[id]?.group && groupById[byId[id].group!] ? byId[id].group! : id).filter((id, i, all) => all.indexOf(id) === i);
+      setOrder(complete(chipIds, chipsFromUrl));
       setEnabled(Object.fromEntries(ids.map((id) => [id, fromUrl.includes(id)])));
     } else {
-      const storedOrder = parseList(ids, window.localStorage.getItem(ORDER_KEY));
+      const storedOrder = parseList(chipIds, window.localStorage.getItem(ORDER_KEY));
       const storedOn = parseList(ids, window.localStorage.getItem(ENABLED_KEY));
-      if (storedOrder) setOrder(complete(ids, storedOrder));
+      if (storedOrder) setOrder(complete(chipIds, storedOrder));
       if (storedOn) setEnabled(Object.fromEntries(ids.map((id) => [id, storedOn.includes(id)])));
     }
     if (window.localStorage.getItem(FIT_KEY) === "0") setAutofit(false);
@@ -143,12 +158,23 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isDefault = order.every((id, i) => id === ids[i]) && ids.every((id) => enabled[id]);
+  const isDefault = order.every((id, i) => id === chipIds[i]) && ids.every((id) => enabled[id]);
+  const slideOrder = order.flatMap(expand);
+
+  // the group menu closes on a click elsewhere or Escape
+  useEffect(() => {
+    if (!menu) return;
+    const onDown = (e: MouseEvent) => { if (!(e.target as HTMLElement).closest(".deck-group")) setMenu(null); };
+    const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === "Escape") setMenu(null); };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("mousedown", onDown); document.removeEventListener("keydown", onKey); };
+  }, [menu]);
 
   // keep the URL and storage in step with the arrangement
   useEffect(() => {
     if (!ready) return;
-    const on = order.filter((id) => enabled[id]);
+    const on = slideOrder.filter((id) => enabled[id]);
     const url = new URL(window.location.href);
     url.searchParams.delete("only");
     if (isDefault) {
@@ -162,6 +188,7 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
     }
     window.history.replaceState(null, "", url.toString());
     window.localStorage.setItem(FIT_KEY, autofit ? "1" : "0");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, enabled, autofit, ready, isDefault]);
 
   const refit = useCallback(() => {
@@ -204,7 +231,8 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
   }, []);
 
   const setAll = (value: boolean) => setEnabled(Object.fromEntries(ids.map((id) => [id, value])));
-  const reset = () => { setOrder(ids); setEnabled(Object.fromEntries(ids.map((id) => [id, true]))); };
+  const reset = () => { setOrder(chipIds); setEnabled(Object.fromEntries(ids.map((id) => [id, true]))); };
+  const setMany = (list: string[], value: boolean) => setEnabled((prev) => ({ ...prev, ...Object.fromEntries(list.map((id) => [id, value])) }));
   const count = ids.filter((id) => enabled[id]).length;
 
   // --- drag and drop between chips
@@ -255,7 +283,54 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
         </div>
         <div className="deck-toolbar-row deck-include">
           <span className="deck-include-label">{text.include} · {count}/{ids.length}</span>
-          {order.map((id) => (
+          {order.map((id) => {
+            const group = groupById[id];
+            if (group) {
+              const list = members(id);
+              const onCount = list.filter((m) => enabled[m]).length;
+              return (
+                <div
+                  key={id}
+                  className={`deck-chip deck-group${dragging === id ? " is-dragging" : ""}${menu === id ? " is-open" : ""}`}
+                  data-on={onCount ? "1" : "0"}
+                  data-drop={drop?.id === id ? drop.place : undefined}
+                  draggable
+                  onDragStart={onDragStart(id)}
+                  onDragOver={onDragOver(id)}
+                  onDragLeave={() => setDrop((d) => (d?.id === id ? null : d))}
+                  onDrop={onDrop(id)}
+                  onDragEnd={onDragEnd}
+                  onKeyDown={onChipKey(id)}
+                >
+                  <span className="deck-grip" aria-hidden="true">⋮⋮</span>
+                  <input
+                    type="checkbox"
+                    checked={onCount === list.length}
+                    ref={(el) => { if (el) el.indeterminate = onCount > 0 && onCount < list.length; }}
+                    onChange={(e) => setMany(list, e.target.checked)}
+                    aria-label={group.label}
+                  />
+                  <button type="button" className="deck-group-button" aria-haspopup="menu" aria-expanded={menu === id} onClick={() => setMenu((m) => (m === id ? null : id))}>
+                    {group.label} · {onCount}/{list.length} <span aria-hidden="true">▾</span>
+                  </button>
+                  {menu === id ? (
+                    <div className="deck-menu" role="menu">
+                      {list.map((m) => (
+                        <label key={m} className="deck-menu-item" data-on={enabled[m] ? "1" : "0"}>
+                          <input type="checkbox" checked={!!enabled[m]} onChange={(e) => setEnabled({ ...enabled, [m]: e.target.checked })} />
+                          {byId[m].label}
+                        </label>
+                      ))}
+                      <div className="deck-menu-actions">
+                        <button type="button" className="deck-mini" onClick={() => setMany(list, true)}>{text.all}</button>
+                        <button type="button" className="deck-mini" onClick={() => setMany(list, false)}>{text.none}</button>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            }
+            return (
             <label
               key={id}
               className={`deck-chip${dragging === id ? " is-dragging" : ""}`}
@@ -273,7 +348,8 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
               <input type="checkbox" checked={!!enabled[id]} onChange={(e) => setEnabled({ ...enabled, [id]: e.target.checked })} />
               {byId[id].label}
             </label>
-          ))}
+            );
+          })}
           <button type="button" className="deck-mini" onClick={() => setAll(true)}>{text.all}</button>
           <button type="button" className="deck-mini" onClick={() => setAll(false)}>{text.none}</button>
           {!isDefault ? <button type="button" className="deck-mini deck-reset" onClick={reset}>{text.reset}</button> : null}
@@ -285,7 +361,7 @@ export default function DeckShell({ slides, text }: { slides: DeckSlide[]; text:
           hidden last item would leave the last visible slide forcing a blank
           trailing page. */}
       <div className={`deck-stack${presenting ? " is-presenting" : ""}`} ref={stack} tabIndex={-1}>
-        {order.filter((id) => enabled[id]).map((id, i, on) => (
+        {slideOrder.filter((id) => enabled[id]).map((id, i, on) => (
           <div key={id} className="deck-item" data-n={`${i + 1} / ${on.length}`}>
             {byId[id].node}
           </div>

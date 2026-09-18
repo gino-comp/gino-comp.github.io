@@ -594,6 +594,34 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .deck-mini:hover { color: #fff; }
 .deck-toolbar .button { cursor: pointer; }
 .deck-toolbar small { margin-left: auto; font-size: 12px; color: var(--text-3); }
+
+/* A group chip: one checkbox for the whole group, and a menu to pick members. */
+.deck-group { padding-right: 8px; cursor: grab; }
+.deck-group.is-open, .deck-group:hover { border-color: rgba(48,221,212,.34); }
+.deck-group-button { border: 0; background: transparent; color: inherit; font: inherit; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.deck-group-button span { font-size: 9px; color: var(--text-3); }
+.deck-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 60; min-width: 220px; display: grid; gap: 2px; padding: 8px; border: 1px solid var(--line); border-radius: 14px; background: rgba(11,16,23,.98); box-shadow: 0 22px 54px rgba(0,0,0,.4); cursor: default; }
+.deck-menu-item { display: flex; align-items: center; gap: 9px; padding: 7px 9px; border-radius: 9px; font-size: 12px; color: var(--text-2); cursor: pointer; }
+.deck-menu-item:hover { background: rgba(255,255,255,.05); color: #fff; }
+.deck-menu-item[data-on="1"] { color: #fff; }
+.deck-menu-item input { accent-color: var(--cyan); width: 14px; height: 14px; margin: 0; }
+.deck-menu-actions { display: flex; gap: 2px; margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--hairline); }
+.deck-menu-actions .deck-mini { margin-left: 0; }
+
+/* Lab note slide: copy and result tiles left, cover and comparison right. */
+.slide-lab-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3cqw; align-items: start; }
+.slide-lab .slide-lead { font-size: 1.25cqw; line-height: 1.6; max-width: none; }
+.slide-lab-stats { margin-top: 1.8cqw; display: grid; grid-template-columns: 1fr 1fr; gap: .8cqw; }
+.slide-lab-stats > div { border: 1px solid var(--line); border-radius: 1cqw; background: #0c121a; padding: 1.1cqw 1.3cqw; display: grid; gap: .3cqw; }
+.slide-lab-stats b { font-size: 2cqw; letter-spacing: -.03em; line-height: 1.05; color: #fff; font-variant-numeric: tabular-nums; word-break: keep-all; }
+.slide-lab-stats span { font-size: .95cqw; font-weight: 600; color: var(--text-2); word-break: keep-all; }
+.slide-lab-media { display: grid; gap: 1cqw; }
+.slide-lab-media > img { width: 100%; height: auto; border-radius: 1cqw; border: 1px solid var(--line); display: block; }
+.slide-lab-compare { border: 1px solid var(--line); border-radius: 1cqw; overflow: hidden; background: #0c121a; }
+.slide-lab-compare > div { display: grid; grid-template-columns: 1fr 1fr; padding: .7cqw 1cqw .5cqw; font-size: .8cqw; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--text-3); }
+.slide-lab-compare > div span:last-child { color: var(--accent-text); }
+.slide-lab-compare img { width: 100%; height: auto; display: block; }
+.slide-lab-url { margin: auto 0 0; padding-top: 1.2cqw; font-size: 1cqw; }
 .deck-stack { display: grid; gap: 26px; width: min(1240px, calc(100% - 48px)); margin: 0 auto; }
 .slide { container-type: inline-size; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); padding: 4.2cqw 5cqw; scroll-snap-align: start; scroll-margin-top: 150px; }
 /* The measured, scaled box; auto-fit sets its width, height and transform. */

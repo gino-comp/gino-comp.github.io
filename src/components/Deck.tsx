@@ -3,6 +3,7 @@ import { ConventionalFlow, RidmFlow, type Conventional, type Ridm } from "@/comp
 import DeckShell from "@/components/DeckShell";
 import { DataMovementStats, DataMovementSvg, type Why } from "@/components/DataMovement";
 import { formatDate, newestFirst } from "@/components/News";
+import { labNotes } from "@/lib/lab-notes";
 import {
   siteUrl,
   type AcronymPart,
@@ -49,7 +50,7 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
   const newsCopy = (key: string) => dict.newsCopy.items[key as keyof typeof dict.newsCopy.items] as NewsCopy;
   const leadResearch = lead.details[0]?.[1];
 
-  const slides: { id: string; node: ReactNode }[] = [
+  const slides: { id: string; node: ReactNode; group?: string; label?: string }[] = [
     { id: "title", node: <Slide key="title" id="title" className="slide-title">
       <div className="slide-kicker">{dict.hero.label}</div>
       <h1>{dict.hero.lead} <span>{dict.hero.accent}</span></h1>
@@ -135,6 +136,43 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       <p className="slide-sub slide-mono">{dict.doda.simulator.href}</p>
     </Slide> },
 
+    // One slide per lab note, read from the same registry as /lab-notes, so a
+    // new project note is in the deck without touching it. They share one
+    // toolbar chip with a menu to pick the projects.
+    ...labNotes.map((note) => {
+      const copy = note.copy[locale];
+      const gif = copy.sections.flatMap((s) => s.figures ?? []).map((f) => f.media).find((m) => m.kind === "compare");
+      const id = `lab-${note.slug}`;
+      return { id, group: "lab", label: copy.title, node: (
+        <Slide key={id} id={id} kicker={`${dict.labNotes.kicker} · ${copy.status} · ${dict.labNotes.updated} ${formatDate(note.updated, locale)}`} className="slide-lab" fitMax={1.2}>
+          <div className="slide-lab-grid">
+            <div className="slide-lab-copy">
+              <h2>{copy.title}</h2>
+              <p className="slide-sub">{copy.tagline}</p>
+              <p className="slide-lead">{copy.summary}</p>
+              <div className="slide-lab-stats">
+                {copy.stats.map((stat) => (
+                  <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>
+                ))}
+              </div>
+            </div>
+            <div className="slide-lab-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={note.cover.src} alt="" />
+              {gif ? (
+                <div className="slide-lab-compare">
+                  <div><span>{gif.left}</span><span>{gif.right}</span></div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={gif.src} alt={gif.alt} />
+                </div>
+              ) : null}
+            </div>
+          </div>
+          <p className="slide-lab-url slide-mono">{siteUrl}/{locale}/lab-notes/{note.slug}/</p>
+        </Slide>
+      ) };
+    }),
+
     { id: "team", node: <Slide key="team" id="team" kicker={dict.about.teamKicker} fitMax={1.45}>
       <h2>{dict.about.teamTitle}</h2>
       <div className="slide-team">
@@ -211,7 +249,8 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
   const labels = dict.deck.slides as Record<string, string>;
   return (
     <DeckShell
-      slides={slides.map((s) => ({ ...s, label: labels[s.id] ?? s.id }))}
+      slides={slides.map((s) => ({ ...s, label: s.label ?? labels[s.id] ?? s.id }))}
+      groups={[{ id: "lab", label: labels.lab }]}
       text={{
         export: dict.deck.export,
         fullscreen: dict.deck.fullscreen,

@@ -159,6 +159,11 @@ browser's print-to-PDF against the deck's print stylesheet: one slide per page,
 dark theme preserved (`print-color-adjust: exact`). Reached from the Contact
 page; unlinked elsewhere, absent from the sitemap and `noindex`.
 
+Lab notes are in the deck as one slide per project, read from the same
+registry as `/lab-notes`. They share a single **Lab Notes** chip in the Include
+row: its checkbox turns the whole group on or off, and clicking the chip opens
+a menu to pick which projects are in. The group moves as one when dragged.
+
 **Full screen** presents the deck one slide per screen, letterboxed to 16:9;
 arrow keys or scrolling move between slides and Esc leaves. The toolbar has a
 chip per slide: tick to include, drag to reorder (or focus
