@@ -4,6 +4,7 @@ import type { Locale, Dictionary } from "@/lib/i18n";
 export default function ExploreSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const cards = [
     { href: `/${locale}/technology`, label: dict.nav.technology, title: dict.doda.title, body: dict.doda.desc },
+    { href: `/${locale}/lab-notes`, label: dict.nav.labNotes, title: dict.labNotes.title, body: dict.labNotes.desc },
     { href: `/${locale}/about`, label: dict.nav.about, title: dict.about.title, body: dict.about.desc },
     { href: `/${locale}/news`, label: dict.nav.news, title: dict.newsCopy.title, body: dict.newsCopy.desc }
   ];

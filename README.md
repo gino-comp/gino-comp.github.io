@@ -22,6 +22,8 @@ Production-oriented Next.js implementation of the RiDM Technology website concep
 
 /ko                     /en
 /ko/technology          /en/technology
+/ko/lab-notes           /en/lab-notes   (one living note per project)
+/ko/lab-notes/<slug>    /en/lab-notes/<slug>
 /ko/applications        /en/applications
 /ko/research            /en/research
 /ko/news                /en/news
@@ -130,6 +132,18 @@ points at a Korean outlet in `ko` and an English one in `en`. A date carries onl
 known (`"2026"`, `"2026-03"` or `"2026-03-14"`); the page renders and sorts each
 entry at that precision, newest first, so a new entry can be added anywhere in
 the list.
+
+### Lab Notes
+
+`/lab-notes` keeps one living note per project, updated in place rather than
+appended to as a feed, so a single URL can be linked from a deck and stay
+current. Each note is a file in `src/content/lab-notes/<slug>.ts` that carries
+its facts once (slug, `updated`, cover, media, stats) and its prose under
+`copy.en` / `copy.ko`, in the same fixed sections for every project. Register
+a new note in `src/lib/lab-notes.ts` (`labNotes`, index order) and put its
+media under `public/lab-notes/<slug>/`. Motion goes in as GIFs through a plain
+`<img>`; stills through `next/image`. Adding an entry to the note's
+`changelog` is how an update is dated.
 
 The site components live in:
 

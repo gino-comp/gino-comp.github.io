@@ -10,6 +10,7 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ridm.tec
 const common = {
   nav: {
     technology: "Technology",
+    labNotes: "Lab Notes",
     applications: "Applications",
     research: "Research",
     news: "What’s New",
@@ -133,6 +134,34 @@ export const dictionaries = {
       desc:
         "The architecture, the team and the latest updates each have a dedicated page.",
       more: "Learn more"
+    },
+    labNotes: {
+      kicker: "LAB NOTES",
+      title: "One living note per project.",
+      desc:
+        "Each project keeps a single note that is updated in place: what it is, the latest demo, the numbers, and a changelog of what changed. Link to it, and it stays current.",
+      updated: "Updated",
+      open: "Open the note",
+      back: "All lab notes",
+      results: "KEY RESULTS",
+      team: "TEAM",
+      changelog: "Changelog",
+      contents: "ON THIS PAGE",
+      pipeline: {
+        cpuLane: "CPU PROCESSING",
+        dodaLane: "DODA + CPU",
+        input: "Input image",
+        arriving: "Pixel-by-pixel arrival",
+        preprocess: "Preprocess",
+        application: "Application",
+        output: "Output",
+        done: "DONE",
+        waits: "CPU waits for the complete frame.",
+        streams: "Starts with the first pixel",
+        preprocessed: "Preprocessed",
+        speedup: "17× preprocessing speedup",
+        earlier: "Finishes earlier"
+      }
     },
     why: {
       kicker: "01 / WHY IT MATTERS",
@@ -511,6 +540,34 @@ export const dictionaries = {
       desc:
         "아키텍처, 팀 소개, 최신 소식은 각 페이지에서 자세히 확인할 수 있습니다.",
       more: "자세히 보기"
+    },
+    labNotes: {
+      kicker: "LAB NOTES",
+      title: "프로젝트마다 하나의 살아있는 노트.",
+      desc:
+        "각 프로젝트는 하나의 노트를 유지하고 그 자리에서 갱신합니다. 무엇인지, 최신 데모, 수치, 그리고 무엇이 바뀌었는지의 변경 기록까지. 링크는 그대로, 내용은 항상 최신입니다.",
+      updated: "갱신",
+      open: "노트 열기",
+      back: "전체 랩 노트",
+      results: "핵심 결과",
+      team: "팀",
+      changelog: "변경 기록",
+      contents: "이 페이지에서",
+      pipeline: {
+        cpuLane: "CPU 처리",
+        dodaLane: "DODA + CPU",
+        input: "입력 이미지",
+        arriving: "픽셀 단위 도착",
+        preprocess: "전처리",
+        application: "애플리케이션",
+        output: "출력",
+        done: "완료",
+        waits: "CPU는 프레임 전체를 기다립니다.",
+        streams: "첫 픽셀부터 시작",
+        preprocessed: "전처리 결과",
+        speedup: "전처리 17× 가속",
+        earlier: "더 일찍 끝남"
+      }
     },
     why: {
       kicker: "01 / WHY IT MATTERS",
