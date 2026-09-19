@@ -67,6 +67,7 @@ export const edgefuse: LabNote = {
         {
           id: "adaptive",
           title: "Adaptive view switching",
+          deck: true,
           body: [
             "Beyond synchronization, EdgeFuse adjusts the fusion weight between EO and IR continuously based on ambient brightness — no fixed threshold, just a smooth blend that shifts as the lighting changes. When light is good, the visible view dominates with thermal picture-in-picture; as light falls, the fused thermal view takes over with the visible as PIP.",
             "The switch is immediate: because the decision is made close to the sensors on the FPGA, the application sees the already-switched stream with no extra latency."
@@ -155,6 +156,7 @@ export const edgefuse: LabNote = {
         {
           id: "adaptive",
           title: "적응형 뷰 전환",
+          deck: true,
           body: [
             "동기화에 더해, EdgeFuse는 주변 밝기에 따라 EO와 IR의 융합 가중치를 연속적으로 조정합니다. 고정된 임계값 없이, 조명이 변하는 대로 블렌드가 부드럽게 이동합니다. 빛이 충분하면 가시광 뷰가 주를 이루고 열화상이 PIP로 표시되고, 빛이 줄어들면 융합된 열화상 뷰가 전면에, 가시광이 PIP로 바뀝니다.",
             "전환은 즉각적입니다. FPGA에서 센서 가까이 판단이 이루어지기 때문에 애플리케이션은 이미 전환된 스트림을 추가 지연 없이 받습니다."

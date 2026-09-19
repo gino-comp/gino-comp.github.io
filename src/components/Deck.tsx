@@ -187,6 +187,28 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
         .map((section) => {
           const sid = `${id}-${section.id}`;
           const hasFigures = !!section.figures?.length;
+          // A single photo or GIF sits beside the copy instead of above it: at
+          // full width it is taller than the slide and pushes the text off.
+          const only = section.figures?.length === 1 ? section.figures[0] : undefined;
+          if (only && (only.media.kind === "gif" || only.media.kind === "image")) {
+            return { id: sid, group: "lab", label: `${copy.title} · ${section.title}`, node: (
+              <Slide key={sid} id={sid} kicker={kicker} className="slide-lab slide-lab-side" fitMax={1.15}>
+                <h2>{section.title}</h2>
+                <div className="slide-lab-side-grid">
+                  <div className="slide-lab-side-copy">
+                    {section.body?.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+                    {section.bullets ? (
+                      <ul className="slide-costs">{section.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+                    ) : null}
+                  </div>
+                  <figure className="slide-lab-side-media">
+                    <DeckFigure figure={only} />
+                    {only.caption ? <figcaption>{only.caption}</figcaption> : null}
+                  </figure>
+                </div>
+              </Slide>
+            ) };
+          }
           return { id: sid, group: "lab", label: `${copy.title} · ${section.title}`, node: (
             <Slide key={sid} id={sid} kicker={kicker} className="slide-lab slide-lab-section">
               <h2>{section.title}</h2>

@@ -631,6 +631,14 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .slide-lab-img { width: 100%; height: auto; border-radius: 1cqw; border: 1px solid var(--line); display: block; }
 .slide-lab-section .slide-lab-media { margin-top: 1.5cqw; }
 .slide-lab-section .slide-lead-tight { max-width: none; }
+/* Fixed cqw columns: auto-fit widens the body as it shrinks it, so a fluid image column would grow against it. */
+.slide-lab-side h2 { max-width: none; }
+.slide-lab-side-grid { margin-top: 2cqw; display: grid; grid-template-columns: 31cqw 55cqw; justify-content: space-between; align-items: center; }
+.slide-lab-side-copy p { margin: 0 0 1.2cqw; font-size: 1.25cqw; line-height: 1.6; color: var(--text-2); word-break: keep-all; }
+.slide-lab-side-copy p:first-child { font-size: 1.4cqw; line-height: 1.5; color: var(--text); padding-left: 1.2cqw; border-left: .25cqw solid var(--accent-text); }
+.slide-lab-side-media { margin: 0; border: 1px solid var(--line); border-radius: 1.1cqw; overflow: hidden; background: #05080c; box-shadow: 0 2cqw 5cqw rgba(0,0,0,.45); }
+.slide-lab-side-media .slide-lab-img { border: 0; border-radius: 0; }
+.slide-lab-side-media figcaption { padding: .8cqw 1.2cqw; font-size: .95cqw; line-height: 1.45; color: var(--text-3); border-top: 1px solid var(--line); }
 .slide-lab-url { margin: auto 0 0; padding-top: 1.2cqw; font-size: 1cqw; }
 .deck-stack { display: grid; gap: 26px; width: min(1240px, calc(100% - 48px)); margin: 0 auto; }
 .slide { container-type: inline-size; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); padding: 4.2cqw 5cqw; scroll-snap-align: start; scroll-margin-top: 150px; }
