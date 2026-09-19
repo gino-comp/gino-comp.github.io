@@ -52,7 +52,7 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
   const newsCopy = (key: string) => dict.newsCopy.items[key as keyof typeof dict.newsCopy.items] as NewsCopy;
   const leadResearch = lead.details[0]?.[1];
 
-  const slides: { id: string; node: ReactNode; group?: string; label?: string }[] = [
+  const slides: { id: string; node: ReactNode; group?: string; bundle?: { id: string; label: string }; label?: string }[] = [
     { id: "title", node: <Slide key="title" id="title" className="slide-title">
       <div className="slide-kicker">{dict.hero.label}</div>
       <h1>{dict.hero.lead} <span>{dict.hero.accent}</span></h1>
@@ -138,30 +138,47 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       <p className="slide-sub slide-mono">{dict.doda.simulator.href}</p>
     </Slide> },
 
-    // One overview slide plus one slide per deck-flagged section, read from
-    // the same registry as /lab-notes. They share one toolbar chip with a
-    // menu to pick which slides are in.
+    // A lab note in the deck is everything its page shows: one overview
+    // slide (head, results, to-dos, team) and one slide per section, read from
+    // the same registry as /lab-notes. All of a note's slides are one entry
+    // in the Lab Notes menu, so a project is in or out as a whole.
     ...labNotes.flatMap((note) => {
       const copy = note.copy[locale];
       const id = `lab-${note.slug}`;
       const kicker = `${dict.labNotes.kicker} · ${copy.title}`;
+      const bundle = { id, label: copy.title };
 
       function DeckFigure({ figure }: { figure: LabFigure }) {
         const m = figure.media;
-        if (m.kind === "pipeline") return <div className="slide-figure"><StreamingPipeline labels={dict.labNotes.pipeline} /></div>;
-        if (m.kind === "compare") return (
-          <div className="slide-lab-compare">
-            <div><span>{m.left}</span><span>{m.right}</span></div>
+        let inner: ReactNode;
+        if (m.kind === "pipeline") inner = <div className="slide-lab-diagram"><StreamingPipeline labels={dict.labNotes.pipeline} /></div>;
+        else if (m.kind === "compare" && m.half) inner = (
+          // one half of a side-by-side recording: the image is laid out at
+          // twice the box and the other half is clipped away
+          <div className="slide-lab-half" data-half={m.half}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={m.src} alt={m.alt} />
+            <img src={m.src} alt={m.alt} width={m.width} height={m.height} />
           </div>
         );
+        else if (m.kind === "compare") inner = (
+          <>
+            <div className="slide-lab-labels"><span>{m.left}</span><span>{m.right}</span></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={m.src} alt={m.alt} width={m.width} height={m.height} />
+          </>
+        );
         // eslint-disable-next-line @next/next/no-img-element
-        return <img className="slide-lab-img" src={m.src} alt={m.alt} />;
+        else inner = <img src={m.src} alt={m.alt} width={m.width} height={m.height} />;
+        return (
+          <figure className="slide-lab-fig">
+            {inner}
+            {figure.caption ? <figcaption>{figure.caption}</figcaption> : null}
+          </figure>
+        );
       }
 
-      const overview = { id, group: "lab", label: copy.title, node: (
-        <Slide key={id} id={id} kicker={`${kicker} · ${copy.status} · ${dict.labNotes.updated} ${formatDate(note.updated, locale)}`} className="slide-lab" fitMax={1.2}>
+      const overview = { id, group: "lab", bundle, label: copy.title, node: (
+        <Slide key={id} id={id} kicker={`${kicker} · ${copy.status} · ${dict.labNotes.updated} ${formatDate(note.updated, locale)}`} className="slide-lab" fitMax={1}>
           <div className="slide-lab-grid">
             <div className="slide-lab-copy">
               <h2>{copy.title}</h2>
@@ -169,61 +186,57 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
               <p className="slide-lead">{copy.summary}</p>
               <div className="slide-lab-stats">
                 {copy.stats.map((stat) => (
-                  <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>
+                  <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span>{stat.note ? <small>{stat.note}</small> : null}</div>
                 ))}
               </div>
             </div>
             <div className="slide-lab-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={note.cover.src} alt="" />
+              <img src={note.cover.src} alt="" width={note.cover.width} height={note.cover.height} />
+              {copy.todos?.length ? (
+                <div className="slide-lab-todo">
+                  <b>TODO</b>
+                  <ol>{copy.todos.map((todo) => <li key={todo.body}>{todo.body}</li>)}</ol>
+                </div>
+              ) : null}
             </div>
           </div>
-          <p className="slide-lab-url slide-mono">{siteUrl}/{locale}/lab-notes/{note.slug}/</p>
+          <p className="slide-lab-foot">
+            {copy.team ? <span><b>{dict.labNotes.team}</b> {copy.team}</span> : null}
+            <span className="slide-mono">{siteUrl}/{locale}/lab-notes/{note.slug}/</span>
+          </p>
         </Slide>
       ) };
 
-      const sectionSlides = copy.sections
-        .filter((s) => s.deck)
-        .map((section) => {
-          const sid = `${id}-${section.id}`;
-          const hasFigures = !!section.figures?.length;
-          // A single photo or GIF sits beside the copy instead of above it: at
-          // full width it is taller than the slide and pushes the text off.
-          const only = section.figures?.length === 1 ? section.figures[0] : undefined;
-          if (only && (only.media.kind === "gif" || only.media.kind === "image")) {
-            return { id: sid, group: "lab", label: `${copy.title} · ${section.title}`, node: (
-              <Slide key={sid} id={sid} kicker={kicker} className="slide-lab slide-lab-side" fitMax={1.15}>
-                <h2>{section.title}</h2>
-                <div className="slide-lab-side-grid">
-                  <div className="slide-lab-side-copy">
-                    {section.body?.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
-                    {section.bullets ? (
-                      <ul className="slide-costs">{section.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
-                    ) : null}
-                  </div>
-                  <figure className="slide-lab-side-media">
-                    <DeckFigure figure={only} />
-                    {only.caption ? <figcaption>{only.caption}</figcaption> : null}
-                  </figure>
-                </div>
-              </Slide>
-            ) };
-          }
-          return { id: sid, group: "lab", label: `${copy.title} · ${section.title}`, node: (
-            <Slide key={sid} id={sid} kicker={kicker} className="slide-lab slide-lab-section">
-              <h2>{section.title}</h2>
-              {hasFigures ? (
-                <div className="slide-lab-media">
-                  {section.figures!.map((fig, j) => <DeckFigure key={j} figure={fig} />)}
-                </div>
+      const sectionSlides = copy.sections.map((section, i) => {
+        const sid = `${id}-${section.id}`;
+        const figures = section.figures ?? [];
+        const first = figures[0]?.media;
+        // Layout follows the media. Media slides are laid out in fixed cqw
+        // sizes against the full 100cqw body and never grow: auto-fit changes
+        // the body's width as it scales, so fluid media would fight it and
+        // fixed media would overflow a narrowed body.
+        // a full side-by-side recording runs wide under the copy, two photos
+        // pair up under it, anything else sits beside the copy.
+        const layout = figures.length === 0 ? "text" : figures.length > 1 ? "pair" : first?.kind === "compare" && !first.half ? "wide" : "side";
+        const text = (
+          <div className="slide-lab-text">
+            {section.body?.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+            {section.bullets ? <ol>{section.bullets.map((b) => <li key={b}>{b}</li>)}</ol> : null}
+          </div>
+        );
+        return { id: sid, group: "lab", bundle, label: `${copy.title} · ${section.title}`, node: (
+          <Slide key={sid} id={sid} kicker={`${kicker} · ${String(i + 1).padStart(2, "0")}/${String(copy.sections.length).padStart(2, "0")}`} className={`slide-lab slide-lab-section is-${layout}${first?.kind === "pipeline" ? " is-diagram" : first?.kind === "compare" && first.half ? " is-half" : ""}`} fitMax={layout === "text" ? 1.5 : 1}>
+            <h2>{section.title}</h2>
+            <div className="slide-lab-body">
+              {text}
+              {figures.length ? (
+                <div className="slide-lab-figs">{figures.map((fig, j) => <DeckFigure key={j} figure={fig} />)}</div>
               ) : null}
-              {section.body?.map((p) => <p key={p.slice(0, 40)} className="slide-lead-tight">{p}</p>)}
-              {section.bullets ? (
-                <ul className="slide-costs">{section.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
-              ) : null}
-            </Slide>
-          ) };
-        });
+            </div>
+          </Slide>
+        ) };
+      });
 
       return [overview, ...sectionSlides];
     }),

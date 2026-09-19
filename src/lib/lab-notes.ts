@@ -3,7 +3,8 @@ import { edgefuse } from "@/content/lab-notes/edgefuse";
 
 /* Lab Notes: one living note per project, updated in place rather than
    appended to as a feed. Each note is a fixed set of sections so the page for
-   every project reads the same way, and a changelog at the bottom carries the
+   every project reads the same way, and every section is also a slide in the
+   deck (the page and the deck carry the same material), and a changelog at the bottom carries the
    history that a feed would otherwise have. Facts (slug, dates, media, stats)
    live once on the note; prose is translated under `copy[locale]`. */
 
@@ -22,8 +23,6 @@ export type LabSection = {
   body?: readonly string[];
   figures?: readonly LabFigure[];
   bullets?: readonly string[];
-  // Mark true to include this section as a slide on the /deck page.
-  deck?: boolean;
 };
 
 export type LabNoteCopy = {

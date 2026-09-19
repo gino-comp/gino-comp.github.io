@@ -33,7 +33,6 @@ export const edgefuse: LabNote = {
         {
           id: "motivation",
           title: "Multi-modal sensing on the edge is getting harder",
-          deck: true,
           body: [
             "Multi-modal sensing is becoming the norm on edge devices such as robots. Even for something as simple as two sensors — a visible-light camera and a thermal sensor — a CPU pipeline is already too slow just for image resizing. The frames arrive faster than the CPU can scale and align them, so the two streams fall out of sync.",
             "Now imagine adding LiDAR, radar, or SAR. The preprocessing burden grows with every sensor added, and the CPU falls further behind. This is a structural problem, not a tuning problem."
@@ -45,7 +44,6 @@ export const edgefuse: LabNote = {
         {
           id: "approach",
           title: "Move preprocessing next to the sensors with DODA",
-          deck: true,
           body: [
             "Instead of sending raw frames to the CPU, we deploy a DODA overlay in the FPGA fabric between the sensors and the application core. As pixels arrive from the visible-light camera (45 FPS, 1280×960) and the thermal sensor (9 FPS, 160×120), DODA resizes and time-aligns the two streams on the fly — before the first byte reaches the ARM core.",
             "The preprocessed, fused stream lands on the CPU already synchronized. The application starts the moment the last pixel of each frame arrives — 19× faster preprocessing than the CPU-only baseline."
@@ -67,7 +65,6 @@ export const edgefuse: LabNote = {
         {
           id: "adaptive",
           title: "Adaptive view switching",
-          deck: true,
           body: [
             "Beyond synchronization, EdgeFuse adjusts the fusion weight between EO and IR continuously based on ambient brightness — no fixed threshold, just a smooth blend that shifts as the lighting changes. When light is good, the visible view dominates with thermal picture-in-picture; as light falls, the fused thermal view takes over with the visible as PIP.",
             "The switch is immediate: because the decision is made close to the sensors on the FPGA, the application sees the already-switched stream with no extra latency."
@@ -90,7 +87,6 @@ export const edgefuse: LabNote = {
         {
           id: "future-work",
           title: "What comes next",
-          deck: true,
           body: [
             "This prototype was built on a tight timeline. The current 19× speedup is only the floor — the architecture has much more headroom. Two near-term priorities:"
           ],
@@ -114,7 +110,7 @@ export const edgefuse: LabNote = {
       ],
       todos: [
         { body: "FPGA 위 칼만 필터 기반 센서 융합" },
-        { body: "렌즈 왜곡 보정을 위한 EO/IR 기하학적 교���" },
+        { body: "렌즈 왜곡 보정을 위한 EO/IR 기하학적 교정" },
         { body: "목표: CPU 단독 기준선 대비 약 100× 가속" }
       ],
       team: "이진호 · Tingting Xiang · Burin Amornpaisannon",
@@ -122,7 +118,6 @@ export const edgefuse: LabNote = {
         {
           id: "motivation",
           title: "엣지 디바이스의 멀티모달 센싱, 점점 복잡해진다",
-          deck: true,
           body: [
             "로봇과 같은 엣지 디바이스에서 멀티모달 센싱은 이미 표준이 되어가고 있습니다. 가시광 카메라와 열화상 센서 두 개만 써도 이미지 리사이즈에 CPU가 버거워집니다. 프레임이 도착하는 속도를 CPU가 따라가지 못하면서 두 스트림은 점점 어긋납니다.",
             "여기에 LiDAR, 레이더, SAR까지 더해지면 어떻게 될까요? 센서가 늘어날수록 전처리 부담은 선형이 아닌 방식으로 커집니다. 이것은 튜닝으로 해결할 수 있는 문제가 아닙니다."
@@ -134,7 +129,6 @@ export const edgefuse: LabNote = {
         {
           id: "approach",
           title: "DODA로 전처리를 센서 바로 옆으로",
-          deck: true,
           body: [
             "원시 프레임을 CPU로 보내는 대신, FPGA 패브릭에 DODA 오버레이를 배치해 센서와 애플리케이션 코어 사이에 둡니다. 가시광 카메라(45 FPS, 1280×960)와 열화상 센서(9 FPS, 160×120)에서 픽셀이 도착하는 즉시 DODA가 리사이즈와 시간 정렬을 처리합니다. ARM 코어에는 이미 동기화된 스트림 하나만 전달됩니다.",
             "마지막 픽셀이 도착하는 순간 전처리가 완료됩니다 — CPU 단독 기준선 대비 전처리 19× 가속."
@@ -156,7 +150,6 @@ export const edgefuse: LabNote = {
         {
           id: "adaptive",
           title: "적응형 뷰 전환",
-          deck: true,
           body: [
             "동기화에 더해, EdgeFuse는 주변 밝기에 따라 EO와 IR의 융합 가중치를 연속적으로 조정합니다. 고정된 임계값 없이, 조명이 변하는 대로 블렌드가 부드럽게 이동합니다. 빛이 충분하면 가시광 뷰가 주를 이루고 열화상이 PIP로 표시되고, 빛이 줄어들면 융합된 열화상 뷰가 전면에, 가시광이 PIP로 바뀝니다.",
             "전환은 즉각적입니다. FPGA에서 센서 가까이 판단이 이루어지기 때문에 애플리케이션은 이미 전환된 스트림을 추가 지연 없이 받습니다."
@@ -179,7 +172,6 @@ export const edgefuse: LabNote = {
         {
           id: "future-work",
           title: "다음 단계",
-          deck: true,
           body: [
             "이 프로토타입은 촉박한 일정 속에서 완성되었습니다. 현재의 19× 가속은 시작에 불과합니다. 두 가지 근접 목표:"
           ],

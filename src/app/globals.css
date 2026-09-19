@@ -616,30 +616,48 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .deck-menu-actions .deck-mini { margin-left: 0; }
 
 /* Lab note slide: copy and result tiles left, cover and comparison right. */
-.slide-lab-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3cqw; align-items: start; }
-.slide-lab .slide-lead { font-size: 1.25cqw; line-height: 1.6; max-width: none; }
+.slide-lab-grid { display: grid; grid-template-columns: 52cqw 44cqw; justify-content: space-between; align-items: start; }
+.slide-lab .slide-lead { font-size: 1.4cqw; line-height: 1.6; max-width: none; }
 .slide-lab-stats { margin-top: 1.8cqw; display: grid; grid-template-columns: 1fr 1fr; gap: .8cqw; }
 .slide-lab-stats > div { border: 1px solid var(--line); border-radius: 1cqw; background: #0c121a; padding: 1.1cqw 1.3cqw; display: grid; gap: .3cqw; }
 .slide-lab-stats b { font-size: 2cqw; letter-spacing: -.03em; line-height: 1.05; color: #fff; font-variant-numeric: tabular-nums; word-break: keep-all; }
 .slide-lab-stats span { font-size: .95cqw; font-weight: 600; color: var(--text-2); word-break: keep-all; }
 .slide-lab-media { display: grid; gap: 1cqw; }
 .slide-lab-media > img { width: 100%; height: auto; border-radius: 1cqw; border: 1px solid var(--line); display: block; }
-.slide-lab-compare { border: 1px solid var(--line); border-radius: 1cqw; overflow: hidden; background: #0c121a; }
-.slide-lab-compare > div { display: grid; grid-template-columns: 1fr 1fr; padding: .7cqw 1cqw .5cqw; font-size: .8cqw; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--text-3); }
-.slide-lab-compare > div span:last-child { color: var(--accent-text); }
-.slide-lab-compare img { width: 100%; height: auto; display: block; }
-.slide-lab-img { width: 100%; height: auto; border-radius: 1cqw; border: 1px solid var(--line); display: block; }
-.slide-lab-section .slide-lab-media { margin-top: 1.5cqw; }
-.slide-lab-section .slide-lead-tight { max-width: none; }
-/* Fixed cqw columns: auto-fit widens the body as it shrinks it, so a fluid image column would grow against it. */
-.slide-lab-side h2 { max-width: none; }
-.slide-lab-side-grid { margin-top: 2cqw; display: grid; grid-template-columns: 31cqw 55cqw; justify-content: space-between; align-items: center; }
-.slide-lab-side-copy p { margin: 0 0 1.2cqw; font-size: 1.25cqw; line-height: 1.6; color: var(--text-2); word-break: keep-all; }
-.slide-lab-side-copy p:first-child { font-size: 1.4cqw; line-height: 1.5; color: var(--text); padding-left: 1.2cqw; border-left: .25cqw solid var(--accent-text); }
-.slide-lab-side-media { margin: 0; border: 1px solid var(--line); border-radius: 1.1cqw; overflow: hidden; background: #05080c; box-shadow: 0 2cqw 5cqw rgba(0,0,0,.45); }
-.slide-lab-side-media .slide-lab-img { border: 0; border-radius: 0; }
-.slide-lab-side-media figcaption { padding: .8cqw 1.2cqw; font-size: .95cqw; line-height: 1.45; color: var(--text-3); border-top: 1px solid var(--line); }
-.slide-lab-url { margin: auto 0 0; padding-top: 1.2cqw; font-size: 1cqw; }
+.slide-lab-stats small { font-size: .85cqw; line-height: 1.4; color: var(--text-3); word-break: keep-all; }
+.slide-lab-todo { border: 1px dashed var(--line); border-radius: 1cqw; padding: 1.1cqw 1.4cqw; }
+.slide-lab-todo > b { display: block; font-size: .8cqw; letter-spacing: .14em; color: var(--accent-text); margin-bottom: .6cqw; }
+.slide-lab-todo ol { margin: 0; padding-left: 1.4cqw; display: grid; gap: .35cqw; font-size: 1.1cqw; line-height: 1.45; color: var(--text-2); word-break: keep-all; }
+.slide-lab-foot { margin: auto 0 0; padding-top: 1.2cqw; display: flex; justify-content: space-between; gap: 2cqw; font-size: 1cqw; color: var(--text-2); }
+.slide-lab-foot b { font-size: .8cqw; letter-spacing: .14em; color: var(--text-3); margin-right: .6cqw; }
+/* Section slides. Every size is a fixed cqw: auto-fit widens the body as it shrinks it, so fluid media would grow against it. */
+.slide-lab-section h2 { max-width: none; font-size: 2.9cqw; }
+.slide-lab-body { margin-top: 2cqw; display: grid; gap: 1.8cqw; }
+.slide-lab-text p { margin: 0 0 1.1cqw; font-size: 1.25cqw; line-height: 1.6; color: var(--text-2); word-break: keep-all; }
+.slide-lab-text p:first-child { font-size: 1.4cqw; line-height: 1.5; color: var(--text); padding-left: 1.2cqw; border-left: .25cqw solid var(--accent-text); }
+.slide-lab-text p:last-child { margin-bottom: 0; }
+.slide-lab-text ol { list-style: none; counter-reset: lab; margin: 1.6cqw 0 0; padding: 0; display: grid; gap: 1cqw; }
+.slide-lab-text li { counter-increment: lab; border: 1px solid var(--line); border-radius: 1cqw; background: #0c121a; padding: 1.3cqw 1.4cqw; font-size: 1.25cqw; line-height: 1.5; color: var(--text); word-break: keep-all; }
+.slide-lab-text li::before { content: counter(lab, decimal-leading-zero); display: block; font-size: .85cqw; letter-spacing: .14em; font-weight: 700; color: var(--accent-text); margin-bottom: .6cqw; }
+.slide-lab-fig { margin: 0; border: 1px solid var(--line); border-radius: 1.1cqw; overflow: hidden; background: #05080c; box-shadow: 0 1.6cqw 4cqw rgba(0,0,0,.4); }
+.slide-lab-fig img { display: block; width: 100%; height: auto; }
+.slide-lab-fig figcaption { padding: .75cqw 1.2cqw; font-size: .95cqw; line-height: 1.45; color: var(--text-3); border-top: 1px solid var(--line); word-break: keep-all; }
+.slide-lab-labels { display: grid; grid-template-columns: 1fr 1fr; padding: .7cqw 1.2cqw .55cqw; font-size: .85cqw; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--text-3); }
+.slide-lab-labels span:last-child { color: var(--accent-text); }
+.slide-lab-half { overflow: hidden; }
+.slide-lab-half img { width: 200%; max-width: none; }
+.slide-lab-half[data-half="right"] img { margin-left: -100%; }
+.slide-lab-diagram { padding: 1cqw 1.2cqw .4cqw; }
+.slide-lab-diagram .flow-scroll { margin: 0; overflow: visible; }
+.slide-lab-diagram svg { display: block; width: 100%; height: auto; min-width: 0; }
+.slide-lab-section.is-side .slide-lab-body { grid-template-columns: 38cqw 57cqw; justify-content: space-between; align-items: center; }
+.slide-lab-section.is-side.is-diagram .slide-lab-body { grid-template-columns: 34cqw 62cqw; }
+.slide-lab-section.is-side.is-half .slide-lab-body { grid-template-columns: 44cqw 50cqw; }
+.slide-lab-section.is-wide .slide-lab-text, .slide-lab-section.is-pair .slide-lab-text { width: 84cqw; }
+.slide-lab-section.is-wide .slide-lab-figs { width: 84cqw; margin-inline: auto; }
+.slide-lab-section.is-pair .slide-lab-figs { display: grid; grid-template-columns: 48.5cqw 48.5cqw; justify-content: space-between; }
+.slide-lab-section.is-text .slide-lab-text p { max-width: 70%; }
+.slide-lab-section.is-text .slide-lab-text ol { grid-template-columns: repeat(3, 1fr); gap: 1.6cqw; }
 .deck-stack { display: grid; gap: 26px; width: min(1240px, calc(100% - 48px)); margin: 0 auto; }
 .slide { container-type: inline-size; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); padding: 4.2cqw 5cqw; scroll-snap-align: start; scroll-margin-top: 150px; }
 /* The measured, scaled box; auto-fit sets its width, height and transform. */

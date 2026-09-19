@@ -19,7 +19,9 @@ import { useCallback, useEffect, useRef, useState, type DragEvent, type Keyboard
 
 // A slide with a `group` shares one toolbar chip with the others in that
 // group; the chip opens a menu to pick which of them are in.
-export type DeckSlide = { id: string; label: string; node: ReactNode; group?: string };
+// Within a group, slides that share a `bundle` are one menu entry: a lab
+// note's slides go in or out of the deck together, as a project.
+export type DeckSlide = { id: string; label: string; node: ReactNode; group?: string; bundle?: { id: string; label: string } };
 export type DeckGroup = { id: string; label: string };
 export type DeckText = {
   export: string; fullscreen: string; back: string; backHref: string; hint: string;
@@ -287,7 +289,15 @@ export default function DeckShell({ slides, groups = [], text }: { slides: DeckS
             const group = groupById[id];
             if (group) {
               const list = members(id);
-              const onCount = list.filter((m) => enabled[m]).length;
+              // menu entries: a bundle of slides, or a lone slide
+              const entries: { id: string; label: string; slides: string[] }[] = [];
+              for (const m of list) {
+                const b = byId[m].bundle ?? { id: m, label: byId[m].label };
+                const entry = entries.find((e) => e.id === b.id);
+                if (entry) entry.slides.push(m); else entries.push({ id: b.id, label: b.label, slides: [m] });
+              }
+              const onCount = entries.filter((e) => e.slides.some((m) => enabled[m])).length;
+              const allOn = list.every((m) => enabled[m]);
               return (
                 <div
                   key={id}
@@ -305,22 +315,25 @@ export default function DeckShell({ slides, groups = [], text }: { slides: DeckS
                   <span className="deck-grip" aria-hidden="true">⋮⋮</span>
                   <input
                     type="checkbox"
-                    checked={onCount === list.length}
-                    ref={(el) => { if (el) el.indeterminate = onCount > 0 && onCount < list.length; }}
+                    checked={allOn}
+                    ref={(el) => { if (el) el.indeterminate = onCount > 0 && !allOn; }}
                     onChange={(e) => setMany(list, e.target.checked)}
                     aria-label={group.label}
                   />
                   <button type="button" className="deck-group-button" aria-haspopup="menu" aria-expanded={menu === id} onClick={() => setMenu((m) => (m === id ? null : id))}>
-                    {group.label} · {onCount}/{list.length} <span aria-hidden="true">▾</span>
+                    {group.label} · {onCount}/{entries.length} <span aria-hidden="true">▾</span>
                   </button>
                   {menu === id ? (
                     <div className="deck-menu" role="menu">
-                      {list.map((m) => (
-                        <label key={m} className="deck-menu-item" data-on={enabled[m] ? "1" : "0"}>
-                          <input type="checkbox" checked={!!enabled[m]} onChange={(e) => setEnabled({ ...enabled, [m]: e.target.checked })} />
-                          {byId[m].label}
-                        </label>
-                      ))}
+                      {entries.map((entry) => {
+                        const on = entry.slides.some((m) => enabled[m]);
+                        return (
+                          <label key={entry.id} className="deck-menu-item" data-on={on ? "1" : "0"}>
+                            <input type="checkbox" checked={on} onChange={(e) => setMany(entry.slides, e.target.checked)} />
+                            {entry.label}{entry.slides.length > 1 ? <small> · {entry.slides.length}</small> : null}
+                          </label>
+                        );
+                      })}
                       <div className="deck-menu-actions">
                         <button type="button" className="deck-mini" onClick={() => setMany(list, true)}>{text.all}</button>
                         <button type="button" className="deck-mini" onClick={() => setMany(list, false)}>{text.none}</button>
