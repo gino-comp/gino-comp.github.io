@@ -3,7 +3,9 @@ import { ConventionalFlow, RidmFlow, type Conventional, type Ridm } from "@/comp
 import DeckShell from "@/components/DeckShell";
 import { DataMovementStats, DataMovementSvg, type Why } from "@/components/DataMovement";
 import { formatDate, newestFirst } from "@/components/News";
+import StreamingPipeline from "@/components/StreamingPipeline";
 import { labNotes } from "@/lib/lab-notes";
+import type { LabFigure } from "@/lib/lab-notes";
 import {
   siteUrl,
   type AcronymPart,
@@ -136,15 +138,30 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
       <p className="slide-sub slide-mono">{dict.doda.simulator.href}</p>
     </Slide> },
 
-    // One slide per lab note, read from the same registry as /lab-notes, so a
-    // new project note is in the deck without touching it. They share one
-    // toolbar chip with a menu to pick the projects.
-    ...labNotes.map((note) => {
+    // One overview slide plus one slide per deck-flagged section, read from
+    // the same registry as /lab-notes. They share one toolbar chip with a
+    // menu to pick which slides are in.
+    ...labNotes.flatMap((note) => {
       const copy = note.copy[locale];
-      const gif = copy.sections.flatMap((s) => s.figures ?? []).map((f) => f.media).find((m) => m.kind === "compare");
       const id = `lab-${note.slug}`;
-      return { id, group: "lab", label: copy.title, node: (
-        <Slide key={id} id={id} kicker={`${dict.labNotes.kicker} · ${copy.status} · ${dict.labNotes.updated} ${formatDate(note.updated, locale)}`} className="slide-lab" fitMax={1.2}>
+      const kicker = `${dict.labNotes.kicker} · ${copy.title}`;
+
+      function DeckFigure({ figure }: { figure: LabFigure }) {
+        const m = figure.media;
+        if (m.kind === "pipeline") return <div className="slide-figure"><StreamingPipeline labels={dict.labNotes.pipeline} /></div>;
+        if (m.kind === "compare") return (
+          <div className="slide-lab-compare">
+            <div><span>{m.left}</span><span>{m.right}</span></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={m.src} alt={m.alt} />
+          </div>
+        );
+        // eslint-disable-next-line @next/next/no-img-element
+        return <img className="slide-lab-img" src={m.src} alt={m.alt} />;
+      }
+
+      const overview = { id, group: "lab", label: copy.title, node: (
+        <Slide key={id} id={id} kicker={`${kicker} · ${copy.status} · ${dict.labNotes.updated} ${formatDate(note.updated, locale)}`} className="slide-lab" fitMax={1.2}>
           <div className="slide-lab-grid">
             <div className="slide-lab-copy">
               <h2>{copy.title}</h2>
@@ -159,18 +176,34 @@ export default function Deck({ locale, dict }: { locale: Locale; dict: Dictionar
             <div className="slide-lab-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={note.cover.src} alt="" />
-              {gif ? (
-                <div className="slide-lab-compare">
-                  <div><span>{gif.left}</span><span>{gif.right}</span></div>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={gif.src} alt={gif.alt} />
-                </div>
-              ) : null}
             </div>
           </div>
           <p className="slide-lab-url slide-mono">{siteUrl}/{locale}/lab-notes/{note.slug}/</p>
         </Slide>
       ) };
+
+      const sectionSlides = copy.sections
+        .filter((s) => s.deck)
+        .map((section) => {
+          const sid = `${id}-${section.id}`;
+          const hasFigures = !!section.figures?.length;
+          return { id: sid, group: "lab", label: `${copy.title} · ${section.title}`, node: (
+            <Slide key={sid} id={sid} kicker={kicker} className="slide-lab slide-lab-section">
+              <h2>{section.title}</h2>
+              {hasFigures ? (
+                <div className="slide-lab-media">
+                  {section.figures!.map((fig, j) => <DeckFigure key={j} figure={fig} />)}
+                </div>
+              ) : null}
+              {section.body?.map((p) => <p key={p.slice(0, 40)} className="slide-lead-tight">{p}</p>)}
+              {section.bullets ? (
+                <ul className="slide-costs">{section.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+              ) : null}
+            </Slide>
+          ) };
+        });
+
+      return [overview, ...sectionSlides];
     }),
 
     { id: "team", node: <Slide key="team" id="team" kicker={dict.about.teamKicker} fitMax={1.45}>

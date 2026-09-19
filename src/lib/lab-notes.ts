@@ -11,7 +11,7 @@ export type LabStat = { value: string; label: string; note?: string };
 
 export type LabMedia =
   | { kind: "gif" | "image"; src: string; width: number; height: number; alt: string }
-  | { kind: "compare"; src: string; width: number; height: number; alt: string; left: string; right: string }
+  | { kind: "compare"; src: string; width: number; height: number; alt: string; left: string; right: string; half?: "left" | "right" }
   | { kind: "pipeline" };
 
 export type LabFigure = { media: LabMedia; caption?: string; title?: string };
@@ -22,6 +22,8 @@ export type LabSection = {
   body?: readonly string[];
   figures?: readonly LabFigure[];
   bullets?: readonly string[];
+  // Mark true to include this section as a slide on the /deck page.
+  deck?: boolean;
 };
 
 export type LabNoteCopy = {
@@ -31,8 +33,9 @@ export type LabNoteCopy = {
   summary: string;
   sections: readonly LabSection[];
   stats: readonly LabStat[];
+  todos?: readonly { body: string; preview?: { src: string; width: number; height: number } }[];
   team?: string;
-  changelog: readonly { date: string; body: string }[];
+  changelog?: readonly { date: string; body: string }[];
 };
 
 export type LabNote = {

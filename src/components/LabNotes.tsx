@@ -62,14 +62,23 @@ function Figure({ figure, dict }: { figure: LabFigure; dict: Dictionary }) {
     );
   }
   if (media.kind === "compare") {
+    const halfW = media.half ? Math.round(media.width / 2) : null;
     return (
-      <figure className="lab-figure is-compare">
-        <div className="lab-compare-labels" aria-hidden="true">
-          <span>{media.left}</span>
-          <span className="is-live">{media.right}</span>
-        </div>
+      <figure className={`lab-figure is-compare${media.half ? " is-half" : ""}`}>
+        {!media.half && (
+          <div className="lab-compare-labels" aria-hidden="true">
+            <span>{media.left}</span>
+            <span className="is-live">{media.right}</span>
+          </div>
+        )}
         {/* GIFs go through a plain img: next/image would re-encode the first frame only. */}
-        <img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" />
+        {halfW ? (
+          <div className="lab-compare-crop" style={{ maxWidth: halfW }}>
+            <img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" style={{ width: media.width }} />
+          </div>
+        ) : (
+          <img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" />
+        )}
         {caption ? <figcaption>{caption}</figcaption> : null}
       </figure>
     );
@@ -111,6 +120,23 @@ export function LabNoteArticle({ locale, dict, note }: { locale: Locale; dict: D
                 {stat.note ? <small>{stat.note}</small> : null}
               </div>
             ))}
+            {copy.todos?.length ? (
+              <div className="lab-stats-todo">
+                <b>TODO</b>
+                <ol>
+                  {copy.todos.map((todo) => (
+                    <li key={todo.body}>
+                      {todo.preview ? (
+                        <div className="lab-stats-todo-preview" style={{ maxWidth: Math.round(todo.preview.width / 2) }}>
+                          <img src={todo.preview.src} alt="" width={todo.preview.width} height={todo.preview.height} loading="lazy" />
+                        </div>
+                      ) : null}
+                      {todo.body}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
@@ -122,7 +148,7 @@ export function LabNoteArticle({ locale, dict, note }: { locale: Locale; dict: D
             {copy.sections.map((section) => (
               <li key={section.id}><a href={`#${section.id}`}>{section.title}</a></li>
             ))}
-            <li><a href="#changelog">{l.changelog}</a></li>
+            {copy.changelog?.length ? <li><a href="#changelog">{l.changelog}</a></li> : null}
           </ol>
         </aside>
 
@@ -138,30 +164,32 @@ export function LabNoteArticle({ locale, dict, note }: { locale: Locale; dict: D
                 <ul className="lab-bullets">{section.bullets.map((line) => <li key={line}>{line}</li>)}</ul>
               ) : null}
               {section.figures ? (
-                <div className={`lab-figures ${section.figures.length > 1 ? "is-pair" : ""}`}>
+                <div className={`lab-figures${section.figures.length > 1 ? " is-pair" : ""}`}>
                   {section.figures.map((figure, j) => <Figure key={j} figure={figure} dict={dict} />)}
                 </div>
               ) : null}
             </section>
           ))}
 
-          <section id="changelog" className="lab-section lab-changelog">
-            <div className="lab-section-head">
-              <span>+</span>
-              <h2>{l.changelog}</h2>
-            </div>
-            <ol>
-              {copy.changelog.map((entry) => (
-                <li key={entry.date + entry.body.slice(0, 20)}>
-                  <time dateTime={entry.date}>{formatDate(entry.date, locale)}</time>
-                  <p>{entry.body}</p>
-                </li>
-              ))}
-            </ol>
-            {copy.team ? (
-              <p className="lab-team"><span>{l.team}</span> {copy.team}</p>
-            ) : null}
-          </section>
+          {copy.changelog?.length ? (
+            <section id="changelog" className="lab-section lab-changelog">
+              <div className="lab-section-head">
+                <span>+</span>
+                <h2>{l.changelog}</h2>
+              </div>
+              <ol>
+                {copy.changelog.map((entry) => (
+                  <li key={entry.date + entry.body.slice(0, 20)}>
+                    <time dateTime={entry.date}>{formatDate(entry.date, locale)}</time>
+                    <p>{entry.body}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
+          {copy.team ? (
+            <p className="lab-team"><span>{l.team}</span> {copy.team}</p>
+          ) : null}
         </div>
       </div>
     </article>

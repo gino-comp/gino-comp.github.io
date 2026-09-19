@@ -159,7 +159,7 @@ export const dictionaries = {
         waits: "CPU waits for the complete frame.",
         streams: "Starts with the first pixel",
         preprocessed: "Preprocessed",
-        speedup: "17× preprocessing speedup",
+        speedup: "19× preprocessing speedup",
         earlier: "Finishes earlier"
       }
     },
@@ -566,7 +566,7 @@ export const dictionaries = {
         waits: "CPU는 프레임 전체를 기다립니다.",
         streams: "첫 픽셀부터 시작",
         preprocessed: "전처리 결과",
-        speedup: "전처리 17× 가속",
+        speedup: "전처리 19× 가속",
         earlier: "더 일찍 끝남"
       }
     },
