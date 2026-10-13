@@ -431,15 +431,15 @@ export const dictionaries = {
               ]
             },
             {
-              role: "IC Designer",
-              name: "Yu Youngjun",
-              school: "Ajou University",
+              role: "RTL Design Engineer",
+              name: "Jung Kyuhyun",
+              school: "Yonsei University",
               portrait: null,
-              links: [],
+              links: [{ type: "linkedin", href: "https://www.linkedin.com/in/kyuhjung3" }],
               details: [
-                ["Focus", "Analog and mixed-signal IC design."],
-                ["Education", "MS in Intelligence Semiconductor Engineering, Ajou University."],
-                ["Tape-outs", "Two tape-outs through TSMC 130nm MPW shuttles."]
+                ["Focus", "RTL design, SoC integration and AI accelerator architecture."],
+                ["Education", "BS in Electrical and Electronic Engineering, Yonsei University (expected 2027)."],
+                ["Research", "Co-developed Hierarchical Cross AllReduce, a Network-on-Chip collective communication scheme for odd-sized 2D meshes, with a 2.23–2.50× simulated AllReduce speedup."]
               ]
             }
           ]
@@ -833,15 +833,15 @@ export const dictionaries = {
               ]
             },
             {
-              role: "IC Designer",
-              name: "유영준",
-              school: "아주대학교",
+              role: "RTL Design Engineer",
+              name: "정규현",
+              school: "연세대학교",
               portrait: null,
-              links: [],
+              links: [{ type: "linkedin", href: "https://www.linkedin.com/in/kyuhjung3" }],
               details: [
-                ["주요분야", "아날로그·혼성신호 IC 설계"],
-                ["학력", "아주대학교 지능형반도체공학 석사"],
-                ["Tape-out", "TSMC 130nm MPW 셔틀을 통해 2회 tape-out 수행"]
+                ["주요분야", "RTL 설계, SoC 통합 및 AI 가속기 아키텍처"],
+                ["학력", "연세대학교 전기전자공학 학사 (2027년 졸업 예정)"],
+                ["연구", "홀수 크기 2D mesh NoC를 위한 집합 통신 기법 Hierarchical Cross AllReduce 공동 개발 (시뮬레이션 기준 AllReduce 통신 2.23–2.50배 가속)"]
               ]
             }
           ]
