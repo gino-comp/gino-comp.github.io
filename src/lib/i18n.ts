@@ -196,7 +196,7 @@ export const dictionaries = {
           { name: "CPU", note: "filter · decode · resize · format" },
           { name: "GPU / NPU", note: "inference" }
         ],
-        edges: { ingest: "all streams, in parallel", cpu: "read one · write back", infer: "read again" },
+        edges: { ingest: "① all streams, in parallel", cpu: "② read one · ③ write back", infer: "④ read again" },
         costs: ["Longer reaction time — every result waits on four memory trips", "Delay that varies frame to frame — each stream waits its turn on the CPU", "Adding a sensor degrades latency for all of them"]
       },
       ridm: {
@@ -603,7 +603,7 @@ export const dictionaries = {
           { name: "CPU", note: "필터링 · 인코딩/디코딩 · 리사이즈 · 포맷 변환" },
           { name: "GPU / NPU", note: "추론" }
         ],
-        edges: { ingest: "모든 스트림 동시 유입", cpu: "하나씩 읽고 · 다시 쓰기", infer: "또 한 번 읽기" },
+        edges: { ingest: "① 모든 스트림 동시 유입", cpu: "② 하나씩 읽고 · ③ 다시 쓰기", infer: "④ 또 한 번 읽기" },
         costs: ["반응 지연 증가 — 결과 하나마다 메모리를 네 번 오갑니다", "프레임마다 달라지는 지연 — 각 스트림이 CPU 차례를 기다립니다", "센서를 추가할수록 모든 센서의 지연이 악화됩니다"]
       },
       ridm: {
