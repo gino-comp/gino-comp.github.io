@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_SITE_URL: https://gino-comp.github.io
+      NEXT_PUBLIC_SITE_URL: https://www.ridm.tech
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
