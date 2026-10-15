@@ -122,7 +122,7 @@ export const dictionaries = {
       lead: "Compute closer to",
       accent: "where data begins.",
       body:
-        "RiDM develops DODA, a programmable dataflow architecture designed to process sensing data closer to its source before it becomes a system-level data movement problem.",
+        "At RiDM, we develop DODA, a programmable dataflow architecture designed to process sensing data closer to its source before it becomes a system-level data movement problem.",
       builtFor: "BUILT FOR",
       stageTitle: "SYSTEM FLOW",
       stageLead:
