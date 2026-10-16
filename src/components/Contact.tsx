@@ -33,7 +33,15 @@ export default function ContactSection({ dict, deckHref, contactHref }: { dict: 
                   <MailIcon />
                   {c.cta}
                 </a>
-                {deckHref ? <a className="button outline-dark" href={deckHref}>{dict.deck.open}</a> : null}
+                {deckHref ? (
+                  <>
+                    <a className="button outline-dark" href={deckHref}>{dict.deck.open}</a>
+                    {/* A plain file in public/, kept at one name so saved links survive a new version. */}
+                    <a className="contact-file" href="/ridm-one-pager.pdf" target="_blank" rel="noopener">
+                      {c.onePager} <span aria-hidden="true">↓</span>
+                    </a>
+                  </>
+                ) : null}
               </>
             )}
           </div>

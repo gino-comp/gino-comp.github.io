@@ -722,6 +722,8 @@ section[id], aside[id] { scroll-margin-top: 92px; }
 .contact-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; justify-self: end; }
 .button.outline-dark { background: transparent; color: #0a0e13; border-color: rgba(10,14,19,.28); }
 .button.outline-dark:hover { border-color: #0a0e13; }
+.contact-file { font-size: 13px; color: #5f6974; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(10,14,19,.25); padding: 4px 2px; }
+.contact-file:hover { color: #0a0e13; text-decoration-color: currentColor; }
 
 /* Presentation: the stack is the fullscreen element, one slide per screen,
    letterboxed to 16:9 and snapping between them. Esc leaves. */
