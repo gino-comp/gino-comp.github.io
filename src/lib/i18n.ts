@@ -377,8 +377,8 @@ export const dictionaries = {
           members: [
             {
               role: "CTO & Co-founder",
-              name: "Tingting Xiang",
-              school: "NUS PhD Candidate",
+              name: "Tingting Xiang, PhD",
+              school: "NUS School of Computing",
               portrait: null,
               links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
               details: [
@@ -780,8 +780,8 @@ export const dictionaries = {
           members: [
             {
               role: "CTO & Co-founder",
-              name: "Tingting Xiang",
-              school: "NUS PhD Candidate",
+              name: "Tingting Xiang, PhD",
+              school: "NUS School of Computing",
               portrait: null,
               links: [{ type: "linkedin", href: "https://www.linkedin.com/in/tingting-xiang-98a051179/" }],
               details: [
